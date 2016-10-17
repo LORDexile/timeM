@@ -16,6 +16,7 @@ public class MainFrame extends JFrame implements Constants{
     private JToolBar toolMenuBar;
     private JButton buttonOk;
 
+    //constructor
     public MainFrame() {
         setSize(1000, 500);
         setContentPane(this.mainPanel);

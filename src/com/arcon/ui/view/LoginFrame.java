@@ -13,6 +13,7 @@ public class LoginFrame extends  JFrame implements Constants {
     private JPasswordField passwordFieldPassword;
     private JButton buttonMainOK;
 
+    //constructor
     public LoginFrame() {
         setSize(500,500);
         setContentPane(this.panelMain);
