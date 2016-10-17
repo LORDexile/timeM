@@ -1,5 +1,6 @@
 package com.arcon.ui.controller;
 
+import com.arcon.Main;
 import com.arcon.lib.Constants;
 import com.arcon.ui.view.LoginFrame;
 
@@ -51,9 +52,9 @@ public class LoginFrameController implements Constants{
         String login = textFieldLogin.getText();
         String pass = passwordFieldPassword.getText();
         if (login.equals(adminLogin) && pass.equals(adminPassword)) {
-            msg = login + " добро пожаловать";
-            JOptionPane.showMessageDialog(null, msg, "Внимание!", JOptionPane.INFORMATION_MESSAGE);
-            // show mainFrame
+            loginFrame.setVisible(false);
+            Main.mainFrameController.showMainFrameWindow();
+
         }else {
             if (login.equals(adminLogin) && !pass.equals(adminPassword)) {
                 msg = "Пароль не подходит";

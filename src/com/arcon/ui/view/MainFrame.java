@@ -24,6 +24,7 @@ public class MainFrame extends JFrame implements Constants{
         setTitle(PROGRAM_TITLE);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setResizable(true);
+        setVisible(false);
         pack();
     }
 
