@@ -10,9 +10,6 @@ public class MainFrameController {
     private MainFrame mainFrame;
 
 
-    private JTextField textFieldCardId;
-    private JToolBar toolMenuBar;
-    private JButton buttonOk;
 
     public MainFrameController () {
         initComponents();
@@ -23,9 +20,7 @@ public class MainFrameController {
     private void initComponents() {
         mainFrame = new MainFrame();
 
-        textFieldCardId = mainFrame.getTextFieldCardId();
-        toolMenuBar = mainFrame.getToolMenuBar();
-        buttonOk = mainFrame.getButtonOk();
+
 
     }
 

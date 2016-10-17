@@ -7,18 +7,26 @@ import javax.swing.*;
 public class MainFrame extends JFrame implements Constants{
 
     private JPanel mainPanel;
+    private JTabbedPane tabbedPane1;
+    private JPanel tabPanelMain;
+    private JPanel tabPanelIO;
+    private JPanel tabPanelOptions;
+    private JPanel tabPanelLog;
+    private JTextField textFieldCard;
+    private JButton buttonPerformCard;
+    private JRadioButton radioButtonInput;
+    private JRadioButton radioButtonOutput;
+    private JTextField textFieldCash;
+    private JButton buttonIOAction;
+    private JTextArea textAreaComment;
+    private JPasswordField passwordFieldPassword;
+    private JButton buttonCangeUser;
+    private JButton changePriceButton;
 
-    private JPanel panelLeft;
-    private JPanel panelRight;
-    private JPanel panelCenter;
-    private JPanel panelTop;
-    private JTextField textFieldCardId;
-    private JToolBar toolMenuBar;
-    private JButton buttonOk;
 
     //constructor
     public MainFrame() {
-        setSize(1000, 500);
+        setSize(800, 500);
         setContentPane(this.mainPanel);
         setLocationRelativeTo(null);
         setTitle(PROGRAM_TITLE);
@@ -26,37 +34,9 @@ public class MainFrame extends JFrame implements Constants{
         setResizable(true);
         setVisible(false);
         pack();
+        setSize(800, 500);
+
     }
 
-    public JPanel getMainPanel() {
-        return mainPanel;
-    }
 
-    public JPanel getPanelLeft() {
-        return panelLeft;
-    }
-
-    public JPanel getPanelRight() {
-        return panelRight;
-    }
-
-    public JPanel getPanelCenter() {
-        return panelCenter;
-    }
-
-    public JPanel getPanelTop() {
-        return panelTop;
-    }
-
-    public JTextField getTextFieldCardId() {
-        return textFieldCardId;
-    }
-
-    public JToolBar getToolMenuBar() {
-        return toolMenuBar;
-    }
-
-    public JButton getButtonOk() {
-        return buttonOk;
-    }
 }

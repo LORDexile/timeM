@@ -15,13 +15,14 @@ public class LoginFrame extends  JFrame implements Constants {
 
     //constructor
     public LoginFrame() {
-        setSize(500,500);
+        setSize(250,150);
         setContentPane(this.panelMain);
         setLocationRelativeTo(null);
         setTitle("Пожалуйста Авторизируйтесь!");
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
         pack();
+        setSize(250,150);
     }
 
     public JButton getButtonMainOK() {
