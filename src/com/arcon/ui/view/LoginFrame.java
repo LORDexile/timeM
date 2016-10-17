@@ -7,11 +7,11 @@ import javax.swing.*;
 
 public class LoginFrame extends  JFrame implements Constants {
 
+    private JPanel panelMain;
 
-    private JButton buttonMainOK;
-    JPanel panelMain;
     private JTextField textFieldLogin;
     private JPasswordField passwordFieldPassword;
+    private JButton buttonMainOK;
 
     public LoginFrame() {
         setSize(500,500);
@@ -19,7 +19,7 @@ public class LoginFrame extends  JFrame implements Constants {
         setLocationRelativeTo(null);
         setTitle("Пожалуйста Авторизируйтесь!");
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setResizable(true);
+        setResizable(false);
         pack();
     }
 
