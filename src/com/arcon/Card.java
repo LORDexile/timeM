@@ -4,7 +4,7 @@ import com.arcon.lib.Constants;
 
 import java.util.Date;
 
-public class Card implements Constants{
+public class Card{
     private long id;
     private Date enterTime;
     private Date exitTime;
@@ -22,7 +22,7 @@ public class Card implements Constants{
         exitTime = new Date();
         //calculate price
         time = (exitTime.getTime() - enterTime.getTime())/1000;
-        price = (int)(time * PRICE_SEC);
+        price = (int)(time * Constants.PRICE_SEC);
 
     }
 

@@ -1,18 +1,18 @@
 package com.arcon.lib;
 
-public interface Constants {
-    String adminLogin = "admin";
-    String adminPassword = "root";
-    String PRODUCT_VERSION = "0.0.5";
-    String PROGRAM_TITLE = "TimeManager - ver:" + PRODUCT_VERSION;
+public final class Constants {
+    public static final String adminLogin = "admin";
+    public static final String adminPassword = "root";
+    public static final String PRODUCT_VERSION = "0.0.5";
+    public static final String PROGRAM_TITLE = "TimeManager - ver:" + PRODUCT_VERSION;
 
-    double PRICE = 2000.0;
-    double PRICE_SEC = PRICE / 3600;
+    public static final double PRICE = 2000.0;
+    public static final double PRICE_SEC = PRICE / 3600;
 
     //DB
-    String DB_USER = "admin";
-    String DB_PASSWORD = "root";
-    String DB_URL= "jdbc:mysql://localhost:3306/test";
-    String DB_DRIVER = "com.mysql.jdbc.Driver";
+    public static final String DB_USER = "admin";
+    public static final String DB_PASSWORD = "root";
+    public static final String DB_URL= "jdbc:mysql://localhost:3306/test";
+    public static final String DB_DRIVER = "com.mysql.jdbc.Driver";
 
 }

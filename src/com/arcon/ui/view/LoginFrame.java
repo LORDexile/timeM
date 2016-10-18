@@ -1,11 +1,9 @@
 package com.arcon.ui.view;
 
-import com.arcon.lib.Constants;
-
 import javax.swing.*;
 
 
-public class LoginFrame extends  JFrame implements Constants {
+public class LoginFrame extends  JFrame{
 
     private JPanel panelMain;
 

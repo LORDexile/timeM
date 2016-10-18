@@ -1,10 +1,11 @@
 package com.arcon.ui.view;
 
+
 import com.arcon.lib.Constants;
 
 import javax.swing.*;
 
-public class MainFrame extends JFrame implements Constants{
+public class MainFrame extends JFrame{
 
     private JPanel mainPanel;
     private JTabbedPane tabbedPane1;
@@ -29,7 +30,7 @@ public class MainFrame extends JFrame implements Constants{
         setSize(800, 500);
         setContentPane(this.mainPanel);
         setLocationRelativeTo(null);
-        setTitle(PROGRAM_TITLE);
+        setTitle(Constants.PROGRAM_TITLE);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setResizable(true);
         setVisible(false);

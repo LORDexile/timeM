@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-public class LoginFrameController implements Constants{
+public class LoginFrameController{
 
     private LoginFrame loginFrame;
 
@@ -51,12 +51,12 @@ public class LoginFrameController implements Constants{
         String msg;
         String login = textFieldLogin.getText();
         String pass = passwordFieldPassword.getText();
-        if (login.equals(adminLogin) && pass.equals(adminPassword)) {
+        if (login.equals(Constants.adminLogin) && pass.equals(Constants.adminPassword)) {
             loginFrame.setVisible(false);
             Main.mainFrameController.showMainFrameWindow();
 
         }else {
-            if (login.equals(adminLogin) && !pass.equals(adminPassword)) {
+            if (login.equals(Constants.adminLogin) && !pass.equals(Constants.adminPassword)) {
                 msg = "Пароль не подходит";
 
             } else {
@@ -68,7 +68,7 @@ public class LoginFrameController implements Constants{
     }
 
     //press button to do verification
-    private class buttonMainOKListener implements ActionListener, Constants {
+    private class buttonMainOKListener implements ActionListener{
 
         @Override
         public void actionPerformed(ActionEvent e) {
