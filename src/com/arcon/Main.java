@@ -2,9 +2,6 @@ package com.arcon;
 
 import com.arcon.ui.controller.LoginFrameController;
 import com.arcon.ui.controller.MainFrameController;
-import com.arcon.ui.view.LoginFrame;
-
-import javax.swing.*;
 
 public class Main {
 
@@ -17,7 +14,6 @@ public class Main {
         loginFrameController.showLoginFrameWindow();
 
         mainFrameController = new MainFrameController();
-
 
     }
 }

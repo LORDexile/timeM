@@ -33,7 +33,7 @@ public class Card implements Constants{
             this.discount = 0;
         }
         discountPrice = (int) (price * (this.discount/100));
-        
+
     }
 
     public long getTime() {
