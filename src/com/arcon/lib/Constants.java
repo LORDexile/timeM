@@ -9,10 +9,16 @@ public final class Constants {
     public static final double PRICE = 2000.0;
     public static final double PRICE_SEC = PRICE / 3600;
 
-    //DB
+    //local DB
     public static final String DB_USER = "admin";
     public static final String DB_PASSWORD = "root";
     public static final String DB_URL= "jdbc:mysql://localhost:3306/test";
     public static final String DB_DRIVER = "com.mysql.jdbc.Driver";
+
+    //remote DB
+    public static final String REMOTE_DB_USER = "admin";
+    public static final String REMOTE_DB_PASSWORD = "root";
+    public static final String REMOTE_DB_URL= "jdbc:mysql://localhost:3306/test";
+    public static final String REMOTE_DB_DRIVER = "com.mysql.jdbc.Driver";
 
 }
