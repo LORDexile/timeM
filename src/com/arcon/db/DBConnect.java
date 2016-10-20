@@ -1,5 +1,6 @@
 package com.arcon.db;
 
+import com.arcon.User;
 import com.arcon.lib.Constants;
 
 import java.io.IOException;
@@ -103,6 +104,54 @@ public class DBConnect{
             }
         }
         return 0;
+    }
+
+    public void createNewUser (User user){
+        boolean NotExist = true;
+        User carrentUser = user;
+        try {
+            statmt = connection.createStatement();
+            resSet = statmt.executeQuery("SELECT * FROM Users");
+            while (resSet.next()) {
+                if (carrentUser.getUserName().equals(resSet.getString("UserName"))) {
+                    NotExist = false;
+
+                }
+            }
+
+            if (NotExist) {
+
+                String sql = "INSERT INTO Users (UserName,UserType,Password,Comment) " +
+                        "VALUES ('" + carrentUser.getUserName() +
+                        "', '" + carrentUser.getUserType() +
+                        "', '" + carrentUser.getPassword() +
+                        "', '" + carrentUser.getComment() +
+                        "');";
+                System.out.println(sql);
+                statmt.executeUpdate(sql);
+
+
+            } else System.out.println("login exist");
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }finally {
+
+            if (resSet != null) {
+                try {
+                    resSet.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (statmt != null) {
+                try {
+                    statmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
     public static DBConnect getInstance() {

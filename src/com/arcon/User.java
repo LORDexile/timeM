@@ -4,27 +4,30 @@ public class User {
 
     private String userName;
     private String password;
-    private UserType accessType;
+    private UserType userType;
+    private String comment;
 
-    public User(String userName, String password) {
+    public User(String userName, UserType userType, String password, String comment) {
         this.userName = userName;
+        this.userType = userType;
         this.password = password;
-        accessType = UserType.USER;
-    }
+        this.comment = comment;
 
-    public boolean isPasswordCorrect (String password) {
-        if (this.password.equals(password)) {
-            return true;
-        }
-        return false;
     }
 
     public String getUserName() {
         return userName;
     }
 
-    public UserType getAccessType() {
-        return accessType;
+    public UserType getUserType() {
+        return userType;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public String getComment() {
+        return comment;
+    }
 }
