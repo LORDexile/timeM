@@ -10,10 +10,10 @@ public final class Constants {
     public static final double PRICE_SEC = PRICE / 3600;
 
     //local DB
-    public static final String DB_USER = "admin";
-    public static final String DB_PASSWORD = "root";
-    public static final String DB_URL= "jdbc:mysql://localhost:3306/test";
-    public static final String DB_DRIVER = "com.mysql.jdbc.Driver";
+    //public static final String DB_USER = null;
+    //public static final String DB_PASSWORD = null;
+    public static final String DB_URL= "jdbc:sqlite:src/com/arcon/db/localDB.db";
+    public static final String DB_DRIVER = "org.sqlite.JDBC";
 
     //remote DB
     public static final String REMOTE_DB_USER = "admin";
