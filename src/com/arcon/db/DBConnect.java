@@ -2,6 +2,7 @@ package com.arcon.db;
 
 import com.arcon.lib.Constants;
 
+import java.io.IOException;
 import java.sql.*;
 
 public class DBConnect{
@@ -55,6 +56,53 @@ public class DBConnect{
             }
         }
         System.out.println("Соединение завершено");
+    }
+
+    /**
+     *
+     * @param userName
+     * @param password
+     * @return
+     * 2 - verification passed;
+     * <p>
+     * 1 - password is`t correct;
+     * </p>
+     * 0 - User does`t exist.
+     *
+     */
+    public int verifyUser (String userName, String password){
+        try {
+            statmt = connection.createStatement();
+            resSet = statmt.executeQuery("SELECT * FROM Users");
+            while (resSet.next()) {
+                if (userName.equals(resSet.getString("UserName"))){
+                    if (password.equals(resSet.getString("Password"))) {
+                        return 2;
+                    }else {
+                        return 1;
+                    }
+
+                }
+            }
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            if (resSet != null) {
+                try {
+                    resSet.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (statmt != null) {
+                try {
+                    statmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return 0;
     }
 
     public static DBConnect getInstance() {
