@@ -3,7 +3,7 @@ package com.arcon.lib;
 public final class Constants {
     public static final String adminLogin = "admin";
     public static final String adminPassword = "root";
-    public static final String PRODUCT_VERSION = "0.0.6";
+    public static final String PRODUCT_VERSION = "0.0.7";
     public static final String PROGRAM_TITLE = "TimeManager - ver:" + PRODUCT_VERSION;
 
     public static final double PRICE = 2000.0;
