@@ -8,36 +8,29 @@ public class Card{
     private long id;
     private Date enterTime;
     private Date exitTime;
-    private long time;
-    private int price;
-    private double discount;
-    private int discountPrice;
+    private long totalTime;
+    private double discount = 0;
 
-    public Card(long id) {
+    public Card(long id, Date date) {
         this.id = id;
-        enterTime = new Date();
+        enterTime = date;
     }
 
     public void setExitTime() {
         exitTime = new Date();
         //calculate price
-        time = (exitTime.getTime() - enterTime.getTime())/1000;
-        price = (int)(time * Constants.PRICE_SEC);
+        totalTime = (exitTime.getTime() - enterTime.getTime()) / 1000;
 
     }
 
     public void setDiscount(float discount) {
         if (discount > 0 && discount <= 100) {
             this.discount = discount;
-        } else {
-            this.discount = 0;
         }
-        discountPrice = (int) (price * (this.discount/100));
-
     }
 
-    public long getTime() {
-        return time;
+    public long getTotalTime() {
+        return totalTime;
     }
 
     public long getId() {
@@ -53,14 +46,12 @@ public class Card{
     }
 
     public int getPrice() {
-        return price;
+        return (int)(totalTime * Constants.PRICE_SEC * (this.discount/100));
     }
 
     public double getDiscount() {
         return discount;
     }
+    
 
-    public int getDiscountPrice() {
-        return discountPrice;
-    }
 }
