@@ -1,7 +1,7 @@
 package com.arcon.ui.controller;
 
 import com.arcon.Main;
-import com.arcon.lib.Constants;
+import com.arcon.db.DBConnect;
 import com.arcon.ui.view.LoginFrame;
 
 import javax.swing.*;
@@ -20,7 +20,7 @@ public class LoginFrameController{
 
 
     public LoginFrameController() {
-        initCompanents();
+        initComponents();
         initListeners();
     }
 
@@ -31,7 +31,7 @@ public class LoginFrameController{
     }
 
     //initialize component`s
-    private void initCompanents() {
+    private void initComponents() {
         loginFrame = new LoginFrame();
 
         buttonMainOK = loginFrame.getButtonMainOK();
@@ -48,23 +48,35 @@ public class LoginFrameController{
 
     //verification user login\password
     private void verification () {
-        String msg;
+        String msg = "";
+        int userVerify;
         String login = textFieldLogin.getText();
         String pass = passwordFieldPassword.getText();
-        if (login.equals(Constants.adminLogin) && pass.equals(Constants.adminPassword)) {
-            loginFrame.setVisible(false);
-            Main.mainFrameController.showMainFrameWindow();
 
-        }else {
-            if (login.equals(Constants.adminLogin) && !pass.equals(Constants.adminPassword)) {
-                msg = "Пароль не подходит";
+        DBConnect connect = DBConnect.getInstance();
+        connect.openConnect();
+        userVerify = connect.verifyUser(login, pass);
+        connect.closeConnect();
 
-            } else {
+        switch (userVerify) {
+            case 0:
                 msg = "Пользователь " + login + " не существует.";
-            }
+                break;
+            case 1:
+                msg = "Пароль не подходит";
+                break;
+            case 2:
+                loginFrame.setVisible(false);
+                Main.mainFrameController.showMainFrameWindow();
+                break;
+        }
+
+        if (!msg.equals("")) {
             JOptionPane.showMessageDialog(null, msg, "Внимание!", JOptionPane.ERROR_MESSAGE);
         }
+
         passwordFieldPassword.setText("");
+        passwordFieldPassword.requestFocus();
     }
 
     //press button to do verification
