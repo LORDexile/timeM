@@ -52,6 +52,6 @@ public class Card{
     public double getDiscount() {
         return discount;
     }
-    
+
 
 }
