@@ -2,6 +2,7 @@ package com.arcon.ui.controller;
 
 import com.arcon.Main;
 import com.arcon.db.DBConnect;
+import com.arcon.lib.Constants;
 import com.arcon.ui.view.LoginFrame;
 
 import javax.swing.*;
@@ -13,6 +14,7 @@ import java.awt.event.KeyListener;
 public class LoginFrameController{
 
     private LoginFrame loginFrame;
+
     private JTextField textFieldLogin;
     private JPasswordField passwordFieldPassword;
     private JButton buttonMainOK;
