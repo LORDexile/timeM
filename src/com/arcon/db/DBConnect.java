@@ -2,9 +2,10 @@ package com.arcon.db;
 
 import com.arcon.ui.model.User;
 import com.arcon.lib.Constants;
-import com.arcon.ui.model.UserType;
 
 import java.sql.*;
+import java.util.HashMap;
+import java.util.Map;
 
 public class DBConnect{
     private static DBConnect instance = new DBConnect();
@@ -154,6 +155,39 @@ public class DBConnect{
                 }
             }
         }
+    }
+
+    public Map<Double, String> getDiscountSet() {
+        Map<Double, String> map = new HashMap();
+
+        try {
+            statmt = connection.createStatement();
+            resSet = statmt.executeQuery("SELECT * FROM Discount");
+            while (resSet.next()) {
+                if (resSet.getString("UserType").equals(Constants.getUserType())) {
+                    map.put(resSet.getDouble("UserName"), resSet.getString("Comment"));
+                }
+            }
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            if (resSet != null) {
+                try {
+                    resSet.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (statmt != null) {
+                try {
+                    statmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return map;
     }
 
     public static DBConnect getInstance() {
