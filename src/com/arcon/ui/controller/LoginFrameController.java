@@ -13,17 +13,14 @@ import java.awt.event.KeyListener;
 public class LoginFrameController{
 
     private LoginFrame loginFrame;
-
     private JTextField textFieldLogin;
     private JPasswordField passwordFieldPassword;
     private JButton buttonMainOK;
-
 
     public LoginFrameController() {
         initComponents();
         initListeners();
     }
-
 
     public void showLoginFrameWindow(){
         loginFrame.setVisible(true);

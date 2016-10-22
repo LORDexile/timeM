@@ -1,9 +1,8 @@
 package com.arcon.db;
 
-import com.arcon.User;
+import com.arcon.ui.model.User;
 import com.arcon.lib.Constants;
 
-import java.io.IOException;
 import java.sql.*;
 
 public class DBConnect{

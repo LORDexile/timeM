@@ -1,4 +1,4 @@
-package com.arcon;
+package com.arcon.ui.model;
 
 import com.arcon.lib.Constants;
 

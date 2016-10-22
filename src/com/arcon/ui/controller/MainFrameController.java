@@ -1,9 +1,6 @@
 package com.arcon.ui.controller;
 
-import com.arcon.Main;
 import com.arcon.ui.view.MainFrame;
-
-import javax.swing.*;
 
 public class MainFrameController {
 
