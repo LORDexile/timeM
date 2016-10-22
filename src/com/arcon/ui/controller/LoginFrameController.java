@@ -66,7 +66,7 @@ public class LoginFrameController{
                 break;
             case 2:
                 loginFrame.setVisible(false);
-                Main.mainFrameController.showMainFrameWindow();
+                loginVerificationPassed();
                 break;
         }
 
@@ -76,6 +76,11 @@ public class LoginFrameController{
 
         passwordFieldPassword.setText("");
         passwordFieldPassword.requestFocus();
+    }
+
+    private void loginVerificationPassed() {
+        Main.mainFrameController.showMainFrameWindow();
+        Main.mainFrameController.updateComponents();
     }
 
     //press button to do verification
