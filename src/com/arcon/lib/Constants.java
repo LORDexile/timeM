@@ -1,10 +1,10 @@
 package com.arcon.lib;
 
 public final class Constants {
-    private static String USER_NAME = null;
-    private static String USER_TYPE = null;
+    private static String USER_NAME;
+    private static String USER_TYPE;
     public static final String PRODUCT_VERSION = "0.0.7";
-    public static final String PROGRAM_TITLE = "TimeManager - ver: " + PRODUCT_VERSION + " - ";
+    public static final String PROGRAM_TITLE = " TimeManager - ver: " + PRODUCT_VERSION;
 
     public static final double PRICE = 2000.0;
     public static final double PRICE_SEC = PRICE / 3600;
@@ -35,5 +35,8 @@ public final class Constants {
 
     public static String getUserType() {
         return USER_TYPE;
+    }
+    public static String getProgramTitle() {
+        return "[" + USER_NAME + "]" + PROGRAM_TITLE;
     }
 }
