@@ -2,6 +2,7 @@ package com.arcon.db;
 
 import com.arcon.ui.model.User;
 import com.arcon.lib.Constants;
+import com.arcon.ui.model.UserType;
 
 import java.sql.*;
 
@@ -77,6 +78,8 @@ public class DBConnect{
             while (resSet.next()) {
                 if (userName.equals(resSet.getString("UserName"))){
                     if (password.equals(resSet.getString("Password"))) {
+                        Constants.setUserName(resSet.getString("UserName"));
+                        Constants.setUserType(resSet.getString("UserType"));
                         return 2;
                     }else {
                         return 1;
