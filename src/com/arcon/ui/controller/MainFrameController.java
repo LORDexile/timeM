@@ -19,7 +19,7 @@ public class MainFrameController {
         mainFrame = new MainFrame();
 
         tabbedPaneMain = mainFrame.getTabbedPaneMain();
-        //tabbedPaneMain.
+
     }
 
     private void initListeners() {
@@ -31,4 +31,5 @@ public class MainFrameController {
         mainFrame.setVisible(true);
 
     }
+
 }

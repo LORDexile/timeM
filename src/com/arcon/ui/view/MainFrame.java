@@ -27,6 +27,10 @@ public class MainFrame extends JFrame{
     private JPanel tabPanelMainSource;
     private JComboBox comboBoxDiscount;
     private JTextField textFieldCash;
+    private JLabel jLabelTimeIn;
+    private JLabel jLabelTimeOut;
+    private JLabel jLabelTimeTotal;
+    private JLabel jLabelPrice;
 
 
     //constructor
@@ -97,5 +101,21 @@ public class MainFrame extends JFrame{
 
     public JTextField getTextFieldCash() {
         return textFieldCash;
+    }
+
+    public JLabel getjLabelTimeIn() {
+        return jLabelTimeIn;
+    }
+
+    public JLabel getjLabelTimeOut() {
+        return jLabelTimeOut;
+    }
+
+    public JLabel getjLabelTimeTotal() {
+        return jLabelTimeTotal;
+    }
+
+    public JLabel getjLabelPrice() {
+        return jLabelPrice;
     }
 }

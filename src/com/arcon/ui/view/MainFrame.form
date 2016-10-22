@@ -51,7 +51,7 @@
                       <text value="Time In:"/>
                     </properties>
                   </component>
-                  <component id="9e009" class="javax.swing.JLabel">
+                  <component id="9e009" class="javax.swing.JLabel" binding="jLabelTimeIn">
                     <constraints>
                       <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
@@ -67,7 +67,7 @@
                       <text value="Time out:"/>
                     </properties>
                   </component>
-                  <component id="e2112" class="javax.swing.JLabel">
+                  <component id="e2112" class="javax.swing.JLabel" binding="jLabelTimeOut">
                     <constraints>
                       <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
@@ -83,7 +83,7 @@
                       <text value="Total time:"/>
                     </properties>
                   </component>
-                  <component id="63bd9" class="javax.swing.JLabel">
+                  <component id="63bd9" class="javax.swing.JLabel" binding="jLabelTimeTotal">
                     <constraints>
                       <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
@@ -133,7 +133,7 @@
                       <text value="Price:"/>
                     </properties>
                   </component>
-                  <component id="8a699" class="javax.swing.JLabel">
+                  <component id="8a699" class="javax.swing.JLabel" binding="jLabelPrice">
                     <constraints>
                       <grid row="4" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
