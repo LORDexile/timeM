@@ -165,7 +165,7 @@ public class DBConnect{
             resSet = statmt.executeQuery("SELECT * FROM Discount");
             while (resSet.next()) {
                 if (resSet.getString("UserType").equals(Constants.getUserType())) {
-                    map.put(resSet.getDouble("UserName"), resSet.getString("Comment"));
+                    map.put(resSet.getDouble("Discount"), resSet.getString("Comment"));
                 }
             }
         }catch (SQLException e) {
