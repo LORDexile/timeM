@@ -165,7 +165,7 @@ public class DBConnect{
         }
     }
 
-    public Card readCardInUSe(String id) {
+    public Card readCardInUse(String id) {
         Date date = null;
         try{
         resSet = statmt.executeQuery("SELECT * FROM CardInUse");
@@ -178,6 +178,15 @@ public class DBConnect{
             e.printStackTrace();
         }
         return new Card(Long.parseLong(id), date);
+    }
+
+    public void deleteCardInUse(String id) {
+        try {
+            String sql = "DELETE FROM CardInUse WHERE id=" + id + ";";
+            statmt.executeUpdate(sql);
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
     }
 
     public void writeCard(Card card) {
@@ -196,6 +205,7 @@ public class DBConnect{
 
         }
     }
+
 
     public ArrayList<Discount> getDiscountSet() {
         ArrayList<Discount> list = new ArrayList();
