@@ -1,13 +1,13 @@
 package com.arcon.db;
 
 import com.arcon.ui.model.Card;
+import com.arcon.ui.model.Discount;
 import com.arcon.ui.model.User;
 import com.arcon.lib.Constants;
 
-import java.util.Date;
+import java.util.*;
 import java.sql.*;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Date;
 
 public class DBConnect{
     private static DBConnect instance = new DBConnect();
@@ -180,21 +180,21 @@ public class DBConnect{
         return new Card(Long.parseLong(id), date);
     }
 
-    public Map<Double, String> getDiscountSet() {
-        Map<Double, String> map = new HashMap();
+    public ArrayList<Discount> getDiscountSet() {
+        ArrayList<Discount> list = new ArrayList();
 
         try {
             resSet = statmt.executeQuery("SELECT * FROM Discount");
             while (resSet.next()) {
                 if (resSet.getString("UserType").equals(Constants.getUserType())) {
-                    map.put(resSet.getDouble("Discount"), resSet.getString("Comment"));
+                    list.add(new Discount(resSet.getDouble("Discount"), resSet.getString("Comment")));
                 }
             }
         }catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return map;
+        return list;
     }
 
     public static DBConnect getInstance() {
