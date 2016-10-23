@@ -1,7 +1,24 @@
 package com.arcon.ui.model;
 
-/**
- * Created by LORDexile on 23.10.2016.
- */
 public class Discount {
+    private double discount;
+    private String comment;
+
+    public Discount(double discount, String comment) {
+        this.discount = discount;
+        this.comment = comment;
+    }
+
+    public double getDiscount() {
+        return discount;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    @Override
+    public String toString() {
+        return comment;
+    }
 }
