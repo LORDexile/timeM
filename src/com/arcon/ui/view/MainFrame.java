@@ -24,7 +24,7 @@ public class MainFrame extends JFrame{
     private JButton buttonCardInput;
     private JButton buttonIO;
     private JButton buttonOptions;
-    private JButton battonLog;
+    private JButton buttonLog;
 
 
 
@@ -94,7 +94,7 @@ public class MainFrame extends JFrame{
         return buttonOptions;
     }
 
-    public JButton getBattonLog() {
-        return battonLog;
+    public JButton getButtonLog() {
+        return buttonLog;
     }
 }

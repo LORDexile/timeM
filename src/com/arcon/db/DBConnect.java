@@ -145,7 +145,6 @@ public class DBConnect{
             }
             writeNewCardInUse(id);
 
-
         }catch (SQLException e){
             e.printStackTrace();
         }

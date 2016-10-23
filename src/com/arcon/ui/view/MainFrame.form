@@ -35,7 +35,7 @@
               <text value="Options"/>
             </properties>
           </component>
-          <component id="5ee99" class="javax.swing.JButton" binding="battonLog">
+          <component id="5ee99" class="javax.swing.JButton" binding="buttonLog">
             <constraints/>
             <properties>
               <text value="Log"/>
@@ -75,6 +75,7 @@
                 </constraints>
                 <properties>
                   <text value="Time In:"/>
+                  <visible value="false"/>
                 </properties>
               </component>
               <component id="9e009" class="javax.swing.JLabel" binding="jLabelTimeIn">
