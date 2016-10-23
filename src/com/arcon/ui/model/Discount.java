@@ -19,6 +19,6 @@ public class Discount {
 
     @Override
     public String toString() {
-        return comment;
+        return discount + "% - " + comment;
     }
 }
