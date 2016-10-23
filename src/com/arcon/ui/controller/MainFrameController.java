@@ -134,6 +134,7 @@ public class MainFrameController {
 
             }else {
                 comboBoxDiscount.setEnabled(false);
+                comboBoxDiscount.setSelectedIndex(0);
             }
 
         }
