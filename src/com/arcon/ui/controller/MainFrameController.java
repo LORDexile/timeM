@@ -101,6 +101,7 @@ public class MainFrameController {
 
         }else {
             msg = "Добавлена новая карта";
+            textFieldCard.setText("");
             textFieldCard.requestFocus();
         }
         connect.closeConnect();
@@ -111,7 +112,7 @@ public class MainFrameController {
 
     }
 
-    private void cancel() {
+    private void cancelAction() {
         card = null;
         cardReady = false;
         textFieldCard.setText("");
@@ -197,9 +198,10 @@ public class MainFrameController {
                     DBConnect connect = DBConnect.getInstance();
                     connect.openConnect();
                     connect.writeCard(card);
+                    connect.deleteCardInUse(String.valueOf(card.getId()));
                     connect.closeConnect();
 
-                    cancel();
+                    cancelAction();
                 }
             }
         }
