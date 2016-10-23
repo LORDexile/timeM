@@ -22,8 +22,8 @@ public class Card{
         totalTime = (exitTime.getTime() - enterTime.getTime()) / 1000;
     }
 
-    public void setDiscount(float discount) {
-        if (discount > 0 && discount <= 100) {
+    public void setDiscount(double discount) {
+        if (discount >= 0.0 && discount <= 100.0) {
             this.discount = discount;
         }
     }
@@ -45,7 +45,7 @@ public class Card{
     }
 
     public int getPrice() {
-        if (discount != 0) {
+        if (discount != 0.0) {
             return (int) (totalTime * Constants.PRICE_SEC * (this.discount / 100));
         }
         return  (int) (totalTime * Constants.PRICE_SEC);
