@@ -33,6 +33,10 @@ public class Card{
         return totalTime;
     }
 
+    public long getIntermediateTime(Date endDate) {
+        return (endDate.getTime() - enterTime.getTime()) / 1000;
+    }
+
     public long getId() {
         return id;
     }
