@@ -91,7 +91,7 @@ public class MainFrameController {
 
         if (cardInUse) {
 
-            card = connect.readCardInUSe(id);
+            card = connect.readCardInUse(id);
             card.setExitTime();
 
             jLabelTimeIn.setText(card.getEnterTime().toString());
