@@ -12,7 +12,7 @@ import java.util.Date;
 public class DBConnect{
     private static DBConnect instance = new DBConnect();
     private Connection connection = null;
-    private Statement statmt = null;
+    private Statement statement = null;
     private ResultSet resSet;
 
     private String url;
@@ -33,7 +33,7 @@ public class DBConnect{
 
         try{
             connection = DriverManager.getConnection(url);
-            statmt = connection.createStatement();
+            statement = connection.createStatement();
             System.out.println("Соеденение установлено:");
         }catch (SQLException e){
             e.getStackTrace();
@@ -50,9 +50,9 @@ public class DBConnect{
             }
         }
 
-        if (statmt != null) {
+        if (statement != null) {
             try {
-                statmt.close();
+                statement.close();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -82,7 +82,7 @@ public class DBConnect{
      */
     public int verifyUser (String userName, String password){
         try {
-            resSet = statmt.executeQuery("SELECT * FROM Users");
+            resSet = statement.executeQuery("SELECT * FROM Users");
             while (resSet.next()) {
                 if (userName.equals(resSet.getString("UserName"))){
                     if (password.equals(resSet.getString("Password"))) {
@@ -105,7 +105,7 @@ public class DBConnect{
 
         boolean NotExist = true;
         try {
-            resSet = statmt.executeQuery("SELECT * FROM Users");
+            resSet = statement.executeQuery("SELECT * FROM Users");
             while (resSet.next()) {
                 if (user.getUserName().equals(resSet.getString("UserName"))) {
                     NotExist = false;
@@ -122,7 +122,7 @@ public class DBConnect{
                         "', '" + user.getComment() +
                         "');";
                 System.out.println(sql);
-                statmt.executeUpdate(sql);
+                statement.executeUpdate(sql);
 
 
             } else System.out.println("login exist");
@@ -136,7 +136,7 @@ public class DBConnect{
     public boolean isCardInUse (String id) {
 
         try {
-            resSet = statmt.executeQuery("SELECT * FROM CardInUse");
+            resSet = statement.executeQuery("SELECT * FROM CardInUse");
 
             while (resSet.next()) {
                 if (id.equals(resSet.getString("id"))) {
@@ -157,8 +157,7 @@ public class DBConnect{
                         "VALUES ('" + id +
                         "', '" + new Date().getTime() +
                         "');";
-                System.out.println(sql);
-                statmt.executeUpdate(sql);
+            statement.executeUpdate(sql);
 
         }catch (SQLException e){
             e.printStackTrace();
@@ -168,7 +167,7 @@ public class DBConnect{
     public Card readCardInUse(String id) {
         Date date = null;
         try{
-        resSet = statmt.executeQuery("SELECT * FROM CardInUse");
+        resSet = statement.executeQuery("SELECT * FROM CardInUse");
             while (resSet.next()) {
                 if (id.equals(resSet.getString("id"))) {
                     date = new Date(resSet.getLong("EnterTime"));
@@ -183,7 +182,7 @@ public class DBConnect{
     public void deleteCardInUse(String id) {
         try {
             String sql = "DELETE FROM CardInUse WHERE id=" + id + ";";
-            statmt.executeUpdate(sql);
+            statement.executeUpdate(sql);
         }catch (SQLException e){
             e.printStackTrace();
         }
@@ -200,7 +199,7 @@ public class DBConnect{
                     "', '" + card.getExitTime() +
                     "');";
             System.out.println(sql);
-            statmt.executeUpdate(sql);
+            statement.executeUpdate(sql);
         }catch (SQLException e) {
 
         }
@@ -211,7 +210,7 @@ public class DBConnect{
         ArrayList<Discount> list = new ArrayList();
 
         try {
-            resSet = statmt.executeQuery("SELECT * FROM Discount");
+            resSet = statement.executeQuery("SELECT * FROM Discount");
             while (resSet.next()) {
                 if (resSet.getString("UserType").equals(Constants.getUserType())) {
                     list.add(new Discount(resSet.getDouble("Discount"), resSet.getString("Comment")));
