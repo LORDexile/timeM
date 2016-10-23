@@ -213,10 +213,11 @@ public class MainFrameController {
          */
         @Override
         public void actionPerformed(ActionEvent e) {
-            Discount disc = (Discount)comboBoxDiscount.getSelectedItem();
-            card.setDiscount(disc.getDiscount());
-            jLabelPrice.setText(String.valueOf(card.getPrice()));
-
+            if (card != null) {
+                Discount disc = (Discount) comboBoxDiscount.getSelectedItem();
+                card.setDiscount(disc.getDiscount());
+                jLabelPrice.setText(String.valueOf(card.getPrice()));
+            }
         }
     }
 }
