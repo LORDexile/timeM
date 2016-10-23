@@ -155,7 +155,7 @@ public class DBConnect{
         try {
             String sql = "INSERT INTO CardInUse (id,EnterTime) " +
                         "VALUES ('" + id +
-                        "', '" + new Date() +
+                        "', '" + new Date().getTime() +
                         "');";
                 System.out.println(sql);
                 statmt.executeUpdate(sql);
@@ -171,7 +171,7 @@ public class DBConnect{
         resSet = statmt.executeQuery("SELECT * FROM CardInUse");
             while (resSet.next()) {
                 if (id.equals(resSet.getString("id"))) {
-                    date = resSet.getDate("EnterTime");
+                    date = new Date(resSet.getLong("EnterTime"));
                 }
             }
         }catch (SQLException e) {
