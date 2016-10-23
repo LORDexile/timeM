@@ -8,29 +8,24 @@ import javax.swing.*;
 public class MainFrame extends JFrame{
 
     private JPanel mainPanel;
-    private JTabbedPane tabbedPaneMain;
-    private JPanel tabPanelMain;
-    private JPanel tabPanelIO;
-    private JPanel tabPanelOptions;
-    private JPanel tabPanelLog;
+    private JPanel PanelMain;
+    private JPanel tabPanelMainSource;
 
     private JTextField textFieldCard;
     private JButton buttonPerformCard;
-    private JRadioButton radioButtonInput;
-    private JRadioButton radioButtonOutput;
-    private JTextField textFieldIOCash;
-    private JButton buttonIOAction;
-    private JTextArea textAreaComment;
-    private JPasswordField passwordFieldPassword;
-    private JButton buttonCangeUser;
-    private JButton changePriceButton;
-    private JPanel tabPanelMainSource;
     private JComboBox comboBoxDiscount;
+    private JCheckBox checkBoxDiscount;
     private JTextField textFieldCash;
     private JLabel jLabelTimeIn;
     private JLabel jLabelTimeOut;
     private JLabel jLabelTimeTotal;
     private JLabel jLabelPrice;
+    private JToolBar toolBarMenu;
+    private JButton buttonCardInput;
+    private JButton buttonIO;
+    private JButton buttonOptions;
+    private JButton battonLog;
+
 
 
     //constructor
@@ -47,10 +42,6 @@ public class MainFrame extends JFrame{
 
     }
 
-    public JTabbedPane getTabbedPaneMain() {
-        return tabbedPaneMain;
-    }
-
     public JTextField getTextFieldCard() {
         return textFieldCard;
     }
@@ -59,44 +50,12 @@ public class MainFrame extends JFrame{
         return buttonPerformCard;
     }
 
-    public JRadioButton getRadioButtonInput() {
-        return radioButtonInput;
-    }
-
-    public JRadioButton getRadioButtonOutput() {
-        return radioButtonOutput;
-    }
-
-    public JTextField getTextFieldIOCash() {
-        return textFieldIOCash;
-    }
-
-    public JButton getButtonIOAction() {
-        return buttonIOAction;
-    }
-
-    public JTextArea getTextAreaComment() {
-        return textAreaComment;
-    }
-
-    public JPasswordField getPasswordFieldPassword() {
-        return passwordFieldPassword;
-    }
-
-    public JButton getButtonCangeUser() {
-        return buttonCangeUser;
-    }
-
-    public JButton getChangePriceButton() {
-        return changePriceButton;
-    }
-
-    public JPanel getTabPanelMainSource() {
-        return tabPanelMainSource;
-    }
-
     public JComboBox getComboBoxDiscount() {
         return comboBoxDiscount;
+    }
+
+    public JCheckBox getCheckBoxDiscount() {
+        return checkBoxDiscount;
     }
 
     public JTextField getTextFieldCash() {
@@ -117,5 +76,25 @@ public class MainFrame extends JFrame{
 
     public JLabel getjLabelPrice() {
         return jLabelPrice;
+    }
+
+    public JToolBar getToolBarMenu() {
+        return toolBarMenu;
+    }
+
+    public JButton getButtonCardInput() {
+        return buttonCardInput;
+    }
+
+    public JButton getButtonIO() {
+        return buttonIO;
+    }
+
+    public JButton getButtonOptions() {
+        return buttonOptions;
+    }
+
+    public JButton getBattonLog() {
+        return battonLog;
     }
 }
