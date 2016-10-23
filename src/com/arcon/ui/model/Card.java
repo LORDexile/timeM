@@ -46,7 +46,7 @@ public class Card{
 
     public int getPrice() {
         if (discount != 0.0) {
-            return (int) (totalTime * Constants.PRICE_SEC * (this.discount / 100));
+            return (int) (totalTime * Constants.PRICE_SEC - (totalTime * Constants.PRICE_SEC * this.discount / 100));
         }
         return  (int) (totalTime * Constants.PRICE_SEC);
     }
