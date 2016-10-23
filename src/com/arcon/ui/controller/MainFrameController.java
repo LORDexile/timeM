@@ -32,6 +32,7 @@ public class MainFrameController {
     private boolean isDiscountSet = false;
     private List<Discount> discountList;
     private Card card;
+    private boolean cardReady = false;
 
     public MainFrameController () {
         initComponents();
@@ -90,7 +91,6 @@ public class MainFrameController {
 
         if (cardInUse) {
 
-            System.out.println("Такая карта есть!");
             card = connect.readCardInUSe(id);
             card.setExitTime();
 
@@ -98,7 +98,6 @@ public class MainFrameController {
             jLabelTimeOut.setText(card.getExitTime().toString());
             jLabelTimeTotal.setText(String.valueOf(card.getTotalTime()));
             jLabelPrice.setText(String.valueOf(card.getPrice()));
-            textFieldCash.requestFocus();
 
         }else {
             msg = "Добавлена новая карта";
@@ -109,7 +108,14 @@ public class MainFrameController {
         if (!msg.equals("")) {
             JOptionPane.showMessageDialog(null, msg, "", JOptionPane.INFORMATION_MESSAGE);
         }
+
+    }
+
+    private void cancel() {
+        card = null;
+        cardReady = false;
         textFieldCard.setText("");
+        textFieldCash.requestFocus();
     }
 
     private class checkBoxDiscountItemListener implements ItemListener {
@@ -165,6 +171,7 @@ public class MainFrameController {
             if (e.getExtendedKeyCode() == 10) {
                 if (!textFieldCard.getText().equals("")) {
                     cardAction();
+                    cardReady = true;
                 }
             }
         }
@@ -186,7 +193,14 @@ public class MainFrameController {
         @Override
         public void actionPerformed(ActionEvent e) {
             if (!textFieldCard.getText().equals("")) {
-                cardAction();
+                if (cardReady){
+                    DBConnect connect = DBConnect.getInstance();
+                    connect.openConnect();
+                    connect.writeCard(card);
+                    connect.closeConnect();
+
+                    cancel();
+                }
             }
         }
     }
