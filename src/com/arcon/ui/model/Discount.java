@@ -19,6 +19,16 @@ public class Discount {
 
     @Override
     public String toString() {
-        return discount + "% - " + comment;
+        String msg = "% - ";
+
+        //if comment is empty shows only "discount + %"
+        //if not empty shows "discount + "% - " + first word of comment
+        if (comment.equals("")){
+            msg = "%" + comment;
+        }else {
+            String[] word = comment.split("\\s");
+            msg += word[0];
+        }
+        return discount + msg;
     }
 }
