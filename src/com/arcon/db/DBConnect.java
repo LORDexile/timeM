@@ -1,8 +1,10 @@
 package com.arcon.db;
 
+import com.arcon.ui.model.Card;
 import com.arcon.ui.model.User;
 import com.arcon.lib.Constants;
 
+import java.util.Date;
 import java.sql.*;
 import java.util.HashMap;
 import java.util.Map;
@@ -13,23 +15,12 @@ public class DBConnect{
     private Statement statmt = null;
     private ResultSet resSet;
 
-    private String user;
-    private String pass;
     private String url;
     private String driver;
-    private String remoteURL;
-    private String remoteDriver;
-
-
-
 
     public DBConnect() {
-        user = Constants.REMOTE_DB_USER;
-        pass = Constants.REMOTE_DB_PASSWORD;
         url = Constants.DB_URL;
         driver = Constants.DB_DRIVER;
-        remoteURL = Constants.REMOTE_DB_URL;
-        remoteDriver = Constants.REMOTE_DB_DRIVER;
     }
 
     public void openConnect() {
@@ -42,6 +33,7 @@ public class DBConnect{
 
         try{
             connection = DriverManager.getConnection(url);
+            statmt = connection.createStatement();
             System.out.println("Соеденение установлено:");
         }catch (SQLException e){
             e.getStackTrace();
@@ -49,6 +41,22 @@ public class DBConnect{
     }
 
     public void closeConnect() {
+
+        if (resSet != null) {
+            try {
+                resSet.close();
+            }catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        if (statmt != null) {
+            try {
+                statmt.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
 
         if (connection != null) {
             try {
@@ -74,7 +82,6 @@ public class DBConnect{
      */
     public int verifyUser (String userName, String password){
         try {
-            statmt = connection.createStatement();
             resSet = statmt.executeQuery("SELECT * FROM Users");
             while (resSet.next()) {
                 if (userName.equals(resSet.getString("UserName"))){
@@ -90,45 +97,29 @@ public class DBConnect{
             }
         }catch (SQLException e) {
             e.printStackTrace();
-        }finally {
-            if (resSet != null) {
-                try {
-                    resSet.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-            if (statmt != null) {
-                try {
-                    statmt.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
         }
         return 0;
     }
 
     public void createNewUser (User user){
+
         boolean NotExist = true;
-        User carrentUser = user;
         try {
-            statmt = connection.createStatement();
             resSet = statmt.executeQuery("SELECT * FROM Users");
             while (resSet.next()) {
-                if (carrentUser.getUserName().equals(resSet.getString("UserName"))) {
+                if (user.getUserName().equals(resSet.getString("UserName"))) {
                     NotExist = false;
-
+                    break;
                 }
             }
 
             if (NotExist) {
 
                 String sql = "INSERT INTO Users (UserName,UserType,Password,Comment) " +
-                        "VALUES ('" + carrentUser.getUserName() +
-                        "', '" + carrentUser.getUserType() +
-                        "', '" + carrentUser.getPassword() +
-                        "', '" + carrentUser.getComment() +
+                        "VALUES ('" + user.getUserName() +
+                        "', '" + user.getUserType() +
+                        "', '" + user.getPassword() +
+                        "', '" + user.getComment() +
                         "');";
                 System.out.println(sql);
                 statmt.executeUpdate(sql);
@@ -138,30 +129,62 @@ public class DBConnect{
 
         }catch (SQLException e){
             e.printStackTrace();
-        }finally {
-
-            if (resSet != null) {
-                try {
-                    resSet.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-            if (statmt != null) {
-                try {
-                    statmt.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
         }
+
+    }
+
+    public boolean isCardInUse (String id) {
+
+        try {
+            resSet = statmt.executeQuery("SELECT * FROM CardInUse");
+
+            while (resSet.next()) {
+                if (id.equals(resSet.getString("id"))) {
+                    return true;
+                }
+            }
+            writeNewCardInUse(id);
+
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    private void writeNewCardInUse(String id) {
+        try {
+            String sql = "INSERT INTO CardInUse (id,EnterTime) " +
+                        "VALUES ('" + id +
+                        "', '" + new Date() +
+                        "');";
+                System.out.println(sql);
+                statmt.executeUpdate(sql);
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+
+    public Card readCardInUSe(String id) {
+        Date date = null;
+        try{
+        resSet = statmt.executeQuery("SELECT * FROM CardInUse");
+            while (resSet.next()) {
+                if (id.equals(resSet.getString("id"))) {
+                    date = resSet.getDate("EnterTime");
+                }
+            }
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return new Card(Long.parseLong(id), date);
     }
 
     public Map<Double, String> getDiscountSet() {
         Map<Double, String> map = new HashMap();
 
         try {
-            statmt = connection.createStatement();
             resSet = statmt.executeQuery("SELECT * FROM Discount");
             while (resSet.next()) {
                 if (resSet.getString("UserType").equals(Constants.getUserType())) {
@@ -170,21 +193,6 @@ public class DBConnect{
             }
         }catch (SQLException e) {
             e.printStackTrace();
-        }finally {
-            if (resSet != null) {
-                try {
-                    resSet.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-            if (statmt != null) {
-                try {
-                    statmt.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
         }
 
         return map;
