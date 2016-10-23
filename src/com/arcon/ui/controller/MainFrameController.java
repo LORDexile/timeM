@@ -65,7 +65,7 @@ public class MainFrameController {
     public void showMainFrameWindow() {
 
         mainFrame.setVisible(true);
-
+        textFieldCard.grabFocus();
 
     }
 
