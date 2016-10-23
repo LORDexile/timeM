@@ -180,6 +180,23 @@ public class DBConnect{
         return new Card(Long.parseLong(id), date);
     }
 
+    public void writeCard(Card card) {
+        try{
+            String sql = "INSERT INTO Cards (Card_id, User, Price, Discount, DATA_in, DATA_out) " +
+                    "VALUES ('" + card.getId() +
+                    "', '" + Constants.getUserName() +
+                    "', '" + card.getPrice() +
+                    "', '" + card.getDiscount() +
+                    "', '" + card.getEnterTime() +
+                    "', '" + card.getExitTime() +
+                    "');";
+            System.out.println(sql);
+            statmt.executeUpdate(sql);
+        }catch (SQLException e) {
+
+        }
+    }
+
     public ArrayList<Discount> getDiscountSet() {
         ArrayList<Discount> list = new ArrayList();
 
