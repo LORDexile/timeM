@@ -18,9 +18,8 @@ public class Card{
 
     public void setExitTime() {
         exitTime = new Date();
-        //calculate price
+        //set time in seconds
         totalTime = (exitTime.getTime() - enterTime.getTime()) / 1000;
-
     }
 
     public void setDiscount(float discount) {
@@ -31,10 +30,6 @@ public class Card{
 
     public long getTotalTime() {
         return totalTime;
-    }
-
-    public long getIntermediateTime(Date endDate) {
-        return (endDate.getTime() - enterTime.getTime()) / 1000;
     }
 
     public long getId() {
@@ -50,7 +45,10 @@ public class Card{
     }
 
     public int getPrice() {
-        return (int)(totalTime * Constants.PRICE_SEC * (this.discount/100));
+        if (discount != 0) {
+            return (int) (totalTime * Constants.PRICE_SEC * (this.discount / 100));
+        }
+        return  (int) (totalTime * Constants.PRICE_SEC);
     }
 
     public double getDiscount() {
