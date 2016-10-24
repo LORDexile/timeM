@@ -20,11 +20,23 @@ public class MainFrame extends JFrame{
     private JLabel jLabelTimeOut;
     private JLabel jLabelTimeTotal;
     private JLabel jLabelPrice;
+
+    private JLabel labelTextTimeIn;
+    private JLabel labelTextTimeOut;
+    private JLabel labelTextTimeTotal;
+    private JLabel labelTextDiscount;
+    private JLabel labelTextPrice;
+    private JLabel labelTextCash;
+
     private JToolBar toolBarMenu;
+
     private JButton buttonCardInput;
     private JButton buttonIO;
     private JButton buttonOptions;
     private JButton buttonLog;
+    private JButton buttonCancel;
+
+
 
 
 
@@ -82,6 +94,10 @@ public class MainFrame extends JFrame{
         return toolBarMenu;
     }
 
+    public JButton getButtonCancel() {
+        return buttonCancel;
+    }
+
     public JButton getButtonCardInput() {
         return buttonCardInput;
     }
@@ -96,5 +112,29 @@ public class MainFrame extends JFrame{
 
     public JButton getButtonLog() {
         return buttonLog;
+    }
+
+    public JLabel getLabelTextTimeIn() {
+        return labelTextTimeIn;
+    }
+
+    public JLabel getLabelTextTimeOut() {
+        return labelTextTimeOut;
+    }
+
+    public JLabel getLabelTextTimeTotal() {
+        return labelTextTimeTotal;
+    }
+
+    public JLabel getLabelTextDiscount() {
+        return labelTextDiscount;
+    }
+
+    public JLabel getLabelTextPrice() {
+        return labelTextPrice;
+    }
+
+    public JLabel getLabelTextCash() {
+        return labelTextCash;
     }
 }
