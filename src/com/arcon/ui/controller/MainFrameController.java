@@ -19,7 +19,6 @@ public class MainFrameController {
 
     private JButton buttonPerformCard;
     private JButton buttonCancel;
-    private JButton buttonCardInput;
     private JButton buttonIO;
     private JButton buttonOptions;
     private JButton buttonLog;
@@ -38,9 +37,7 @@ public class MainFrameController {
     private JLabel labelTextDiscount;
     private JLabel labelTextPrice;
     private JLabel labelTextCash;
-
-    private JToolBar toolBarMenu;
-
+    
     private boolean setText = false;
     private boolean isDiscountSet = false;
     private List<Discount> discountList;
@@ -75,7 +72,6 @@ public class MainFrameController {
 
         buttonPerformCard = mainFrame.getButtonPerformCard();
         buttonCancel = mainFrame.getButtonCancel();
-        buttonCardInput = mainFrame.getButtonCardInput();
         buttonIO = mainFrame.getButtonIO();
         buttonOptions = mainFrame.getButtonOptions();
         buttonLog = mainFrame.getButtonLog();

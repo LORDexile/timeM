@@ -30,7 +30,6 @@ public class MainFrame extends JFrame{
 
     private JToolBar toolBarMenu;
 
-    private JButton buttonCardInput;
     private JButton buttonIO;
     private JButton buttonOptions;
     private JButton buttonLog;
@@ -96,10 +95,6 @@ public class MainFrame extends JFrame{
 
     public JButton getButtonCancel() {
         return buttonCancel;
-    }
-
-    public JButton getButtonCardInput() {
-        return buttonCardInput;
     }
 
     public JButton getButtonIO() {

@@ -17,12 +17,6 @@
         </properties>
         <border type="none"/>
         <children>
-          <component id="83bbb" class="javax.swing.JButton" binding="buttonCardInput">
-            <constraints/>
-            <properties>
-              <text value="Card Input"/>
-            </properties>
-          </component>
           <component id="2532a" class="javax.swing.JButton" binding="buttonIO">
             <constraints/>
             <properties>
