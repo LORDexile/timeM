@@ -15,20 +15,33 @@ public class MainFrameController {
     private MainFrame mainFrame;
 
     private JTextField textFieldCard;
-    private JButton buttonPerformCard;
-    private JComboBox comboBoxDiscount;
-    private JCheckBox checkBoxDiscount;
     private JTextField textFieldCash;
-    private JLabel jLabelTimeIn;
-    private JLabel jLabelTimeOut;
-    private JLabel jLabelTimeTotal;
-    private JLabel jLabelPrice;
-    private JToolBar toolBarMenu;
+
+    private JButton buttonPerformCard;
+    private JButton buttonCancel;
     private JButton buttonCardInput;
     private JButton buttonIO;
     private JButton buttonOptions;
     private JButton buttonLog;
 
+    private JComboBox comboBoxDiscount;
+    private JCheckBox checkBoxDiscount;
+
+    private JLabel jLabelTimeIn;
+    private JLabel jLabelTimeOut;
+    private JLabel jLabelTimeTotal;
+    private JLabel jLabelPrice;
+
+    private JLabel labelTextTimeIn;
+    private JLabel labelTextTimeOut;
+    private JLabel labelTextTimeTotal;
+    private JLabel labelTextDiscount;
+    private JLabel labelTextPrice;
+    private JLabel labelTextCash;
+
+    private JToolBar toolBarMenu;
+
+    private boolean setText = false;
     private boolean isDiscountSet = false;
     private List<Discount> discountList;
     private Card card;
@@ -44,14 +57,24 @@ public class MainFrameController {
 
         textFieldCard = mainFrame.getTextFieldCard();
         textFieldCash = mainFrame.getTextFieldCash();
-        buttonPerformCard = mainFrame.getButtonPerformCard();
+
         jLabelTimeIn = mainFrame.getjLabelTimeIn();
         jLabelTimeOut = mainFrame.getjLabelTimeOut();
         jLabelTimeTotal = mainFrame.getjLabelTimeTotal();
         jLabelPrice = mainFrame.getjLabelPrice();
+
+        labelTextTimeIn = mainFrame.getLabelTextTimeIn();
+        labelTextTimeOut = mainFrame.getLabelTextTimeOut();
+        labelTextTimeTotal = mainFrame.getLabelTextTimeTotal();
+        labelTextDiscount = mainFrame.getLabelTextDiscount();
+        labelTextPrice = mainFrame.getLabelTextPrice();
+        labelTextCash = mainFrame.getLabelTextCash();
+
         comboBoxDiscount = mainFrame.getComboBoxDiscount();
         checkBoxDiscount = mainFrame.getCheckBoxDiscount();
 
+        buttonPerformCard = mainFrame.getButtonPerformCard();
+        buttonCancel = mainFrame.getButtonCancel();
         buttonCardInput = mainFrame.getButtonCardInput();
         buttonIO = mainFrame.getButtonIO();
         buttonOptions = mainFrame.getButtonOptions();
@@ -64,6 +87,7 @@ public class MainFrameController {
         buttonPerformCard.addActionListener(new buttonPerformCardActionListener());
         checkBoxDiscount.addItemListener(new checkBoxDiscountItemListener());
         comboBoxDiscount.addActionListener(new comboBoxDiscountActionListener());
+        buttonCancel.addActionListener(new buttonCancelActionListener());
 
     }
 
@@ -71,6 +95,7 @@ public class MainFrameController {
 
         mainFrame.setVisible(true);
         textFieldCard.requestFocus();
+        setText();
 
     }
 
@@ -98,6 +123,7 @@ public class MainFrameController {
             jLabelTimeOut.setText(card.getExitTime().toString());
             jLabelTimeTotal.setText(String.valueOf(card.getTotalTime()));
             jLabelPrice.setText(String.valueOf(card.getPrice()));
+            setText();
 
         }else {
             msg = "Добавлена новая карта";
@@ -117,6 +143,31 @@ public class MainFrameController {
         cardReady = false;
         textFieldCard.setText("");
         textFieldCash.requestFocus();
+        setText();
+    }
+
+    private void setText() {
+        labelTextTimeIn.setVisible(setText);
+        labelTextTimeOut.setVisible(setText);
+        labelTextTimeTotal.setVisible(setText);
+        labelTextDiscount.setVisible(setText);
+        labelTextPrice.setVisible(setText);
+        labelTextCash.setVisible(setText);
+
+        jLabelTimeIn.setVisible(setText);
+        jLabelTimeOut.setVisible(setText);
+        jLabelTimeTotal.setVisible(setText);
+        jLabelPrice.setVisible(setText);
+
+        checkBoxDiscount.setVisible(setText);
+        comboBoxDiscount.setVisible(setText);
+
+        textFieldCash.setVisible(setText);
+
+        buttonCancel.setVisible(setText);
+        buttonPerformCard.setVisible(setText);
+
+        setText = !setText;
     }
 
     private class checkBoxDiscountItemListener implements ItemListener {
@@ -220,6 +271,19 @@ public class MainFrameController {
                 card.setDiscount(disc.getDiscount());
                 jLabelPrice.setText(String.valueOf(card.getPrice()));
             }
+        }
+    }
+
+    private class buttonCancelActionListener implements ActionListener {
+
+        /**
+         * Invoked when an action occurs.
+         *
+         * @param e
+         */
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            cancelAction();
         }
     }
 }
