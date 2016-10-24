@@ -37,7 +37,7 @@ public class MainFrameController {
     private JLabel labelTextDiscount;
     private JLabel labelTextPrice;
     private JLabel labelTextCash;
-    
+
     private boolean setText = false;
     private boolean isDiscountSet = false;
     private List<Discount> discountList;

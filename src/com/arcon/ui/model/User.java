@@ -1,7 +1,5 @@
 package com.arcon.ui.model;
 
-import com.arcon.ui.model.UserType;
-
 public class User {
 
     private String userName;

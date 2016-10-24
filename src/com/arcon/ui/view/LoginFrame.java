@@ -2,7 +2,6 @@ package com.arcon.ui.view;
 
 import javax.swing.*;
 
-
 public class LoginFrame extends  JFrame{
 
     private JPanel panelMain;

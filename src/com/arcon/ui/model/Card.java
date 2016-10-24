@@ -1,7 +1,6 @@
 package com.arcon.ui.model;
 
 import com.arcon.lib.Constants;
-
 import java.util.Date;
 
 public class Card{
@@ -54,6 +53,5 @@ public class Card{
     public double getDiscount() {
         return discount;
     }
-
 
 }

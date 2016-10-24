@@ -1,6 +1,5 @@
 package com.arcon.ui.view;
 
-
 import com.arcon.lib.Constants;
 
 import javax.swing.*;
@@ -35,10 +34,6 @@ public class MainFrame extends JFrame{
     private JButton buttonLog;
     private JButton buttonCancel;
 
-
-
-
-
     //constructor
     public MainFrame() {
         setSize(800, 500);
@@ -57,40 +52,12 @@ public class MainFrame extends JFrame{
         return textFieldCard;
     }
 
-    public JButton getButtonPerformCard() {
-        return buttonPerformCard;
-    }
-
-    public JComboBox getComboBoxDiscount() {
-        return comboBoxDiscount;
-    }
-
-    public JCheckBox getCheckBoxDiscount() {
-        return checkBoxDiscount;
-    }
-
     public JTextField getTextFieldCash() {
         return textFieldCash;
     }
 
-    public JLabel getjLabelTimeIn() {
-        return jLabelTimeIn;
-    }
-
-    public JLabel getjLabelTimeOut() {
-        return jLabelTimeOut;
-    }
-
-    public JLabel getjLabelTimeTotal() {
-        return jLabelTimeTotal;
-    }
-
-    public JLabel getjLabelPrice() {
-        return jLabelPrice;
-    }
-
-    public JToolBar getToolBarMenu() {
-        return toolBarMenu;
+    public JButton getButtonPerformCard() {
+        return buttonPerformCard;
     }
 
     public JButton getButtonCancel() {
@@ -108,6 +75,32 @@ public class MainFrame extends JFrame{
     public JButton getButtonLog() {
         return buttonLog;
     }
+
+    public JComboBox getComboBoxDiscount() {
+        return comboBoxDiscount;
+    }
+
+    public JCheckBox getCheckBoxDiscount() {
+        return checkBoxDiscount;
+    }
+
+
+    public JLabel getjLabelTimeIn() {
+        return jLabelTimeIn;
+    }
+
+    public JLabel getjLabelTimeOut() {
+        return jLabelTimeOut;
+    }
+
+    public JLabel getjLabelTimeTotal() {
+        return jLabelTimeTotal;
+    }
+
+    public JLabel getjLabelPrice() {
+        return jLabelPrice;
+    }
+
 
     public JLabel getLabelTextTimeIn() {
         return labelTextTimeIn;
