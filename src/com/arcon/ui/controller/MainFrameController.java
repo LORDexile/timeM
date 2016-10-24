@@ -124,6 +124,7 @@ public class MainFrameController {
             jLabelTimeTotal.setText(String.valueOf(card.getTotalTime()));
             jLabelPrice.setText(String.valueOf(card.getPrice()));
             setText();
+            textFieldCash.requestFocus();
 
         }else {
             msg = "Добавлена новая карта";
