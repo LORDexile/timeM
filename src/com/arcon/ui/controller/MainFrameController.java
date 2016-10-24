@@ -88,6 +88,7 @@ public class MainFrameController {
         checkBoxDiscount.addItemListener(new checkBoxDiscountItemListener());
         comboBoxDiscount.addActionListener(new comboBoxDiscountActionListener());
         buttonCancel.addActionListener(new buttonCancelActionListener());
+        textFieldCash.addKeyListener(new textFieldCashKeyListener());
 
     }
 
@@ -127,14 +128,14 @@ public class MainFrameController {
             textFieldCash.requestFocus();
 
         }else {
-            msg = "Добавлена новая карта";
+            msg = "Added new Card";
             textFieldCard.setText("");
             textFieldCard.requestFocus();
         }
         connect.closeConnect();
 
         if (!msg.equals("")) {
-            JOptionPane.showMessageDialog(null, msg, "", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, msg, "Success", JOptionPane.INFORMATION_MESSAGE);
         }
 
     }
@@ -285,6 +286,72 @@ public class MainFrameController {
         @Override
         public void actionPerformed(ActionEvent e) {
             cancelAction();
+        }
+    }
+
+    private class textFieldCashKeyListener implements KeyListener {
+        /**
+         * Invoked when a key has been typed.
+         * See the class description for {@link KeyEvent} for a definition of
+         * a key typed event.
+         *
+         * @param e
+         */
+        @Override
+        public void keyTyped(KeyEvent e) {
+
+        }
+
+        /**
+         * Invoked when a key has been pressed.
+         * See the class description for {@link KeyEvent} for a definition of
+         * a key pressed event.
+         *
+         * @param e
+         */
+        @Override
+        public void keyPressed(KeyEvent e) {
+            if (e.getExtendedKeyCode() == 10) {
+                String msg = "";
+                String errorMsg = "";
+                int cash = 0;
+                int price = card.getPrice();
+                int moneyBack;
+                try {
+                    cash += Integer.parseInt(textFieldCash.getText());
+                }catch (Exception exp) {
+                    errorMsg = "Invalid input tex field Cash";
+                }
+
+                if(cash >= price) {
+                    moneyBack = cash - price;
+                    msg = "Money back: " + moneyBack + " UAH";
+                }else {
+                    errorMsg = "Cash less than price!";
+                }
+
+                textFieldCash.setText("");
+
+                if (!msg.equals("")) {
+                    JOptionPane.showMessageDialog(null, msg, "Cash", JOptionPane.INFORMATION_MESSAGE);
+                }else {
+                    JOptionPane.showMessageDialog(null, errorMsg, "Error", JOptionPane.ERROR_MESSAGE);
+                }
+
+                buttonPerformCard.requestFocus();
+            }
+        }
+
+        /**
+         * Invoked when a key has been released.
+         * See the class description for {@link KeyEvent} for a definition of
+         * a key released event.
+         *
+         * @param e
+         */
+        @Override
+        public void keyReleased(KeyEvent e) {
+
         }
     }
 }
