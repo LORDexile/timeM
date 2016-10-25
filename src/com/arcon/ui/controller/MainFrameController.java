@@ -2,6 +2,7 @@ package com.arcon.ui.controller;
 
 import com.arcon.db.DBConnect;
 import com.arcon.lib.Constants;
+import com.arcon.ui.model.ActionType;
 import com.arcon.ui.model.Card;
 import com.arcon.ui.model.Discount;
 import com.arcon.ui.view.MainFrame;
@@ -132,6 +133,7 @@ public class MainFrameController {
             textFieldCash.requestFocus();
 
         }else {
+            setCardCount(connect, true);
             msg = "Added new Card";
             textFieldCard.setText("");
             textFieldCard.requestFocus();
@@ -150,6 +152,17 @@ public class MainFrameController {
         textFieldCard.setText("");
         textFieldCash.requestFocus();
         setText();
+    }
+
+    private void setCardCount(DBConnect connect, boolean cardAction) {
+        connect.setCardCount(cardAction);
+        jLabelTotalCards.setText(String.valueOf(connect.getCardCount()));
+    }
+
+    private void setMoneyCount(DBConnect connect, int money) {
+        connect.setTransaction(money, ActionType.CARD_OUTPUT);
+        jLabelMoney.setText(String.valueOf(connect.getMoneyCount()));
+        jLabelTotalCards.setText(String.valueOf(connect.getCardCount()));
     }
 
     private void setText() {
@@ -256,6 +269,7 @@ public class MainFrameController {
                     connect.openConnect();
                     connect.writeCard(card);
                     connect.deleteCardInUse(String.valueOf(card.getId()));
+                    setMoneyCount(connect, card.getPrice());
                     connect.closeConnect();
 
                     cancelAction();

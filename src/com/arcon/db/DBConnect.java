@@ -1,5 +1,6 @@
 package com.arcon.db;
 
+import com.arcon.ui.model.ActionType;
 import com.arcon.ui.model.Card;
 import com.arcon.ui.model.Discount;
 import com.arcon.ui.model.User;
@@ -201,8 +202,79 @@ public class DBConnect{
             System.out.println(sql);
             statement.executeUpdate(sql);
         }catch (SQLException e) {
-
+            e.printStackTrace();
         }
+    }
+
+    public void setTransaction(int money, ActionType actionType) {
+
+        if (actionType.equals(ActionType.CARD_OUTPUT)) {
+            setCardCount(false);
+        }
+
+        setMoneyCount(money);
+
+        try{
+            String sql = "INSERT INTO money_transactions (number_of_cash, action, user_name, date) " +
+                    "VALUES ('" + money +
+                    "', '" + actionType.toString() +
+                    "', '" + Constants.getUserName() +
+                    "', '" + new Date() +
+                    "');";
+
+            System.out.println(sql);
+            statement.executeUpdate(sql);
+
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void setCardCount(boolean cardAction) {
+        int cardCount = getCardCount();
+
+        if (cardAction){
+            cardCount += 1;
+        }else {
+            cardCount -= 1;
+        }
+        String sql = "UPDATE items set count = " + cardCount + " where id = 'card';";
+        try {
+            statement.executeUpdate(sql);
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+
+    private void setMoneyCount(int money) {
+        money += getMoneyCount();
+
+        String sql = "UPDATE items set count = " + money + " WHERE id = 'money';";
+        try {
+            statement.executeUpdate(sql);
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+
+    public int getMoneyCount() {
+        try {
+            resSet = statement.executeQuery("SELECT * FROM items WHERE id = 'money';");
+            return resSet.getInt("count");
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return -999999;
+    }
+
+    public int getCardCount() {
+        try {
+            resSet = statement.executeQuery("SELECT * FROM items WHERE id = 'card';");
+            return resSet.getInt("count");
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return -999999;
     }
 
 
