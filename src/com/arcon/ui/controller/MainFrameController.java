@@ -90,6 +90,7 @@ public class MainFrameController {
 
         textFieldCard.addKeyListener(new textFieldCardKeyListener());
         buttonPerformCard.addActionListener(new buttonPerformCardActionListener());
+        buttonPerformCard.addKeyListener(new buttonPerformCardKeyListener());
         checkBoxDiscount.addItemListener(new checkBoxDiscountItemListener());
         comboBoxDiscount.addActionListener(new comboBoxDiscountActionListener());
         buttonCancel.addActionListener(new buttonCancelActionListener());
@@ -145,13 +146,56 @@ public class MainFrameController {
         }
 
     }
-    
+
+    private void cardAction() {
+        if (cardReady){
+            DBConnect connect = DBConnect.getInstance();
+            connect.openConnect();
+            connect.writeCard(card);
+            connect.deleteCardInUse(String.valueOf(card.getId()));
+            setMoneyCount(connect, card.getPrice());
+            connect.closeConnect();
+
+            cancelAction();
+        }
+    }
+
     private void cancelAction() {
         card = null;
         cardReady = false;
         textFieldCard.setText("");
-        textFieldCash.requestFocus();
+        textFieldCard.requestFocus();
         setText();
+    }
+
+    private void countChange() {
+        String msg = "";
+        String errorMsg = "";
+        int cash = 0;
+        int price = card.getPrice();
+        int moneyBack;
+        try {
+            cash += Integer.parseInt(textFieldCash.getText());
+        }catch (Exception exp) {
+            errorMsg = "Invalid input tex field Cash";
+        }
+
+        if(cash >= price) {
+            moneyBack = cash - price;
+            msg = "Money back: " + moneyBack + " UAH";
+        }else {
+            errorMsg = "Cash less than price!";
+        }
+
+        textFieldCash.setText("");
+
+        if (!msg.equals("")) {
+            JOptionPane.showMessageDialog(null, msg, "Cash", JOptionPane.INFORMATION_MESSAGE);
+        }else {
+            JOptionPane.showMessageDialog(null, errorMsg, "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+        buttonPerformCard.grabFocus();
     }
 
     private void setCardCount(DBConnect connect, boolean cardAction) {
@@ -264,17 +308,50 @@ public class MainFrameController {
         @Override
         public void actionPerformed(ActionEvent e) {
             if (!textFieldCard.getText().equals("")) {
-                if (cardReady){
-                    DBConnect connect = DBConnect.getInstance();
-                    connect.openConnect();
-                    connect.writeCard(card);
-                    connect.deleteCardInUse(String.valueOf(card.getId()));
-                    setMoneyCount(connect, card.getPrice());
-                    connect.closeConnect();
+                cardAction();
+            }
+        }
+    }
 
-                    cancelAction();
+    private class buttonPerformCardKeyListener implements KeyListener {
+        /**
+         * Invoked when a key has been typed.
+         * See the class description for {@link KeyEvent} for a definition of
+         * a key typed event.
+         *
+         * @param e
+         */
+        @Override
+        public void keyTyped(KeyEvent e) {
+
+        }
+
+        /**
+         * Invoked when a key has been pressed.
+         * See the class description for {@link KeyEvent} for a definition of
+         * a key pressed event.
+         *
+         * @param e
+         */
+        @Override
+        public void keyPressed(KeyEvent e) {
+            if (e.getExtendedKeyCode() == 10) {
+                if (!textFieldCard.getText().equals("")) {
+                    cardAction();
                 }
             }
+        }
+
+        /**
+         * Invoked when a key has been released.
+         * See the class description for {@link KeyEvent} for a definition of
+         * a key released event.
+         *
+         * @param e
+         */
+        @Override
+        public void keyReleased(KeyEvent e) {
+
         }
     }
 
@@ -330,33 +407,7 @@ public class MainFrameController {
         @Override
         public void keyPressed(KeyEvent e) {
             if (e.getExtendedKeyCode() == 10) {
-                String msg = "";
-                String errorMsg = "";
-                int cash = 0;
-                int price = card.getPrice();
-                int moneyBack;
-                try {
-                    cash += Integer.parseInt(textFieldCash.getText());
-                }catch (Exception exp) {
-                    errorMsg = "Invalid input tex field Cash";
-                }
-
-                if(cash >= price) {
-                    moneyBack = cash - price;
-                    msg = "Money back: " + moneyBack + " UAH";
-                }else {
-                    errorMsg = "Cash less than price!";
-                }
-
-                textFieldCash.setText("");
-
-                if (!msg.equals("")) {
-                    JOptionPane.showMessageDialog(null, msg, "Cash", JOptionPane.INFORMATION_MESSAGE);
-                }else {
-                    JOptionPane.showMessageDialog(null, errorMsg, "Error", JOptionPane.ERROR_MESSAGE);
-                }
-
-                buttonPerformCard.requestFocus();
+                countChange();
             }
         }
 
@@ -372,4 +423,5 @@ public class MainFrameController {
 
         }
     }
+
 }
