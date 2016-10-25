@@ -7,8 +7,9 @@ import javax.swing.*;
 public class MainFrame extends JFrame{
 
     private JPanel mainPanel;
-    private JPanel PanelMain;
+    private JPanel mainPanelCenter;
     private JPanel tabPanelMainSource;
+    private JPanel mainPanelSouth;
 
     private JTextField textFieldCard;
     private JButton buttonPerformCard;
@@ -19,6 +20,8 @@ public class MainFrame extends JFrame{
     private JLabel jLabelTimeOut;
     private JLabel jLabelTimeTotal;
     private JLabel jLabelPrice;
+    private JLabel jLabelTotalCards;
+    private JLabel jLabelMoney;
 
     private JLabel labelTextTimeIn;
     private JLabel labelTextTimeOut;
@@ -26,6 +29,8 @@ public class MainFrame extends JFrame{
     private JLabel labelTextDiscount;
     private JLabel labelTextPrice;
     private JLabel labelTextCash;
+    private JLabel labelTextTotalCard;
+    private JLabel labelTextMoney;
 
     private JToolBar toolBarMenu;
 
@@ -84,7 +89,6 @@ public class MainFrame extends JFrame{
         return checkBoxDiscount;
     }
 
-
     public JLabel getjLabelTimeIn() {
         return jLabelTimeIn;
     }
@@ -101,6 +105,13 @@ public class MainFrame extends JFrame{
         return jLabelPrice;
     }
 
+    public JLabel getjLabelTotalCards() {
+        return jLabelTotalCards;
+    }
+
+    public JLabel getjLabelMoney() {
+        return jLabelMoney;
+    }
 
     public JLabel getLabelTextTimeIn() {
         return labelTextTimeIn;
@@ -124,5 +135,13 @@ public class MainFrame extends JFrame{
 
     public JLabel getLabelTextCash() {
         return labelTextCash;
+    }
+
+    public JLabel getLabelTextTotalCard() {
+        return labelTextTotalCard;
+    }
+
+    public JLabel getLabelTextMoney() {
+        return labelTextMoney;
     }
 }

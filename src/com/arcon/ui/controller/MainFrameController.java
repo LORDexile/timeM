@@ -30,6 +30,8 @@ public class MainFrameController {
     private JLabel jLabelTimeOut;
     private JLabel jLabelTimeTotal;
     private JLabel jLabelPrice;
+    private JLabel jLabelTotalCards;
+    private JLabel jLabelMoney;
 
     private JLabel labelTextTimeIn;
     private JLabel labelTextTimeOut;
@@ -37,6 +39,8 @@ public class MainFrameController {
     private JLabel labelTextDiscount;
     private JLabel labelTextPrice;
     private JLabel labelTextCash;
+    private JLabel labelTextTotalCard;
+    private JLabel labelTextMoney;
 
     private boolean setText = false;
     private boolean isDiscountSet = false;
@@ -59,6 +63,8 @@ public class MainFrameController {
         jLabelTimeOut = mainFrame.getjLabelTimeOut();
         jLabelTimeTotal = mainFrame.getjLabelTimeTotal();
         jLabelPrice = mainFrame.getjLabelPrice();
+        jLabelTotalCards = mainFrame.getjLabelTotalCards();
+        jLabelMoney = mainFrame.getjLabelMoney();
 
         labelTextTimeIn = mainFrame.getLabelTextTimeIn();
         labelTextTimeOut = mainFrame.getLabelTextTimeOut();
@@ -66,6 +72,8 @@ public class MainFrameController {
         labelTextDiscount = mainFrame.getLabelTextDiscount();
         labelTextPrice = mainFrame.getLabelTextPrice();
         labelTextCash = mainFrame.getLabelTextCash();
+        labelTextTotalCard = mainFrame.getLabelTextTotalCard();
+        labelTextMoney = mainFrame.getLabelTextMoney();
 
         comboBoxDiscount = mainFrame.getComboBoxDiscount();
         checkBoxDiscount = mainFrame.getCheckBoxDiscount();
