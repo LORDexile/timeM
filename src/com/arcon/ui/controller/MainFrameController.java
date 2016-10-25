@@ -109,6 +109,11 @@ public class MainFrameController {
     public void updateComponents() {
         mainFrame.setTitle(Constants.getProgramTitle());
         isDiscountSet = false;
+        DBConnect connect = DBConnect.getInstance();
+        connect.openConnect();
+        connect.getCardCount();
+        connect.getMoneyCount();
+        connect.closeConnect();
     }
 
     private void cardPreparationAction() {

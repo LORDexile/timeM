@@ -277,7 +277,6 @@ public class DBConnect{
         return -999999;
     }
 
-
     public ArrayList<Discount> getDiscountSet() {
         ArrayList<Discount> list = new ArrayList();
 
