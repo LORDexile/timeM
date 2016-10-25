@@ -110,7 +110,7 @@ public class MainFrameController {
         isDiscountSet = false;
     }
 
-    private void cardAction() {
+    private void cardPreparationAction() {
 
         String msg = "";
         boolean cardInUse;
@@ -145,7 +145,7 @@ public class MainFrameController {
         }
 
     }
-
+    
     private void cancelAction() {
         card = null;
         cardReady = false;
@@ -241,7 +241,7 @@ public class MainFrameController {
         public void keyPressed(KeyEvent e) {
             if (e.getExtendedKeyCode() == 10) {
                 if (!textFieldCard.getText().equals("")) {
-                    cardAction();
+                    cardPreparationAction();
                     cardReady = true;
                 }
             }
