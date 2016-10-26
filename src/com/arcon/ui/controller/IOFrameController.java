@@ -10,4 +10,19 @@ public class IOFrameController {
     private JButton buttonCancel;
     private JRadioButton radioButtonOutput;
     private JRadioButton radioButtonInpute;
+
+    public IOFrameController() {
+        initComponents();
+        initListeners();
+    }
+
+    private void initComponents() {
+
+    }
+
+    private void initListeners() {
+
+    }
+
+
 }
