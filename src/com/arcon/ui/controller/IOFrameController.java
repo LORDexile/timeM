@@ -3,6 +3,8 @@ package com.arcon.ui.controller;
 import com.arcon.ui.view.IOFrame;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class IOFrameController {
     private IOFrame ioFrame;
@@ -38,9 +40,27 @@ public class IOFrameController {
     }
 
     private void initListeners() {
-
+        buttonCancel.addActionListener(new buttonCancelActionListener());
     }
 
 
+    private class buttonCancelActionListener implements ActionListener {
+        /**
+         * Invoked when an action occurs.
+         *
+         * @param e
+         */
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            textFieldCash.setText("");
+            textFieldCash.setEnabled(false);
+            textAreaComment.setText("");
+            textAreaComment.setEnabled(false);
+            passwordFieldPassword.setText("");
+            passwordFieldPassword.setEnabled(false);
+            buttonPerform.setEnabled(false);
 
+            ioFrame.setVisible(false);
+        }
+    }
 }
