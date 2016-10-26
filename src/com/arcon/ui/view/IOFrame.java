@@ -14,6 +14,8 @@ public class IOFrame extends JFrame{
     private JRadioButton radioButtonOutput;
     private ButtonGroup buttonGroupIO = new ButtonGroup();
 
+    private JLabel labelTransactionMethod;
+
     public IOFrame() {
         setSize(430,200);
         setContentPane(this.panelMainBorder);
@@ -21,8 +23,10 @@ public class IOFrame extends JFrame{
         setTitle("Input / Output transactions");
         setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
         setResizable(true);
+
         buttonGroupIO.add(radioButtonInput);
         buttonGroupIO.add(radioButtonOutput);
+
         pack();
         setSize(430,200);
     }
@@ -57,5 +61,9 @@ public class IOFrame extends JFrame{
 
     public ButtonGroup getButtonGroupIO() {
         return buttonGroupIO;
+    }
+
+    public JLabel getLabelTransactionMethod() {
+        return labelTransactionMethod;
     }
 }

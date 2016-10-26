@@ -21,6 +21,8 @@ public class IOFrameController {
     private JRadioButton radioButtonOutput;
     private ButtonGroup buttonGroupIO;
 
+    private JLabel labelTransactionMethod;
+
     private ActionType actionType;
     private boolean isComponentsNotShown = false;
     private boolean isIOMethodSelected = false;
@@ -47,6 +49,8 @@ public class IOFrameController {
         radioButtonInput = ioFrame.getRadioButtonInput();
         radioButtonOutput = ioFrame.getRadioButtonOutput();
 
+        labelTransactionMethod = ioFrame.getLabelTransactionMethod();
+
     }
 
     private void initListeners() {
@@ -61,6 +65,7 @@ public class IOFrameController {
         textFieldCash.setText("");
         textAreaComment.setText("");
         passwordFieldPassword.setText("");
+        labelTransactionMethod.setText("SELECT!");
 
         isIOMethodSelected = false;
         buttonGroupIO.clearSelection();
@@ -113,6 +118,7 @@ public class IOFrameController {
         @Override
         public void actionPerformed(ActionEvent e) {
             actionType = ActionType.MONEY_INPUT;
+            labelTransactionMethod.setText("INPUT transaction");
 
             if (!isIOMethodSelected) {
                 showComponents();
@@ -130,6 +136,7 @@ public class IOFrameController {
         @Override
         public void actionPerformed(ActionEvent e) {
             actionType = ActionType.MONEY_OUTPUT;
+            labelTransactionMethod.setText("OUTPUT transaction");
 
             if (!isIOMethodSelected) {
                 showComponents();
