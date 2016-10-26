@@ -19,9 +19,11 @@ public class IOFrameController {
 
     private JRadioButton radioButtonInput;
     private JRadioButton radioButtonOutput;
+    private ButtonGroup buttonGroupIO;
 
     private ActionType actionType;
-    private boolean isComponentsNotShown = true;
+    private boolean isComponentsNotShown = false;
+    private boolean isIOMethodSelected = false;
 
     public IOFrameController() {
         initComponents();
@@ -40,8 +42,11 @@ public class IOFrameController {
         passwordFieldPassword = ioFrame.getPasswordFieldPassword();
         buttonPerform = ioFrame.getButtonPerform();
         buttonCancel = ioFrame.getButtonCancel();
+
+        buttonGroupIO = ioFrame.getButtonGroupIO();
         radioButtonInput = ioFrame.getRadioButtonInput();
         radioButtonOutput = ioFrame.getRadioButtonOutput();
+
     }
 
     private void initListeners() {
@@ -49,13 +54,16 @@ public class IOFrameController {
         buttonPerform.addActionListener(new buttonPerformActionListener());
 
         radioButtonInput.addActionListener(new radioButtonInputActionListener());
+        radioButtonOutput.addActionListener(new radioButtonOutputActionListener());
     }
 
     private void cancelAction() {
         textFieldCash.setText("");
         textAreaComment.setText("");
         passwordFieldPassword.setText("");
-        showComponents();
+
+        isIOMethodSelected = false;
+        buttonGroupIO.clearSelection();
 
         ioFrame.setVisible(false);
     }
@@ -105,6 +113,28 @@ public class IOFrameController {
         @Override
         public void actionPerformed(ActionEvent e) {
             actionType = ActionType.MONEY_INPUT;
+
+            if (!isIOMethodSelected) {
+                showComponents();
+                isIOMethodSelected = true;
+            }
+        }
+    }
+
+    private class radioButtonOutputActionListener implements ActionListener {
+        /**
+         * Invoked when an action occurs.
+         *
+         * @param e
+         */
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            actionType = ActionType.MONEY_OUTPUT;
+
+            if (!isIOMethodSelected) {
+                showComponents();
+                isIOMethodSelected = true;
+            }
         }
     }
 }
