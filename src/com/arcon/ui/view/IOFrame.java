@@ -10,18 +10,19 @@ public class IOFrame extends JFrame{
     private JPasswordField passwordFieldPassword;
     private JButton buttonPerform;
     private JButton buttonCancel;
+    private JRadioButton radioButtonInput;
     private JRadioButton radioButtonOutput;
-    private JRadioButton radioButtonInpute;
+
 
     public IOFrame() {
-        setSize(350,500);
+        setSize(430,200);
         setContentPane(this.panelMainBorder);
         setLocationRelativeTo(null);
         setTitle("Input / Output transactions");
-        setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
-        setResizable(false);
+        setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+        setResizable(true);
         pack();
-        setSize(350,500);
+        setSize(430,200);
     }
 
     public JTextField getTextFieldCash() {
@@ -48,7 +49,7 @@ public class IOFrame extends JFrame{
         return radioButtonOutput;
     }
 
-    public JRadioButton getRadioButtonInpute() {
-        return radioButtonInpute;
+    public JRadioButton getRadioButtonInput() {
+        return radioButtonInput;
     }
 }
