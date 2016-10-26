@@ -1,5 +1,6 @@
 package com.arcon.ui.controller;
 
+import com.arcon.Main;
 import com.arcon.db.DBConnect;
 import com.arcon.lib.Constants;
 import com.arcon.ui.model.ActionType;
@@ -40,8 +41,6 @@ public class MainFrameController {
     private JLabel labelTextDiscount;
     private JLabel labelTextPrice;
     private JLabel labelTextCash;
-    private JLabel labelTextTotalCard;
-    private JLabel labelTextMoney;
 
     private boolean setText = false;
     private boolean isDiscountSet = false;
@@ -73,8 +72,6 @@ public class MainFrameController {
         labelTextDiscount = mainFrame.getLabelTextDiscount();
         labelTextPrice = mainFrame.getLabelTextPrice();
         labelTextCash = mainFrame.getLabelTextCash();
-        labelTextTotalCard = mainFrame.getLabelTextTotalCard();
-        labelTextMoney = mainFrame.getLabelTextMoney();
 
         comboBoxDiscount = mainFrame.getComboBoxDiscount();
         checkBoxDiscount = mainFrame.getCheckBoxDiscount();
@@ -95,6 +92,7 @@ public class MainFrameController {
         comboBoxDiscount.addActionListener(new comboBoxDiscountActionListener());
         buttonCancel.addActionListener(new buttonCancelActionListener());
         textFieldCash.addKeyListener(new textFieldCashKeyListener());
+        buttonIO.addActionListener(new buttonIOActionListener());
 
     }
 
@@ -429,4 +427,15 @@ public class MainFrameController {
         }
     }
 
+    private class buttonIOActionListener implements ActionListener {
+        /**
+         * Invoked when an action occurs.
+         *
+         * @param e
+         */
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            Main.ioFrameController.showIOFrameWindow();
+        }
+    }
 }
