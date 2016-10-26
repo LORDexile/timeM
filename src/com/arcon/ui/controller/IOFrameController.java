@@ -1,5 +1,6 @@
 package com.arcon.ui.controller;
 
+import com.arcon.ui.model.ActionType;
 import com.arcon.ui.view.IOFrame;
 
 import javax.swing.*;
@@ -19,6 +20,9 @@ public class IOFrameController {
     private JRadioButton radioButtonInput;
     private JRadioButton radioButtonOutput;
 
+    private ActionType actionType;
+    private boolean isComponentsNotShown = true;
+
     public IOFrameController() {
         initComponents();
         initListeners();
@@ -26,6 +30,7 @@ public class IOFrameController {
 
     public void showIOFrameWindow() {
         ioFrame.setVisible(true);
+        showComponents();
     }
 
     private void initComponents() {
@@ -41,18 +46,30 @@ public class IOFrameController {
 
     private void initListeners() {
         buttonCancel.addActionListener(new buttonCancelActionListener());
+        buttonPerform.addActionListener(new buttonPerformActionListener());
+
+        radioButtonInput.addActionListener(new radioButtonInputActionListener());
     }
 
     private void cancelAction() {
         textFieldCash.setText("");
-        textFieldCash.setEnabled(false);
         textAreaComment.setText("");
-        textAreaComment.setEnabled(false);
         passwordFieldPassword.setText("");
-        passwordFieldPassword.setEnabled(false);
-        buttonPerform.setEnabled(false);
+        showComponents();
 
         ioFrame.setVisible(false);
+    }
+
+    private void performAction() {
+        //Action
+    }
+
+    private void showComponents() {
+        textFieldCash.setEnabled(isComponentsNotShown);
+        textAreaComment.setEnabled(isComponentsNotShown);
+        passwordFieldPassword.setEnabled(isComponentsNotShown);
+        buttonPerform.setEnabled(isComponentsNotShown);
+        isComponentsNotShown = !isComponentsNotShown;
     }
 
     private class buttonCancelActionListener implements ActionListener {
@@ -64,6 +81,30 @@ public class IOFrameController {
         @Override
         public void actionPerformed(ActionEvent e) {
             cancelAction();
+        }
+    }
+
+    private class buttonPerformActionListener implements ActionListener {
+        /**
+         * Invoked when an action occurs.
+         *
+         * @param e
+         */
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            performAction();
+        }
+    }
+
+    private class radioButtonInputActionListener implements ActionListener {
+        /**
+         * Invoked when an action occurs.
+         *
+         * @param e
+         */
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            actionType = ActionType.MONEY_INPUT;
         }
     }
 }
