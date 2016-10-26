@@ -9,6 +9,7 @@ public class MainFrame extends JFrame{
     private JPanel mainPanel;
     private JPanel mainPanelCenter;
     private JPanel tabPanelMainSource;
+    private JToolBar toolBarMenu;
     private JPanel mainPanelSouth;
 
     private JTextField textFieldCard;
@@ -31,8 +32,6 @@ public class MainFrame extends JFrame{
     private JLabel labelTextCash;
     private JLabel labelTextTotalCard;
     private JLabel labelTextMoney;
-
-    private JToolBar toolBarMenu;
 
     private JButton buttonIO;
     private JButton buttonOptions;
