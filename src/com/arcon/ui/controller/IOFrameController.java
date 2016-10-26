@@ -43,6 +43,17 @@ public class IOFrameController {
         buttonCancel.addActionListener(new buttonCancelActionListener());
     }
 
+    private void cancelAction() {
+        textFieldCash.setText("");
+        textFieldCash.setEnabled(false);
+        textAreaComment.setText("");
+        textAreaComment.setEnabled(false);
+        passwordFieldPassword.setText("");
+        passwordFieldPassword.setEnabled(false);
+        buttonPerform.setEnabled(false);
+
+        ioFrame.setVisible(false);
+    }
 
     private class buttonCancelActionListener implements ActionListener {
         /**
@@ -52,15 +63,7 @@ public class IOFrameController {
          */
         @Override
         public void actionPerformed(ActionEvent e) {
-            textFieldCash.setText("");
-            textFieldCash.setEnabled(false);
-            textAreaComment.setText("");
-            textAreaComment.setEnabled(false);
-            passwordFieldPassword.setText("");
-            passwordFieldPassword.setEnabled(false);
-            buttonPerform.setEnabled(false);
-
-            ioFrame.setVisible(false);
+            cancelAction();
         }
     }
 }
