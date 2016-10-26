@@ -25,7 +25,6 @@ public class LoginFrameController{
 
     public void showLoginFrameWindow(){
         loginFrame.setVisible(true);
-
     }
 
     //initialize component`s
