@@ -188,7 +188,7 @@ public class MainFrameController {
 
         if(cash >= price) {
             moneyBack = cash - price;
-            msg = "Money back: " + moneyBack + " UAH";
+            msg = "<html>Money back: <span style='color:red'><big>" + moneyBack + "</big></span> UAH</html>";
         }else {
             errorMsg = "Cash less than price!";
         }
