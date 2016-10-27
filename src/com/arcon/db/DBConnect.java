@@ -144,7 +144,6 @@ public class DBConnect{
                     return true;
                 }
             }
-            writeNewCardInUse(id);
 
         }catch (SQLException e){
             e.printStackTrace();
@@ -152,17 +151,19 @@ public class DBConnect{
         return false;
     }
 
-    private void writeNewCardInUse(String id) {
+    public void writeNewCardInUse(String id) {
         try {
             String sql = "INSERT INTO CardInUse (id,EnterTime) " +
                         "VALUES ('" + id +
                         "', '" + new Date().getTime() +
                         "');";
+
             statement.executeUpdate(sql);
 
         }catch (SQLException e){
             e.printStackTrace();
         }
+        setCardCount(1);
     }
 
     public Card readCardInUse(String id) {
@@ -209,9 +210,8 @@ public class DBConnect{
     public void setTransaction(int money, ActionType actionType) {
 
         if (actionType.equals(ActionType.CARD_OUTPUT)) {
-            setCardCount(false);
+            setCardCount(-1);
         }
-
         setMoneyCount(money);
 
         try{
@@ -230,14 +230,21 @@ public class DBConnect{
         }
     }
 
-    public void setCardCount(boolean cardAction) {
+    public void setCardCount(int cardAction) {
         int cardCount = getCardCount();
 
-        if (cardAction){
-            cardCount += 1;
-        }else {
-            cardCount -= 1;
+        switch (cardAction){
+            case 1:
+                cardCount += 1;
+                break;
+            case -1:
+                cardCount -= 1;
+                break;
+            default:
+                cardCount += 0;
+                break;
         }
+
         String sql = "UPDATE items set count = " + cardCount + " where id = 'card';";
         try {
             statement.executeUpdate(sql);
@@ -246,7 +253,7 @@ public class DBConnect{
         }
     }
 
-    private void setMoneyCount(int money) {
+    public void setMoneyCount(int money) {
         money += getMoneyCount();
 
         String sql = "UPDATE items set count = " + money + " WHERE id = 'money';";
