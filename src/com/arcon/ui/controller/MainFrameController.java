@@ -109,8 +109,8 @@ public class MainFrameController {
         isDiscountSet = false;
         DBConnect connect = DBConnect.getInstance();
         connect.openConnect();
-        connect.getCardCount();
-        connect.getMoneyCount();
+        setCardCount(connect, 0);
+        setMoneyCount(connect, 0);
         connect.closeConnect();
     }
 
@@ -137,7 +137,8 @@ public class MainFrameController {
             textFieldCash.requestFocus();
 
         }else {
-            setCardCount(connect, true);
+            connect.writeNewCardInUse(id);
+            setCardCount(connect, 1);
             msg = "Added new Card";
             textFieldCard.setText("");
             textFieldCard.requestFocus();
@@ -156,7 +157,9 @@ public class MainFrameController {
             connect.openConnect();
             connect.writeCard(card);
             connect.deleteCardInUse(String.valueOf(card.getId()));
-            setMoneyCount(connect, card.getPrice());
+            connect.setTransaction(card.getPrice(), ActionType.CARD_OUTPUT);
+            setCardCount(connect, 0);
+            setMoneyCount(connect, 0);
             connect.closeConnect();
 
             cancelAction();
@@ -201,15 +204,20 @@ public class MainFrameController {
         buttonPerformCard.grabFocus();
     }
 
-    private void setCardCount(DBConnect connect, boolean cardAction) {
-        connect.setCardCount(cardAction);
-        jLabelTotalCards.setText(String.valueOf(connect.getCardCount()));
+    private void setCardCount(DBConnect connect, int cardAction) {
+        if(cardAction != 0) {
+            connect.setCardCount(cardAction);
+        }
+        String str = String.valueOf(connect.getCardCount());
+        jLabelTotalCards.setText("<html><font color='red'><big>" + str + "</big></font></html>");
     }
 
     private void setMoneyCount(DBConnect connect, int money) {
-        connect.setTransaction(money, ActionType.CARD_OUTPUT);
-        jLabelMoney.setText(String.valueOf(connect.getMoneyCount()));
-        jLabelTotalCards.setText(String.valueOf(connect.getCardCount()));
+        if(money != 0) {
+            connect.setMoneyCount(money);
+        }
+        String str = String.valueOf(connect.getMoneyCount());
+        jLabelMoney.setText("<html><font color='red'><big>" + str + "</big></font></html>");
     }
 
     private void setText() {
