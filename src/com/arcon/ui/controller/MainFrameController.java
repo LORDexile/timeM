@@ -109,9 +109,13 @@ public class MainFrameController {
         isDiscountSet = false;
         DBConnect connect = DBConnect.getInstance();
         connect.openConnect();
+        updateCounters(connect);
+        connect.closeConnect();
+    }
+
+    public void updateCounters(DBConnect connect) {
         setCardCount(connect, 0);
         setMoneyCount(connect, 0);
-        connect.closeConnect();
     }
 
     private void cardPreparationAction() {
@@ -158,8 +162,7 @@ public class MainFrameController {
             connect.writeCard(card);
             connect.deleteCardInUse(String.valueOf(card.getId()));
             connect.setTransaction(card.getPrice(), ActionType.CARD_OUTPUT);
-            setCardCount(connect, 0);
-            setMoneyCount(connect, 0);
+            updateCounters(connect);
             connect.closeConnect();
 
             cancelAction();
