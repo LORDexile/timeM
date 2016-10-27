@@ -1,5 +1,8 @@
 package com.arcon.ui.controller;
 
+import com.arcon.Main;
+import com.arcon.db.DBConnect;
+import com.arcon.lib.Constants;
 import com.arcon.ui.model.ActionType;
 import com.arcon.ui.view.IOFrame;
 
@@ -75,7 +78,41 @@ public class IOFrameController {
     }
 
     private void performAction() {
-        //Action
+        int cash = Integer.parseInt(textFieldCash.getText());
+        String comment = textAreaComment.getText();
+        String password = passwordFieldPassword.getText();
+
+        if (cash > 0 && !comment.equals("")) {
+
+            DBConnect connect = DBConnect.getInstance();
+            connect.openConnect();
+
+            switch (connect.verifyUser(Constants.getUserName(), password)) {
+                case 1:
+                    JOptionPane.showMessageDialog(null, "Password incorrect!", "error", JOptionPane.ERROR_MESSAGE);
+                    passwordFieldPassword.requestFocus();
+                    break;
+                case 2:
+                    if (radioButtonInput.isSelected()) {
+                        connect.setTransaction(cash, ActionType.MONEY_INPUT, comment);
+                    } else if (radioButtonOutput.isSelected()) {
+                        cash = -cash;
+                        connect.setTransaction(cash, ActionType.MONEY_OUTPUT, comment);
+                    }
+                    cancelAction();
+                    break;
+            }
+
+            Main.mainFrameController.updateCounters(connect);
+            connect.closeConnect();
+            
+        }else if (comment.equals("")) {
+            JOptionPane.showMessageDialog(null, "comment field must be filled!", "error", JOptionPane.ERROR_MESSAGE);
+            textAreaComment.requestFocus();
+        }else if(cash < 0) {
+            JOptionPane.showMessageDialog(null, "cash field must be positive!", "error", JOptionPane.ERROR_MESSAGE);
+            textFieldCash.requestFocus();
+        }
     }
 
     private void showComponents() {

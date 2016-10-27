@@ -210,6 +210,7 @@ public class DBConnect{
     public void setTransaction(int money, ActionType actionType) {
         setTransaction(money, actionType, null);
     }
+
     public void setTransaction(int money, ActionType actionType, String comment) {
         if (actionType.equals(ActionType.CARD_OUTPUT)) {
             setCardCount(-1);
