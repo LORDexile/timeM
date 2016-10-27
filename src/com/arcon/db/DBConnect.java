@@ -208,18 +208,21 @@ public class DBConnect{
     }
 
     public void setTransaction(int money, ActionType actionType) {
-
+        setTransaction(money, actionType, null);
+    }
+    public void setTransaction(int money, ActionType actionType, String comment) {
         if (actionType.equals(ActionType.CARD_OUTPUT)) {
             setCardCount(-1);
         }
         setMoneyCount(money);
 
         try{
-            String sql = "INSERT INTO money_transactions (number_of_cash, action, user_name, date) " +
+            String sql = "INSERT INTO money_transactions (number_of_cash, action, user_name, date, comment) " +
                     "VALUES ('" + money +
                     "', '" + actionType.toString() +
                     "', '" + Constants.getUserName() +
                     "', '" + new Date() +
+                    "', '" + comment +
                     "');";
 
             System.out.println(sql);
