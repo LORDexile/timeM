@@ -33,6 +33,7 @@ public class IOFrameController {
     }
 
     public void showIOFrameWindow() {
+        cancelAction();
         ioFrame.setVisible(true);
         showComponents();
     }
