@@ -138,7 +138,7 @@ public class MainFrameController {
 
         }else {
             connect.writeNewCardInUse(id);
-            setCardCount(connect, 1);
+            setCardCount(connect, 0);
             msg = "Added new Card";
             textFieldCard.setText("");
             textFieldCard.requestFocus();
