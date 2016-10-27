@@ -9,6 +9,8 @@ import com.arcon.ui.view.IOFrame;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 public class IOFrameController {
     private IOFrame ioFrame;
@@ -63,6 +65,8 @@ public class IOFrameController {
 
         radioButtonInput.addActionListener(new radioButtonInputActionListener());
         radioButtonOutput.addActionListener(new radioButtonOutputActionListener());
+
+        textFieldCash.addKeyListener(new textFieldCashKeyListener());
     }
 
     private void cancelAction() {
@@ -105,7 +109,7 @@ public class IOFrameController {
 
             Main.mainFrameController.updateCounters(connect);
             connect.closeConnect();
-            
+
         }else if (comment.equals("")) {
             JOptionPane.showMessageDialog(null, "comment field must be filled!", "error", JOptionPane.ERROR_MESSAGE);
             textAreaComment.requestFocus();
@@ -179,6 +183,56 @@ public class IOFrameController {
             if (!isIOMethodSelected) {
                 showComponents();
                 isIOMethodSelected = true;
+            }
+        }
+    }
+
+    private class textFieldCashKeyListener implements KeyListener {
+        /**
+         * Invoked when a key has been typed.
+         * See the class description for {@link KeyEvent} for a definition of
+         * a key typed event.
+         *
+         * @param e
+         */
+        @Override
+        public void keyTyped(KeyEvent e) {
+
+        }
+
+        /**
+         * Invoked when a key has been pressed.
+         * See the class description for {@link KeyEvent} for a definition of
+         * a key pressed event.
+         *
+         * @param e
+         */
+        @Override
+        public void keyPressed(KeyEvent e) {
+
+        }
+
+        /**
+         * Invoked when a key has been released.
+         * See the class description for {@link KeyEvent} for a definition of
+         * a key released event.
+         *
+         * @param e
+         */
+        @Override
+        public void keyReleased(KeyEvent e) {
+            char c = e.getKeyChar();
+            if(!e.isActionKey()) {
+                if (!(c == '0' || c == '1' || c == '2' || c == '3' || c == '4' || c == '5' || c == '6' || c == '7' || c == '8' || c == '9')) {
+
+                    String s = textFieldCash.getText();
+                    String newS = "";
+                    for (int i = 0; i < s.length(); i ++) {
+                        if (s.charAt(i) != c) newS += s.charAt(i);
+                    }
+                    textFieldCash.setText(newS);
+
+                }
             }
         }
     }
