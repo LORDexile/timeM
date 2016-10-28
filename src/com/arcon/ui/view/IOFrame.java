@@ -27,6 +27,11 @@ public class IOFrame extends JFrame{
         buttonGroupIO.add(radioButtonInput);
         buttonGroupIO.add(radioButtonOutput);
 
+        textFieldCash.setEnabled(false);
+        textAreaComment.setEnabled(false);
+        passwordFieldPassword.setEnabled(false);
+        buttonPerform.setEnabled(false);
+
         pack();
         setSize(430,200);
     }

@@ -40,7 +40,6 @@ public class IOFrameController {
     public void showIOFrameWindow() {
         cancelAction();
         ioFrame.setVisible(true);
-        showComponents();
     }
 
     private void initComponents() {
@@ -70,15 +69,19 @@ public class IOFrameController {
     }
 
     private void cancelAction() {
-        textFieldCash.setText("");
-        textAreaComment.setText("");
-        passwordFieldPassword.setText("");
-        labelTransactionMethod.setText("SELECT!");
+        if (isIOMethodSelected) {
 
-        isIOMethodSelected = false;
-        buttonGroupIO.clearSelection();
+            textFieldCash.setText("");
+            textAreaComment.setText("");
+            passwordFieldPassword.setText("");
+            labelTransactionMethod.setText("SELECT!");
+            isIOMethodSelected = false;
+            buttonGroupIO.clearSelection();
+
+        }
 
         ioFrame.setVisible(false);
+
     }
 
     private void performAction() {
@@ -98,10 +101,10 @@ public class IOFrameController {
                     break;
                 case 2:
                     if (radioButtonInput.isSelected()) {
-                        connect.setTransaction(cash, ActionType.MONEY_INPUT, comment);
+                        connect.setTransaction(cash, actionType, comment);
                     } else if (radioButtonOutput.isSelected()) {
                         cash = -cash;
-                        connect.setTransaction(cash, ActionType.MONEY_OUTPUT, comment);
+                        connect.setTransaction(cash, actionType, comment);
                     }
                     cancelAction();
                     break;
@@ -187,6 +190,7 @@ public class IOFrameController {
         }
     }
 
+    //TODO create new class that contains like this methods
     private class textFieldCashKeyListener implements KeyListener {
         /**
          * Invoked when a key has been typed.
