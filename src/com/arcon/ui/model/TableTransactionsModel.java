@@ -73,8 +73,7 @@ public class TableTransactionsModel implements TableModel{
             case 2:
                 return transaction.getUserName();
             case 3:
-                SimpleDateFormat dateFormat = new SimpleDateFormat("'['HH:mm:ss']' d.MMM.yyyy", new Locale("ru"));
-                return dateFormat.format(transaction.getDate());
+                return transaction.getDate();
             case 4:
                 return transaction.getComment();
         }

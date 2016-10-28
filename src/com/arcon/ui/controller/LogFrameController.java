@@ -3,6 +3,8 @@ package com.arcon.ui.controller;
 import com.arcon.db.DBConnect;
 import com.arcon.ui.model.Card;
 import com.arcon.ui.model.TableCardInUseModel;
+import com.arcon.ui.model.TableTransactionsModel;
+import com.arcon.ui.model.Transaction;
 import com.arcon.ui.view.LogFrame;
 
 import javax.swing.*;
@@ -14,6 +16,7 @@ public class LogFrameController {
 
     private LogFrame logFrame;
     private TableCardInUseModel tableCardInUseModel;
+    private TableTransactionsModel tableTransactionsModel;
 
     private JButton button1;
     private JTable tableCardInUse;
@@ -42,6 +45,7 @@ public class LogFrameController {
 
     private void initListeners() {
         buttonCardInUseRefresh.addActionListener(new buttonRefreshActionListener());
+        buttonTransactionsRefresh.addActionListener(new buttonTransactionsRefreshActionListener());
     }
     private void setCardInUseModel() {
         List<Card> list;
@@ -55,11 +59,30 @@ public class LogFrameController {
         tableCardInUse.setModel(tableCardInUseModel);
     }
 
+    private void setTransactionsModel() {
+        List<Transaction> list;
+        DBConnect connect = DBConnect.getInstance();
+        connect.openConnect();
+        list = connect.getTransactionList();
+        connect.closeConnect();
+
+        tableTransactionsModel = new TableTransactionsModel(list);
+        tableTransactions.setModel(tableTransactionsModel);
+    }
+
     private class buttonRefreshActionListener implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
             setCardInUseModel();
+        }
+    }
+
+    private class buttonTransactionsRefreshActionListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            setTransactionsModel();
         }
     }
 }
