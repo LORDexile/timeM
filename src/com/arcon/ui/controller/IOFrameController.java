@@ -29,7 +29,7 @@ public class IOFrameController {
     private JLabel labelTransactionMethod;
 
     private ActionType actionType;
-    private boolean isComponentsNotShown = false;
+    private boolean isComponentsHide = true;
     private boolean isIOMethodSelected = false;
 
     public IOFrameController() {
@@ -77,7 +77,7 @@ public class IOFrameController {
             labelTransactionMethod.setText("SELECT!");
             isIOMethodSelected = false;
             buttonGroupIO.clearSelection();
-
+            showComponents();
         }
 
         ioFrame.setVisible(false);
@@ -123,11 +123,11 @@ public class IOFrameController {
     }
 
     private void showComponents() {
-        textFieldCash.setEnabled(isComponentsNotShown);
-        textAreaComment.setEnabled(isComponentsNotShown);
-        passwordFieldPassword.setEnabled(isComponentsNotShown);
-        buttonPerform.setEnabled(isComponentsNotShown);
-        isComponentsNotShown = !isComponentsNotShown;
+        textFieldCash.setEnabled(isComponentsHide);
+        textAreaComment.setEnabled(isComponentsHide);
+        passwordFieldPassword.setEnabled(isComponentsHide);
+        buttonPerform.setEnabled(isComponentsHide);
+        isComponentsHide = !isComponentsHide;
     }
 
     private class buttonCancelActionListener implements ActionListener {
@@ -166,8 +166,8 @@ public class IOFrameController {
             labelTransactionMethod.setText("INPUT transaction");
 
             if (!isIOMethodSelected) {
-                showComponents();
                 isIOMethodSelected = true;
+                showComponents();
             }
         }
     }
@@ -184,8 +184,8 @@ public class IOFrameController {
             labelTransactionMethod.setText("OUTPUT transaction");
 
             if (!isIOMethodSelected) {
-                showComponents();
                 isIOMethodSelected = true;
+                showComponents();
             }
         }
     }
