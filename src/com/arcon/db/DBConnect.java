@@ -166,21 +166,6 @@ public class DBConnect{
         setCardCount(1);
     }
 
-    public Card readCardInUse(String id) {
-        Date date = null;
-        try{
-        resSet = statement.executeQuery("SELECT * FROM CardInUse");
-            while (resSet.next()) {
-                if (id.equals(resSet.getString("id"))) {
-                    date = new Date(resSet.getLong("EnterTime"));
-                }
-            }
-        }catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return new Card(Long.parseLong(id), date);
-    }
-
     public void deleteCardInUse(String id) {
         try {
             String sql = "DELETE FROM CardInUse WHERE id=" + id + ";";
@@ -286,6 +271,35 @@ public class DBConnect{
             e.printStackTrace();
         }
         return -999999;
+    }
+
+    public Card getCardInUseById(String id) {
+        Date date = null;
+        try{
+            resSet = statement.executeQuery("SELECT * FROM CardInUse");
+            while (resSet.next()) {
+                if (id.equals(resSet.getString("id"))) {
+                    date = new Date(resSet.getLong("EnterTime"));
+                }
+            }
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return new Card(Long.parseLong(id), date);
+    }
+
+    public List<Card> getCardInUseList(){
+        List<Card> list = new ArrayList<>();
+        try{
+            resSet = statement.executeQuery("SELECT * FROM CardInUse");
+            while (resSet.next()) {
+                list.add(getCardInUseById(resSet.getString("id")));
+            }
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return list;
     }
 
     public ArrayList<Discount> getDiscountSet() {
