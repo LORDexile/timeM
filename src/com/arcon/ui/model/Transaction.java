@@ -1,16 +1,14 @@
 package com.arcon.ui.model;
 
-import java.util.Date;
-
 public class Transaction {
 
     int cashNumber;
     String actionType;
     String userName;
-    Date date;
+    String date;
     String comment;
 
-    public Transaction(int cashNumber, String actionType, String userName, Date date, String comment) {
+    public Transaction(int cashNumber, String actionType, String userName, String date, String comment) {
         this.cashNumber = cashNumber;
         this.actionType = actionType;
         this.userName = userName;
@@ -30,7 +28,7 @@ public class Transaction {
         return userName;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
