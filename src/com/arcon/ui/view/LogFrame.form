@@ -27,15 +27,22 @@
                   <component id="9265d" class="javax.swing.JButton" binding="buttonRefresh">
                     <constraints/>
                     <properties>
-                      <text value="Button"/>
+                      <text value="Refresh"/>
                     </properties>
                   </component>
                 </children>
               </toolbar>
-              <component id="84c8" class="javax.swing.JTable" binding="tableCardInUse">
+              <scrollpane id="2eb6e">
                 <constraints border-constraint="Center"/>
                 <properties/>
-              </component>
+                <border type="none"/>
+                <children>
+                  <component id="84c8" class="javax.swing.JTable" binding="tableCardInUse">
+                    <constraints/>
+                    <properties/>
+                  </component>
+                </children>
+              </scrollpane>
             </children>
           </grid>
         </children>

@@ -293,7 +293,7 @@ public class DBConnect{
         Card card;
         try{
             resSet = statement.executeQuery("SELECT * FROM CardInUse");
-            
+
             while (resSet.next()) {
                 card = new Card(resSet.getLong("id"), new Date(resSet.getLong("EnterTime")));
                 list.add(card);

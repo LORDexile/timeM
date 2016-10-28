@@ -93,6 +93,7 @@ public class MainFrameController {
         buttonCancel.addActionListener(new buttonCancelActionListener());
         textFieldCash.addKeyListener(new textFieldCashKeyListener());
         buttonIO.addActionListener(new buttonIOActionListener());
+        buttonLog.addActionListener(new  buttonLogActionListener());
 
     }
 
@@ -130,7 +131,7 @@ public class MainFrameController {
 
         if (cardInUse) {
 
-            card = connect.readCardInUse(id);
+            card = connect.getCardInUseById(id);
             card.setExitTime();
 
             jLabelTimeIn.setText(card.getEnterTime().toString());
@@ -439,14 +440,18 @@ public class MainFrameController {
     }
 
     private class buttonIOActionListener implements ActionListener {
-        /**
-         * Invoked when an action occurs.
-         *
-         * @param e
-         */
+
         @Override
         public void actionPerformed(ActionEvent e) {
             Main.ioFrameController.showIOFrameWindow();
+        }
+    }
+
+    private class buttonLogActionListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            Main.logFrameController.showLogFrameWindow();
         }
     }
 }
