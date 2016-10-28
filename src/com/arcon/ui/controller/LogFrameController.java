@@ -8,7 +8,6 @@ import com.arcon.ui.view.LogFrame;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.List;
 
 public class LogFrameController {
@@ -18,7 +17,9 @@ public class LogFrameController {
 
     private JButton button1;
     private JTable tableCardInUse;
-    private JButton buttonRefresh;
+    private JButton buttonCardInUseRefresh;
+    private JButton buttonTransactionsRefresh;
+    private JTable tableTransactions;
 
     public LogFrameController() {
         initComponents();
@@ -33,12 +34,14 @@ public class LogFrameController {
         logFrame = new LogFrame();
 
         tableCardInUse = logFrame.getTableCardInUse();
+        buttonCardInUseRefresh = logFrame.getButtonCardInUseRefresh();
 
-        buttonRefresh = logFrame.getButtonRefresh();
+        tableTransactions = logFrame.getTableTransactions();
+        buttonTransactionsRefresh = logFrame.getButtonTransactionsRefresh();
     }
 
     private void initListeners() {
-        buttonRefresh.addActionListener(new buttonRefreshActionListener());
+        buttonCardInUseRefresh.addActionListener(new buttonRefreshActionListener());
     }
     private void setCardInUseModel() {
         List<Card> list;

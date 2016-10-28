@@ -12,7 +12,7 @@
         <properties/>
         <border type="none"/>
         <children>
-          <grid id="2a7c0" binding="panelTable" layout-manager="BorderLayout" hgap="0" vgap="0">
+          <grid id="2a7c0" binding="panelTableCardInUse" layout-manager="BorderLayout" hgap="0" vgap="0">
             <constraints>
               <tabbedpane title="Card in use"/>
             </constraints>
@@ -21,10 +21,12 @@
             <children>
               <toolbar id="d7413">
                 <constraints border-constraint="South"/>
-                <properties/>
+                <properties>
+                  <floatable value="false"/>
+                </properties>
                 <border type="none"/>
                 <children>
-                  <component id="9265d" class="javax.swing.JButton" binding="buttonRefresh">
+                  <component id="9265d" class="javax.swing.JButton" binding="buttonCardInUseRefresh">
                     <constraints/>
                     <properties>
                       <text value="Refresh"/>
@@ -38,6 +40,42 @@
                 <border type="none"/>
                 <children>
                   <component id="84c8" class="javax.swing.JTable" binding="tableCardInUse">
+                    <constraints/>
+                    <properties/>
+                  </component>
+                </children>
+              </scrollpane>
+            </children>
+          </grid>
+          <grid id="24a3a" binding="panelTableTransactions" layout-manager="BorderLayout" hgap="0" vgap="0">
+            <constraints>
+              <tabbedpane title="Transactions"/>
+            </constraints>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <toolbar id="75ca6">
+                <constraints border-constraint="South"/>
+                <properties>
+                  <floatable value="false"/>
+                </properties>
+                <border type="none"/>
+                <children>
+                  <component id="55ccb" class="javax.swing.JButton" binding="buttonTransactionsRefresh">
+                    <constraints/>
+                    <properties>
+                      <label value="Refresh"/>
+                      <text value="Refresh"/>
+                    </properties>
+                  </component>
+                </children>
+              </toolbar>
+              <scrollpane id="701f">
+                <constraints border-constraint="Center"/>
+                <properties/>
+                <border type="none"/>
+                <children>
+                  <component id="41070" class="javax.swing.JTable" binding="tableTransactions">
                     <constraints/>
                     <properties/>
                   </component>

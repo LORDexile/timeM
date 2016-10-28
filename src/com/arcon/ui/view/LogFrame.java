@@ -3,13 +3,19 @@ package com.arcon.ui.view;
 import javax.swing.*;
 
 public class LogFrame extends JFrame{
-    private JTabbedPane tabbedPaneTables;
     private JPanel panelLogMain;
+    private JTabbedPane tabbedPaneTables;
     private JPanel panelLogMainTop;
-    private JPanel panelTable;
+    private JPanel panelTableCardInUse;
+    private JPanel panelTableTransactions;
+
     private JButton button1;
+
     private JTable tableCardInUse;
-    private JButton buttonRefresh;
+    private JButton buttonCardInUseRefresh;
+
+    private JTable tableTransactions;
+    private JButton buttonTransactionsRefresh;
 
     public LogFrame() {
         setSize(600,400);
@@ -22,8 +28,8 @@ public class LogFrame extends JFrame{
         setSize(600,400);
     }
 
-    public JButton getButtonRefresh() {
-        return buttonRefresh;
+    public JButton getButtonCardInUseRefresh() {
+        return buttonCardInUseRefresh;
     }
 
     public JTable getTableCardInUse() {
@@ -32,5 +38,13 @@ public class LogFrame extends JFrame{
 
     public JButton getButton1() {
         return button1;
+    }
+
+    public JTable getTableTransactions() {
+        return tableTransactions;
+    }
+
+    public JButton getButtonTransactionsRefresh() {
+        return buttonTransactionsRefresh;
     }
 }
