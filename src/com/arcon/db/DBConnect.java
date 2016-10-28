@@ -1,9 +1,6 @@
 package com.arcon.db;
 
-import com.arcon.ui.model.ActionType;
-import com.arcon.ui.model.Card;
-import com.arcon.ui.model.Discount;
-import com.arcon.ui.model.User;
+import com.arcon.ui.model.*;
 import com.arcon.lib.Constants;
 
 import java.util.*;
@@ -302,6 +299,24 @@ public class DBConnect{
             e.printStackTrace();
         }
 
+        return list;
+    }
+
+    public List<Transaction> getTransactionList() {
+        List<Transaction> list = new ArrayList<>();
+        Transaction transaction;
+        try{
+            resSet = statement.executeQuery("SELECT * FROM money_transactions");
+
+            while (resSet.next()) {
+                transaction = new Transaction(resSet.getInt("number_of_cash"), resSet.getString("action"),
+                        resSet.getString("user_name"), resSet.getString("date"), resSet.getString("comment"));
+                list.add(transaction);
+            }
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
         return list;
     }
 
