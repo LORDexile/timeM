@@ -290,10 +290,13 @@ public class DBConnect{
 
     public List<Card> getCardInUseList(){
         List<Card> list = new ArrayList<>();
+        Card card;
         try{
             resSet = statement.executeQuery("SELECT * FROM CardInUse");
+            
             while (resSet.next()) {
-                list.add(getCardInUseById(resSet.getString("id")));
+                card = new Card(resSet.getLong("id"), new Date(resSet.getLong("EnterTime")));
+                list.add(card);
             }
         }catch (SQLException e) {
             e.printStackTrace();
