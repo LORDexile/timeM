@@ -156,6 +156,42 @@
               </scrollpane>
             </children>
           </grid>
+          <grid id="e6690" binding="panelTableUsers" layout-manager="BorderLayout" hgap="0" vgap="0">
+            <constraints>
+              <tabbedpane title="Users"/>
+            </constraints>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <toolbar id="d8673">
+                <constraints border-constraint="South"/>
+                <properties>
+                  <floatable value="false"/>
+                </properties>
+                <border type="none"/>
+                <children>
+                  <component id="d46a6" class="javax.swing.JButton" binding="buttonUsersRefresh">
+                    <constraints/>
+                    <properties>
+                      <label value="Refresh"/>
+                      <text value="Refresh"/>
+                    </properties>
+                  </component>
+                </children>
+              </toolbar>
+              <scrollpane id="ff2a4">
+                <constraints border-constraint="Center"/>
+                <properties/>
+                <border type="none"/>
+                <children>
+                  <component id="89911" class="javax.swing.JTable" binding="tableUsers">
+                    <constraints/>
+                    <properties/>
+                  </component>
+                </children>
+              </scrollpane>
+            </children>
+          </grid>
         </children>
       </tabbedpane>
       <grid id="d5679" binding="panelLogMainTop" layout-manager="BorderLayout" hgap="0" vgap="0">
