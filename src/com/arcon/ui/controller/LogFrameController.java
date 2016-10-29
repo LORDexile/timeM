@@ -3,6 +3,7 @@ package com.arcon.ui.controller;
 import com.arcon.db.DBConnect;
 import com.arcon.ui.model.TableCardInUseModel;
 import com.arcon.ui.model.TableCardsModel;
+import com.arcon.ui.model.TableDiscountsModel;
 import com.arcon.ui.model.TableTransactionsModel;
 import com.arcon.ui.view.LogFrame;
 
@@ -16,6 +17,7 @@ public class LogFrameController {
     private TableCardInUseModel tableCardInUseModel;
     private TableTransactionsModel tableTransactionsModel;
     private TableCardsModel tableCardsModel;
+    private TableDiscountsModel tableDiscountsModel;
 
     private JButton button1;
 
@@ -28,13 +30,12 @@ public class LogFrameController {
     private JTable tableCards;
     private JButton buttonCardsRefresh;
 
+    private JTable tableDiscounts;
+    private JButton buttonDiscountsRefresh;
+
     public LogFrameController() {
         initComponents();
         initListeners();
-    }
-
-    public void showLogFrameWindow(){
-        logFrame.setVisible(true);
     }
 
     private void initComponents() {
@@ -48,13 +49,22 @@ public class LogFrameController {
 
         tableCards = logFrame.getTableCards();
         buttonCardsRefresh = logFrame.getButtonCardsRefresh();
+
+        tableDiscounts = logFrame.getTableDiscounts();
+        buttonDiscountsRefresh = logFrame.getButtonDiscountsRefresh();
     }
 
     private void initListeners() {
         buttonCardInUseRefresh.addActionListener(new buttonRefreshActionListener());
         buttonTransactionsRefresh.addActionListener(new buttonTransactionsRefreshActionListener());
         buttonCardsRefresh.addActionListener(new buttonCardsRefreshActionListener());
+        buttonDiscountsRefresh.addActionListener(new buttonDiscountsRefreshActionListener());
     }
+
+    public void showLogFrameWindow(){
+        logFrame.setVisible(true);
+    }
+
     private void setCardInUseModel() {
 
         DBConnect connect = DBConnect.getInstance();
@@ -84,6 +94,15 @@ public class LogFrameController {
         tableCards.setModel(tableCardsModel);
     }
 
+    private void setDiscountsModel() {
+        DBConnect connect = DBConnect.getInstance();
+        connect.openConnect();
+        tableDiscountsModel = new TableDiscountsModel(connect.getDiscountList());
+        connect.closeConnect();
+
+        tableDiscounts.setModel(tableDiscountsModel);
+    }
+
     private class buttonRefreshActionListener implements ActionListener {
 
         @Override
@@ -105,6 +124,14 @@ public class LogFrameController {
         @Override
         public void actionPerformed(ActionEvent e) {
             setCardsModel();
+        }
+    }
+
+    private class buttonDiscountsRefreshActionListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            setDiscountsModel();
         }
     }
 }
