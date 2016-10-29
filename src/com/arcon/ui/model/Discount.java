@@ -3,10 +3,17 @@ package com.arcon.ui.model;
 public class Discount {
     private double discount;
     private String comment;
+    private String userType;
 
     public Discount(double discount, String comment) {
         this.discount = discount;
         this.comment = comment;
+    }
+
+    public Discount(double discount, String comment, String userName) {
+        this.discount = discount;
+        this.comment = comment;
+        this.userType = userName;
     }
 
     public double getDiscount() {
@@ -15,6 +22,10 @@ public class Discount {
 
     public String getComment() {
         return comment;
+    }
+
+    public String getUserType() {
+        return userType;
     }
 
     @Override
