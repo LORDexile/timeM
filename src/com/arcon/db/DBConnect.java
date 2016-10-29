@@ -357,7 +357,7 @@ public class DBConnect{
             e.printStackTrace();
         }
 
-        return null;
+        return list;
     }
 
     public static DBConnect getInstance() {
