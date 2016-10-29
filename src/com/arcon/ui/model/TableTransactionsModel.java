@@ -2,9 +2,7 @@ package com.arcon.ui.model;
 
 import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
-import java.text.SimpleDateFormat;
 import java.util.List;
-import java.util.Locale;
 
 public class TableTransactionsModel implements TableModel{
     List<Transaction> transactionList;

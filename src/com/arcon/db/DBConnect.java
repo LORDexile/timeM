@@ -293,7 +293,7 @@ public class DBConnect{
 
             while (resSet.next()) {
                 card = new Card(resSet.getLong("id"), new Date(resSet.getLong("EnterTime")));
-                list.add(card);
+                list.add(0,card);
             }
         }catch (SQLException e) {
             e.printStackTrace();
@@ -311,7 +311,7 @@ public class DBConnect{
             while (resSet.next()) {
                 transaction = new Transaction(resSet.getInt("number_of_cash"), resSet.getString("action"),
                         resSet.getString("user_name"), resSet.getString("date"), resSet.getString("comment"));
-                list.add(transaction);
+                list.add(0,transaction);
             }
 
         }catch (SQLException e){
