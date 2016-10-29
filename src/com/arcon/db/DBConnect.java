@@ -320,8 +320,8 @@ public class DBConnect{
         return list;
     }
 
-    public ArrayList<Discount> getDiscountSet() {
-        ArrayList<Discount> list = new ArrayList();
+    public List<Discount> getDiscountList() {
+        List<Discount> list = new ArrayList<>();
 
         try {
             resSet = statement.executeQuery("SELECT * FROM Discount");
