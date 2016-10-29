@@ -9,6 +9,7 @@ public class LogFrame extends JFrame{
     private JPanel panelTableCardInUse;
     private JPanel panelTableTransactions;
     private JPanel panelTableCards;
+    private JPanel panelTableDiscount;
 
     private JButton button1;
 
@@ -21,6 +22,8 @@ public class LogFrame extends JFrame{
     private JTable tableCards;
     private JButton buttonCardsRefresh;
 
+    private JTable tableDiscounts;
+    private JButton buttonDiscountsRefresh;
 
     public LogFrame() {
         setSize(600,400);
@@ -59,5 +62,13 @@ public class LogFrame extends JFrame{
 
     public JButton getButtonCardsRefresh() {
         return buttonCardsRefresh;
+    }
+
+    public JTable getTableDiscounts() {
+        return tableDiscounts;
+    }
+
+    public JButton getButtonDiscountsRefresh() {
+        return buttonDiscountsRefresh;
     }
 }
