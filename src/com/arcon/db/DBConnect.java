@@ -337,7 +337,7 @@ public class DBConnect{
         return list;
     }
 
-    public List<Card> getCardList() {
+    public List<Card> getCardsList() {
         List<Card> list = new ArrayList<>();
         Card card;
         try {
