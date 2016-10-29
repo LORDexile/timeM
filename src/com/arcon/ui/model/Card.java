@@ -7,7 +7,7 @@ public class Card{
     private int operationId;
     private long id;
     private String userName;
-    private int price;
+    private int price = 0;
     private double discount = 0;
     private Date enterTime;
     private Date exitTime;
@@ -55,11 +55,13 @@ public class Card{
     }
 
     public int getPrice() {
-        if (discount != 0.0) {
-            price = (int) (totalTime * Constants.PRICE_SEC - (totalTime * Constants.PRICE_SEC * this.discount / 100));
-            return price;
+        if(price == 0) {
+            if (discount != 0.0) {
+                price = (int) (totalTime * Constants.PRICE_SEC - (totalTime * Constants.PRICE_SEC * this.discount / 100));
+                return price;
+            }
+            price = (int) (totalTime * Constants.PRICE_SEC);
         }
-        price = (int) (totalTime * Constants.PRICE_SEC);
         return  price;
     }
 
