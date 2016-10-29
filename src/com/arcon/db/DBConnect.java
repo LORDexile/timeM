@@ -326,7 +326,7 @@ public class DBConnect{
         try {
             resSet = statement.executeQuery("SELECT * FROM Discount");
             while (resSet.next()) {
-                if (resSet.getString("UserType").equals(Constants.getUserType())) {
+                if (resSet.getString("UserType").equals(Constants.getUserType()) || Constants.getUserType().equals(UserType.ADMIN)) {
                     list.add(new Discount(resSet.getDouble("Discount"), resSet.getString("Comment")));
                 }
             }
@@ -335,6 +335,29 @@ public class DBConnect{
         }
 
         return list;
+    }
+
+    public List<Card> getCardList() {
+        List<Card> list = new ArrayList<>();
+        Card card;
+        try {
+            resSet = statement.executeQuery("SELECT * FROM Cards");
+            while (resSet.next()) {
+                card = new Card(resSet.getInt("Operation_id"),
+                        resSet.getInt("Card_id"),
+                        resSet.getString("User"),
+                        resSet.getInt("Price"),
+                        resSet.getDouble("Discount"),
+                        resSet.getString("DATA_in"),
+                        resSet.getString("DATA_out")
+                        );
+                list.add(0, card);
+            }
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
     public static DBConnect getInstance() {
