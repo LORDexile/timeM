@@ -1,28 +1,32 @@
 package com.arcon.ui.controller;
 
 import com.arcon.db.DBConnect;
-import com.arcon.ui.model.Card;
 import com.arcon.ui.model.TableCardInUseModel;
+import com.arcon.ui.model.TableCardsModel;
 import com.arcon.ui.model.TableTransactionsModel;
-import com.arcon.ui.model.Transaction;
 import com.arcon.ui.view.LogFrame;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
 
 public class LogFrameController {
 
     private LogFrame logFrame;
     private TableCardInUseModel tableCardInUseModel;
     private TableTransactionsModel tableTransactionsModel;
+    private TableCardsModel tableCardsModel;
 
     private JButton button1;
+
     private JTable tableCardInUse;
     private JButton buttonCardInUseRefresh;
-    private JButton buttonTransactionsRefresh;
+
     private JTable tableTransactions;
+    private JButton buttonTransactionsRefresh;
+
+    private JTable tableCards;
+    private JButton buttonCardsRefresh;
 
     public LogFrameController() {
         initComponents();
@@ -41,33 +45,43 @@ public class LogFrameController {
 
         tableTransactions = logFrame.getTableTransactions();
         buttonTransactionsRefresh = logFrame.getButtonTransactionsRefresh();
+
+        tableCards = logFrame.getTableCards();
+        buttonCardsRefresh = logFrame.getButtonCardsRefresh();
     }
 
     private void initListeners() {
         buttonCardInUseRefresh.addActionListener(new buttonRefreshActionListener());
         buttonTransactionsRefresh.addActionListener(new buttonTransactionsRefreshActionListener());
+        buttonCardsRefresh.addActionListener(new buttonCardsRefreshActionListener());
     }
     private void setCardInUseModel() {
-        List<Card> list;
 
         DBConnect connect = DBConnect.getInstance();
         connect.openConnect();
-        list = connect.getCardInUseList();
+        tableCardInUseModel = new TableCardInUseModel(connect.getCardInUseList());
         connect.closeConnect();
 
-        tableCardInUseModel = new TableCardInUseModel(list);
         tableCardInUse.setModel(tableCardInUseModel);
     }
 
     private void setTransactionsModel() {
-        List<Transaction> list;
+
         DBConnect connect = DBConnect.getInstance();
         connect.openConnect();
-        list = connect.getTransactionList();
+        tableTransactionsModel = new TableTransactionsModel(connect.getTransactionList());
         connect.closeConnect();
 
-        tableTransactionsModel = new TableTransactionsModel(list);
         tableTransactions.setModel(tableTransactionsModel);
+    }
+
+    private void setCardsModel(){
+        DBConnect connect = DBConnect.getInstance();
+        connect.openConnect();
+        tableCardsModel = new TableCardsModel(connect.getCardsList());
+        connect.closeConnect();
+
+        tableCards.setModel(tableCardsModel);
     }
 
     private class buttonRefreshActionListener implements ActionListener {
@@ -83,6 +97,14 @@ public class LogFrameController {
         @Override
         public void actionPerformed(ActionEvent e) {
             setTransactionsModel();
+        }
+    }
+
+    private class buttonCardsRefreshActionListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            setCardsModel();
         }
     }
 }
