@@ -360,6 +360,25 @@ public class DBConnect{
         return list;
     }
 
+    public List<User> getUsersList() {
+        List<User> list = new ArrayList<>();
+        User user;
+        try {
+            resSet = statement.executeQuery("SELECT * FROM Users");
+            while (resSet.next()) {
+                user = new User(resSet.getString("UserName"),
+                        UserType.toUserType(resSet.getString("UserType")),
+                        null,
+                        resSet.getString("Comment")
+                );
+                list.add(user);
+            }
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
     public static DBConnect getInstance() {
         return instance;
     }
