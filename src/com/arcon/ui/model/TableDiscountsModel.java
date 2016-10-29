@@ -41,7 +41,6 @@ public class TableDiscountsModel implements TableModel{
             case 0:
                 return double.class;
             case 1:
-                return String.class;
             case 2:
                 return String.class;
         }

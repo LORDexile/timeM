@@ -47,17 +47,13 @@ public class TableCardsModel implements TableModel{
     public Class<?> getColumnClass(int columnIndex) {
         switch (columnIndex) {
             case 0:
-                return int.class;
             case 1:
-                return int.class;
-            case 2:
-                return String.class;
             case 3:
                 return int.class;
             case 4:
                 return double.class;
+            case 2:
             case 5:
-                return String.class;
             case 6:
                 return String.class;
         }
