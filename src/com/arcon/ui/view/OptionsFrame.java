@@ -14,12 +14,11 @@ public class OptionsFrame extends JFrame{
     private JButton buttonMenuPrice;
     private JButton buttonMenuDiscounts;
     private JButton buttonMenuUsers;
+    private JButton buttonMenuProgram;
 
     private JLabel labelUserName;
     private JLabel labelUserType;
     private JButton buttonChangeUser;
-    private JButton buttonMenuProgram;
-
 
     public OptionsFrame() {
 
@@ -27,12 +26,16 @@ public class OptionsFrame extends JFrame{
         setContentPane(this.panelMain);
         setLocationRelativeTo(null);
         setTitle(Constants.PROGRAM_TITLE);
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
         setResizable(true);
         setVisible(false);
         pack();
         setSize(800, 500);
 
+    }
+
+    public JPanel getPanelContextChangeUser() {
+        return panelContextChangeUser;
     }
 
     public JButton getButtonMenuChangeUser() {
@@ -51,6 +54,9 @@ public class OptionsFrame extends JFrame{
         return buttonMenuUsers;
     }
 
+    public JButton getButtonMenuProgram() {
+        return buttonMenuProgram;
+    }
 
     public JLabel getLabelUserName() {
         return labelUserName;
@@ -64,10 +70,4 @@ public class OptionsFrame extends JFrame{
         return buttonChangeUser;
     }
 
-    public JButton getButtonMenuProgram() {
-        return buttonMenuProgram;
-    }
-
-
-    
 }

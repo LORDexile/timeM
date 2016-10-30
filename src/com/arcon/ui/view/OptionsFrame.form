@@ -118,17 +118,16 @@
             <children>
               <component id="1a999" class="javax.swing.JLabel">
                 <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                    <minimum-size width="100" height="33"/>
+                    <preferred-size width="100" height="33"/>
+                    <maximum-size width="100" height="33"/>
+                  </grid>
                 </constraints>
                 <properties>
                   <text value="Current User:"/>
                 </properties>
               </component>
-              <hspacer id="f0549">
-                <constraints>
-                  <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-                </constraints>
-              </hspacer>
               <vspacer id="730c0">
                 <constraints>
                   <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
@@ -136,7 +135,11 @@
               </vspacer>
               <component id="fece3" class="javax.swing.JLabel">
                 <constraints>
-                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                    <minimum-size width="120" height="33"/>
+                    <preferred-size width="120" height="33"/>
+                    <maximum-size width="120" height="33"/>
+                  </grid>
                 </constraints>
                 <properties>
                   <text value="Current User type:"/>
@@ -150,11 +153,6 @@
                   <text value="UserNameNull"/>
                 </properties>
               </component>
-              <hspacer id="226f7">
-                <constraints>
-                  <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-                </constraints>
-              </hspacer>
               <component id="a00b0" class="javax.swing.JLabel" binding="labelUserType">
                 <constraints>
                   <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
@@ -165,7 +163,7 @@
               </component>
               <component id="6c8bf" class="javax.swing.JButton" binding="buttonChangeUser">
                 <constraints>
-                  <grid row="2" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <text value="Change User"/>
