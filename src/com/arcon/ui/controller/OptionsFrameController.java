@@ -5,6 +5,7 @@ import com.arcon.lib.Constants;
 import com.arcon.ui.view.OptionsFrame;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -17,7 +18,7 @@ public class OptionsFrameController {
     private JButton buttonMenuUsers;
     private JButton buttonMenuProgram;
 
-    private JPanel panelContextChangeUser;
+    private JPanel panelContextMain;
 
     private JLabel labelUserName;
     private JLabel labelUserType;
@@ -32,17 +33,20 @@ public class OptionsFrameController {
     private void initComponents() {
         optionsFrame = new OptionsFrame();
 
-        panelContextChangeUser = optionsFrame.getPanelContextChangeUser();
+        panelContextMain = optionsFrame.getPanelContextMain();
 
         buttonMenuChangeUser = optionsFrame.getButtonMenuChangeUser();
         labelUserName = optionsFrame.getLabelUserName();
         labelUserType = optionsFrame.getLabelUserType();
         buttonChangeUser = optionsFrame.getButtonChangeUser();
+
+        buttonMenuPrice = optionsFrame.getButtonMenuPrice();
     }
 
     private void initListeners() {
 
         buttonMenuChangeUser.addActionListener(new buttonMenuChangeUserActionListener());
+        buttonMenuPrice.addActionListener(new buttonMenuPriceActionListener());
 
         buttonChangeUser.addActionListener(new buttonChangeUserActionListener());
     }
@@ -57,18 +61,9 @@ public class OptionsFrameController {
         labelUserType.setText("<html><font color='red'>" + Constants.getUserType() + "</font></html>");
     }
 
-    private void setContextPanel(int number){
-        hideContextPanels();
-        switch (number){
-            case 1:
-                panelContextChangeUser.setVisible(true);
-                break;
-            case 2:
-        }
-    }
-
-    private void hideContextPanels(){
-        panelContextChangeUser.setVisible(false);
+    private void setContextPanel(String panel){
+        CardLayout cl = (CardLayout)(panelContextMain.getLayout());
+        cl.show(panelContextMain, panel);
     }
 
     private class buttonChangeUserActionListener implements ActionListener {
@@ -84,7 +79,15 @@ public class OptionsFrameController {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            setContextPanel(1);
+            setContextPanel("Card1");
+        }
+    }
+
+    private class buttonMenuPriceActionListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            setContextPanel("Card2");
         }
     }
 }
