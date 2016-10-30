@@ -1,9 +1,7 @@
 package com.arcon;
 
+import com.arcon.lib.Constants;
 import com.arcon.ui.controller.*;
-import com.arcon.ui.view.IOFrame;
-import com.arcon.ui.view.LogFrame;
-import com.arcon.ui.view.OptionsFrame;
 
 public class Main {
 
@@ -14,6 +12,7 @@ public class Main {
     public static LogFrameController logFrameController;
 
     public static void main(String[] args) {
+        Constants.getUserType();//preloading Constant Class
 
         loginFrameController = new LoginFrameController();
         loginFrameController.showLoginFrameWindow();
