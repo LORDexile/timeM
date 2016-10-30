@@ -5,7 +5,7 @@ import com.arcon.db.DBConnect;
 public final class Constants {
     private static String USER_NAME;
     private static String USER_TYPE;
-    public static final String PRODUCT_VERSION = "0.3.0";
+    public static final String PRODUCT_VERSION = "0.3.1";
     public static final String PROGRAM_TITLE = " TimeManager - ver: " + PRODUCT_VERSION;
 
     public static final double PRICE = getGlobalPrice();
