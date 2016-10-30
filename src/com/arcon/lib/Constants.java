@@ -1,12 +1,14 @@
 package com.arcon.lib;
 
+import com.arcon.db.DBConnect;
+
 public final class Constants {
     private static String USER_NAME;
     private static String USER_TYPE;
     public static final String PRODUCT_VERSION = "0.3.0";
     public static final String PROGRAM_TITLE = " TimeManager - ver: " + PRODUCT_VERSION;
 
-    public static final double PRICE = 2000.0;
+    public static final double PRICE = getGlobalPrice();
     public static final double PRICE_SEC = PRICE / 3600;
 
     //local DB
@@ -37,5 +39,14 @@ public final class Constants {
 
     public static String getProgramTitle() {
         return "[" + USER_NAME + "]" + PROGRAM_TITLE;
+    }
+
+    private static double getGlobalPrice(){
+        double price;
+        DBConnect connect = DBConnect.getInstance();
+        connect.openConnect();
+        price = connect.getGlobalPrice();
+        connect.closeConnect();
+        return price;
     }
 }
