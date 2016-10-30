@@ -93,6 +93,7 @@ public class MainFrameController {
         buttonCancel.addActionListener(new buttonCancelActionListener());
         textFieldCash.addKeyListener(new textFieldCashKeyListener());
         buttonIO.addActionListener(new buttonIOActionListener());
+        buttonOptions.addActionListener(new buttonOptionsActionListener());
         buttonLog.addActionListener(new  buttonLogActionListener());
 
     }
@@ -452,6 +453,14 @@ public class MainFrameController {
         @Override
         public void actionPerformed(ActionEvent e) {
             Main.logFrameController.showLogFrameWindow();
+        }
+    }
+
+    private class buttonOptionsActionListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            Main.optionsFrameController.showOptionsFrameWindow();
         }
     }
 }
