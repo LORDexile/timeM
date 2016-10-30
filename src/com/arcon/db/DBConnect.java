@@ -3,6 +3,7 @@ package com.arcon.db;
 import com.arcon.ui.model.*;
 import com.arcon.lib.Constants;
 
+import javax.swing.*;
 import java.util.*;
 import java.sql.*;
 import java.util.Date;
@@ -248,6 +249,32 @@ public class DBConnect{
         }catch (SQLException e){
             e.printStackTrace();
         }
+    }
+
+    public void setGlobalPrice(double price, String password){
+        if (verifyUser(Constants.getUserName(), password) == 2){
+
+            String sql = "UPDATE constants set value_real = " + price + " WHERE `key` = 'price_per_hour';";
+
+            try {
+                statement.executeUpdate(sql);
+            }catch (SQLException e){
+                e.printStackTrace();
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(null,"Password incorrect!", "Error",JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    public double getGlobalPrice() {
+        try {
+            resSet = statement.executeQuery("SELECT * FROM constants WHERE `key` = 'price_per_hour';");
+            return resSet.getDouble("value_real");
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return 0.0;
     }
 
     public int getMoneyCount() {
