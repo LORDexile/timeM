@@ -1,7 +1,73 @@
 package com.arcon.ui.view;
 
-/**
- * Created by LORDexile on 30.10.2016.
- */
-public class OptionsFrame {
+import com.arcon.lib.Constants;
+
+import javax.swing.*;
+
+public class OptionsFrame extends JFrame{
+    private JPanel panelMain;
+    private JPanel panelMenu;
+    private JPanel panelContextMain;
+    private JPanel panelContextChangeUser;
+
+    private JButton buttonMenuChangeUser;
+    private JButton buttonMenuPrice;
+    private JButton buttonMenuDiscounts;
+    private JButton buttonMenuUsers;
+
+    private JLabel labelUserName;
+    private JLabel labelUserType;
+    private JButton buttonChangeUser;
+    private JButton buttonMenuProgram;
+
+
+    public OptionsFrame() {
+
+        setSize(800, 500);
+        setContentPane(this.panelMain);
+        setLocationRelativeTo(null);
+        setTitle(Constants.PROGRAM_TITLE);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setResizable(true);
+        setVisible(false);
+        pack();
+        setSize(800, 500);
+
+    }
+
+    public JButton getButtonMenuChangeUser() {
+        return buttonMenuChangeUser;
+    }
+
+    public JButton getButtonMenuPrice() {
+        return buttonMenuPrice;
+    }
+
+    public JButton getButtonMenuDiscounts() {
+        return buttonMenuDiscounts;
+    }
+
+    public JButton getButtonMenuUsers() {
+        return buttonMenuUsers;
+    }
+
+
+    public JLabel getLabelUserName() {
+        return labelUserName;
+    }
+
+    public JLabel getLabelUserType() {
+        return labelUserType;
+    }
+
+    public JButton getButtonChangeUser() {
+        return buttonChangeUser;
+    }
+
+    public JButton getButtonMenuProgram() {
+        return buttonMenuProgram;
+    }
+
+
+    
 }
