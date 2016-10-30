@@ -102,8 +102,6 @@ public class MainFrameController {
 
         mainFrame.setVisible(true);
         textFieldCard.requestFocus();
-        setText();
-
     }
 
     public void updateComponents() {

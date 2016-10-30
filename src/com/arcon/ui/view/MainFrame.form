@@ -74,7 +74,7 @@
                 </constraints>
                 <properties>
                   <text value="Time In:"/>
-                  <visible value="true"/>
+                  <visible value="false"/>
                 </properties>
               </component>
               <component id="1b260" class="javax.swing.JLabel" binding="labelTextTimeOut">
@@ -83,6 +83,7 @@
                 </constraints>
                 <properties>
                   <text value="Time out:"/>
+                  <visible value="false"/>
                 </properties>
               </component>
               <component id="e2112" class="javax.swing.JLabel" binding="jLabelTimeOut">
@@ -91,6 +92,7 @@
                 </constraints>
                 <properties>
                   <text value="00hour:00min:00sec"/>
+                  <visible value="false"/>
                 </properties>
               </component>
               <component id="3ba1e" class="javax.swing.JLabel" binding="labelTextTimeTotal">
@@ -99,6 +101,7 @@
                 </constraints>
                 <properties>
                   <text value="Total time:"/>
+                  <visible value="false"/>
                 </properties>
               </component>
               <component id="63bd9" class="javax.swing.JLabel" binding="jLabelTimeTotal">
@@ -107,6 +110,7 @@
                 </constraints>
                 <properties>
                   <text value="00hour:00min:00sec"/>
+                  <visible value="false"/>
                 </properties>
               </component>
               <component id="29103" class="javax.swing.JSeparator">
@@ -135,6 +139,7 @@
                 </constraints>
                 <properties>
                   <text value="00 UAH"/>
+                  <visible value="false"/>
                 </properties>
               </component>
               <component id="3e571" class="javax.swing.JLabel" binding="labelTextPrice">
@@ -143,6 +148,7 @@
                 </constraints>
                 <properties>
                   <text value="Price:"/>
+                  <visible value="false"/>
                 </properties>
               </component>
               <component id="469c8" class="javax.swing.JLabel" binding="labelTextCash">
@@ -151,6 +157,7 @@
                 </constraints>
                 <properties>
                   <text value="Cash:"/>
+                  <visible value="false"/>
                 </properties>
               </component>
               <component id="25d81" class="javax.swing.JTextField" binding="textFieldCash" default-binding="true">
@@ -159,7 +166,9 @@
                     <preferred-size width="150" height="-1"/>
                   </grid>
                 </constraints>
-                <properties/>
+                <properties>
+                  <visible value="false"/>
+                </properties>
               </component>
               <component id="ab2b5" class="javax.swing.JButton" binding="buttonPerformCard">
                 <constraints>
@@ -168,6 +177,7 @@
                 <properties>
                   <enabled value="true"/>
                   <text value="Perform"/>
+                  <visible value="false"/>
                 </properties>
               </component>
               <component id="744b6" class="javax.swing.JButton" binding="buttonCancel">
@@ -176,6 +186,7 @@
                 </constraints>
                 <properties>
                   <text value="Cancel"/>
+                  <visible value="false"/>
                 </properties>
               </component>
               <component id="9e009" class="javax.swing.JLabel" binding="jLabelTimeIn">
@@ -184,6 +195,7 @@
                 </constraints>
                 <properties>
                   <text value="00hour:00min:00sec"/>
+                  <visible value="false"/>
                 </properties>
               </component>
               <component id="9181d" class="javax.swing.JComboBox" binding="comboBoxDiscount">
@@ -194,6 +206,7 @@
                   <enabled value="false"/>
                   <lightWeightPopupEnabled value="true"/>
                   <maximumRowCount value="10"/>
+                  <visible value="false"/>
                 </properties>
               </component>
               <component id="ca390" class="javax.swing.JLabel" binding="labelTextDiscount">
@@ -202,6 +215,7 @@
                 </constraints>
                 <properties>
                   <text value="Discount:"/>
+                  <visible value="false"/>
                 </properties>
               </component>
               <component id="def2c" class="javax.swing.JCheckBox" binding="checkBoxDiscount">
@@ -210,6 +224,7 @@
                 </constraints>
                 <properties>
                   <text value=""/>
+                  <visible value="false"/>
                 </properties>
               </component>
             </children>
