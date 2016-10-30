@@ -1,17 +1,16 @@
 package com.arcon;
 
-import com.arcon.ui.controller.IOFrameController;
-import com.arcon.ui.controller.LogFrameController;
-import com.arcon.ui.controller.LoginFrameController;
-import com.arcon.ui.controller.MainFrameController;
+import com.arcon.ui.controller.*;
 import com.arcon.ui.view.IOFrame;
 import com.arcon.ui.view.LogFrame;
+import com.arcon.ui.view.OptionsFrame;
 
 public class Main {
 
     public static MainFrameController mainFrameController;
     public static LoginFrameController loginFrameController;
     public static IOFrameController ioFrameController;
+    public static OptionsFrameController optionsFrameController;
     public static LogFrameController logFrameController;
 
     public static void main(String[] args) {
@@ -25,5 +24,6 @@ public class Main {
 
         logFrameController = new LogFrameController();
 
+        optionsFrameController = new OptionsFrameController();
     }
 }
