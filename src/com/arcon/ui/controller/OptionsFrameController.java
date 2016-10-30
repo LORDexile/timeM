@@ -1,7 +1,9 @@
 package com.arcon.ui.controller;
 
 import com.arcon.Main;
+import com.arcon.db.DBConnect;
 import com.arcon.lib.Constants;
+import com.arcon.ui.model.UserType;
 import com.arcon.ui.view.OptionsFrame;
 
 import javax.swing.*;
@@ -24,6 +26,15 @@ public class OptionsFrameController {
     private JLabel labelUserType;
     private JButton buttonChangeUser;
 
+    private JLabel labelPrice;
+    private JTextField textFieldNewPrice;
+    private JPasswordField passwordFieldPassword;
+    private JButton buttonPriceChangePerform;
+    private JLabel jLabelNewPrice;
+    private JLabel jLabelPassword;
+
+    private boolean isPriceContextVisible = false;
+
 
     public OptionsFrameController() {
         initComponents();
@@ -41,6 +52,12 @@ public class OptionsFrameController {
         buttonChangeUser = optionsFrame.getButtonChangeUser();
 
         buttonMenuPrice = optionsFrame.getButtonMenuPrice();
+        labelPrice = optionsFrame.getLabelPrice();
+        textFieldNewPrice = optionsFrame.getTextFieldNewPrice();
+        passwordFieldPassword = optionsFrame.getPasswordFieldPassword();
+        buttonPriceChangePerform = optionsFrame.getButtonPriceChangePerform();
+        jLabelNewPrice = optionsFrame.getjLabelNewPrice();
+        jLabelPassword = optionsFrame.getjLabelPassword();
     }
 
     private void initListeners() {
@@ -49,21 +66,38 @@ public class OptionsFrameController {
         buttonMenuPrice.addActionListener(new buttonMenuPriceActionListener());
 
         buttonChangeUser.addActionListener(new buttonChangeUserActionListener());
+        buttonPriceChangePerform.addActionListener(new buttonPriceChangePerformActionListener());
     }
 
     public void showOptionsFrameWindow() {
         optionsFrame.setVisible(true);
-        setCurrentUserInfo();
+        setContextChangeUserPanelUserInfo();
     }
 
-    private void setCurrentUserInfo(){
+    private void setContextChangeUserPanelUserInfo(){
         labelUserName.setText("<html><font color='red'>" + Constants.getUserName() + "</font></html>");
         labelUserType.setText("<html><font color='red'>" + Constants.getUserType() + "</font></html>");
     }
 
-    private void setContextPanel(String panel){
+    private void setContextPricePanel(){
+        labelPrice.setText((String.valueOf(Constants.PRICE)));
+        if (!Constants.getUserType().equals(UserType.ADMIN.toString())){
+            setUserTypeContextPrice();
+        }
+    }
+
+    private void showContextPanel(String panel){
         CardLayout cl = (CardLayout)(panelContextMain.getLayout());
         cl.show(panelContextMain, panel);
+    }
+
+    private void setUserTypeContextPrice(){
+        jLabelNewPrice.setVisible(isPriceContextVisible);
+        textFieldNewPrice.setVisible(isPriceContextVisible);
+        jLabelPassword.setVisible(isPriceContextVisible);
+        passwordFieldPassword.setVisible(isPriceContextVisible);
+        buttonPriceChangePerform.setVisible(isPriceContextVisible);
+        isPriceContextVisible = !isPriceContextVisible;
     }
 
     private class buttonChangeUserActionListener implements ActionListener {
@@ -79,7 +113,8 @@ public class OptionsFrameController {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            setContextPanel("Card1");
+            setContextChangeUserPanelUserInfo();
+            showContextPanel("CardChangeUser");
         }
     }
 
@@ -87,7 +122,33 @@ public class OptionsFrameController {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            setContextPanel("Card2");
+            setContextPricePanel();
+            showContextPanel("CardPrice");
+
+        }
+    }
+
+    private class buttonPriceChangePerformActionListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            double newPrice;
+            try {
+                newPrice = Double.parseDouble(textFieldNewPrice.getText());
+
+                DBConnect connect = DBConnect.getInstance();
+                connect.openConnect();
+                connect.setGlobalPrice(newPrice, passwordFieldPassword.getText());
+
+                JOptionPane.showMessageDialog(null, "Please reboot program!", "", JOptionPane.INFORMATION_MESSAGE);
+            }catch (Exception exp){
+                JOptionPane.showMessageDialog(null, "input error", "error", JOptionPane.ERROR_MESSAGE);
+                textFieldNewPrice.setText("");
+                textFieldNewPrice.requestFocus();
+            }
+            textFieldNewPrice.setText("");
+            passwordFieldPassword.setText("");
+
         }
     }
 }
