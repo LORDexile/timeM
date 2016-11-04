@@ -30,6 +30,14 @@ public class Card{
         enterTime = date;
     }
 
+    private void calculatePrice(){
+        if (discount != 0.0) {
+            price = (int) (totalTime * Constants.PRICE_SEC - (totalTime * Constants.PRICE_SEC * this.discount / 100));
+        }else {
+            price = (int) (totalTime * Constants.PRICE_SEC);
+        }
+    }
+
     public void setExitTime(){
         exitTime = new Date();
         //set time in seconds
@@ -39,6 +47,7 @@ public class Card{
     public void setDiscount(double discount) {
         if (discount >= 0.0 && discount <= 100.0) {
             this.discount = discount;
+            calculatePrice();
         }
     }
 
@@ -56,11 +65,7 @@ public class Card{
 
     public int getPrice() {
         if(price == 0) {
-            if (discount != 0.0) {
-                price = (int) (totalTime * Constants.PRICE_SEC - (totalTime * Constants.PRICE_SEC * this.discount / 100));
-                return price;
-            }
-            price = (int) (totalTime * Constants.PRICE_SEC);
+            calculatePrice();
         }
         return  price;
     }
