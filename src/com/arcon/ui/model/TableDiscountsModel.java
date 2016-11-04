@@ -19,7 +19,7 @@ public class TableDiscountsModel implements TableModel{
 
     @Override
     public int getColumnCount() {
-        return 3;
+        return 4;
     }
 
     @Override
@@ -31,6 +31,8 @@ public class TableDiscountsModel implements TableModel{
                 return "Description";
             case 2:
                 return "User type";
+            case 3:
+                return "Active";
         }
         return null;
     }
@@ -42,6 +44,7 @@ public class TableDiscountsModel implements TableModel{
                 return double.class;
             case 1:
             case 2:
+            case 3:
                 return String.class;
         }
         return null;
@@ -62,6 +65,11 @@ public class TableDiscountsModel implements TableModel{
                 return discount.getComment();
             case 2:
                 return discount.getUserType();
+            case 3:
+                if (discount.isActive()){
+                    return "+";
+                }
+                return "-";
         }
         return null;
     }
