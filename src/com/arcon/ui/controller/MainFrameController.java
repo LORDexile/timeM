@@ -42,7 +42,7 @@ public class MainFrameController {
     private JLabel labelTextPrice;
     private JLabel labelTextCash;
 
-    private boolean setText = false;
+    private boolean setText = true;
     private boolean isDiscountSet = false;
     private List<Discount> discountList;
     private Card card;
@@ -276,25 +276,11 @@ public class MainFrameController {
     }
 
     private class textFieldCardKeyListener implements KeyListener {
-        /**
-         * Invoked when a key has been typed.
-         * See the class description for {@link KeyEvent} for a definition of
-         * a key typed event.
-         *
-         * @param e
-         */
         @Override
         public void keyTyped(KeyEvent e) {
 
         }
 
-        /**
-         * Invoked when a key has been pressed.
-         * See the class description for {@link KeyEvent} for a definition of
-         * a key pressed event.
-         *
-         * @param e
-         */
         @Override
         public void keyPressed(KeyEvent e) {
             if (e.getExtendedKeyCode() == 10) {
@@ -305,13 +291,6 @@ public class MainFrameController {
             }
         }
 
-        /**
-         * Invoked when a key has been released.
-         * See the class description for {@link KeyEvent} for a definition of
-         * a key released event.
-         *
-         * @param e
-         */
         @Override
         public void keyReleased(KeyEvent e) {
 
@@ -328,25 +307,12 @@ public class MainFrameController {
     }
 
     private class buttonPerformCardKeyListener implements KeyListener {
-        /**
-         * Invoked when a key has been typed.
-         * See the class description for {@link KeyEvent} for a definition of
-         * a key typed event.
-         *
-         * @param e
-         */
+
         @Override
         public void keyTyped(KeyEvent e) {
 
         }
 
-        /**
-         * Invoked when a key has been pressed.
-         * See the class description for {@link KeyEvent} for a definition of
-         * a key pressed event.
-         *
-         * @param e
-         */
         @Override
         public void keyPressed(KeyEvent e) {
             if (e.getExtendedKeyCode() == 10) {
@@ -356,13 +322,6 @@ public class MainFrameController {
             }
         }
 
-        /**
-         * Invoked when a key has been released.
-         * See the class description for {@link KeyEvent} for a definition of
-         * a key released event.
-         *
-         * @param e
-         */
         @Override
         public void keyReleased(KeyEvent e) {
 
@@ -370,11 +329,7 @@ public class MainFrameController {
     }
 
     private class comboBoxDiscountActionListener implements ActionListener {
-        /**
-         * Invoked when an action occurs.
-         *
-         * @param e
-         */
+
         @Override
         public void actionPerformed(ActionEvent e) {
             if (card != null) {
@@ -387,11 +342,6 @@ public class MainFrameController {
 
     private class buttonCancelActionListener implements ActionListener {
 
-        /**
-         * Invoked when an action occurs.
-         *
-         * @param e
-         */
         @Override
         public void actionPerformed(ActionEvent e) {
             cancelAction();
@@ -399,25 +349,12 @@ public class MainFrameController {
     }
 
     private class textFieldCashKeyListener implements KeyListener {
-        /**
-         * Invoked when a key has been typed.
-         * See the class description for {@link KeyEvent} for a definition of
-         * a key typed event.
-         *
-         * @param e
-         */
+
         @Override
         public void keyTyped(KeyEvent e) {
 
         }
 
-        /**
-         * Invoked when a key has been pressed.
-         * See the class description for {@link KeyEvent} for a definition of
-         * a key pressed event.
-         *
-         * @param e
-         */
         @Override
         public void keyPressed(KeyEvent e) {
             if (e.getExtendedKeyCode() == 10) {
@@ -425,13 +362,6 @@ public class MainFrameController {
             }
         }
 
-        /**
-         * Invoked when a key has been released.
-         * See the class description for {@link KeyEvent} for a definition of
-         * a key released event.
-         *
-         * @param e
-         */
         @Override
         public void keyReleased(KeyEvent e) {
 
