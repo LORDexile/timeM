@@ -4,16 +4,18 @@ public class Discount {
     private double discount;
     private String comment;
     private String userType;
+    private int isActive = 1;
 
     public Discount(double discount, String comment) {
         this.discount = discount;
         this.comment = comment;
     }
 
-    public Discount(double discount, String comment, String userName) {
+    public Discount(double discount, String comment, String userName, int isActive) {
         this.discount = discount;
         this.comment = comment;
         this.userType = userName;
+        this.isActive = isActive;
     }
 
     public double getDiscount() {
@@ -26,6 +28,13 @@ public class Discount {
 
     public String getUserType() {
         return userType;
+    }
+
+    public boolean isActive() {
+        if(isActive == 1) {
+            return true;
+        }
+        return false;
     }
 
     @Override
