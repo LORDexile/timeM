@@ -79,6 +79,8 @@ public class OptionsFrameController {
         buttonPriceChangePerform.addActionListener(new buttonPriceChangePerformActionListener());
 
         buttonMenuDiscounts.addActionListener(new buttonMenuDiscountsActionListener());
+        buttonAddDiscount.addActionListener(new buttonAddDiscountActionListener());
+        buttonDeleteDiscount.addActionListener(new buttonDeleteDiscountActionListener());
     }
 
     public void showOptionsFrameWindow() {
@@ -115,7 +117,7 @@ public class OptionsFrameController {
     private void setContextDiscountsTableModel(){
         DBConnect connect = DBConnect.getInstance();
         connect.openConnect();
-        TableDiscountsModel tableDiscountsModel = new TableDiscountsModel(connect.getDiscountList());
+        TableDiscountsModel tableDiscountsModel = new TableDiscountsModel(connect.getUserDiscountList());
         connect.closeConnect();
 
         tableDiscounts.setModel(tableDiscountsModel);
@@ -178,6 +180,20 @@ public class OptionsFrameController {
         public void actionPerformed(ActionEvent e) {
             setContextDiscountsTableModel();
             showContextPanel("CardDiscounts");
+        }
+    }
+
+    private class buttonAddDiscountActionListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            System.out.println("Add");
+        }
+    }
+
+    private class buttonDeleteDiscountActionListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            System.out.println("dell");
         }
     }
 }
