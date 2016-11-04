@@ -256,7 +256,7 @@ public class MainFrameController {
                 if (!isDiscountSet) {
                     DBConnect connect = new DBConnect();
                     connect.openConnect();
-                    discountList = connect.getDiscountList();
+                    discountList = connect.getUserDiscountList();
                     connect.closeConnect();
 
                     for (Discount elem :
