@@ -8,6 +8,7 @@ public class OptionsFrame extends JFrame{
     private JPanel panelContextMain;
     private JPanel panelContextChangeUser;
     private JPanel panelContextPrice;
+    private JPanel panelContextDiscounts;
 
     private JButton buttonMenuChangeUser;
     private JButton buttonMenuPrice;
@@ -25,6 +26,11 @@ public class OptionsFrame extends JFrame{
     private JButton buttonPriceChangePerform;
     private JLabel jLabelNewPrice;
     private JLabel jLabelPassword;
+
+    private JTable tableDiscounts;
+    private JButton buttonAddDiscount;
+    private JButton buttonDeleteDiscount;
+    private JButton buttonSwitchDiscount;
 
     public OptionsFrame() {
 
@@ -98,5 +104,21 @@ public class OptionsFrame extends JFrame{
 
     public JLabel getjLabelNewPrice() {
         return jLabelNewPrice;
+    }
+
+    public JTable getTableDiscounts() {
+        return tableDiscounts;
+    }
+
+    public JButton getButtonAddDiscount() {
+        return buttonAddDiscount;
+    }
+
+    public JButton getButtonDeleteDiscount() {
+        return buttonDeleteDiscount;
+    }
+
+    public JButton getButtonSwitchDiscount() {
+        return buttonSwitchDiscount;
     }
 }
