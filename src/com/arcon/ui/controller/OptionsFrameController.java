@@ -3,6 +3,7 @@ package com.arcon.ui.controller;
 import com.arcon.Main;
 import com.arcon.db.DBConnect;
 import com.arcon.lib.Constants;
+import com.arcon.ui.model.TableDiscountsModel;
 import com.arcon.ui.model.UserType;
 import com.arcon.ui.view.OptionsFrame;
 
@@ -33,6 +34,10 @@ public class OptionsFrameController {
     private JLabel jLabelNewPrice;
     private JLabel jLabelPassword;
 
+    private JTable tableDiscounts;
+    private JButton buttonAddDiscount;
+    private JButton buttonDeleteDiscount;
+
     private boolean isPriceContextVisible = false;
 
 
@@ -58,6 +63,11 @@ public class OptionsFrameController {
         buttonPriceChangePerform = optionsFrame.getButtonPriceChangePerform();
         jLabelNewPrice = optionsFrame.getjLabelNewPrice();
         jLabelPassword = optionsFrame.getjLabelPassword();
+
+        buttonMenuDiscounts = optionsFrame.getButtonMenuDiscounts();
+        tableDiscounts = optionsFrame.getTableDiscounts();
+        buttonAddDiscount = optionsFrame.getButtonAddDiscount();
+        buttonDeleteDiscount = optionsFrame.getButtonDeleteDiscount();
     }
 
     private void initListeners() {
@@ -67,6 +77,8 @@ public class OptionsFrameController {
 
         buttonChangeUser.addActionListener(new buttonChangeUserActionListener());
         buttonPriceChangePerform.addActionListener(new buttonPriceChangePerformActionListener());
+
+        buttonMenuDiscounts.addActionListener(new buttonMenuDiscountsActionListener());
     }
 
     public void showOptionsFrameWindow() {
@@ -98,6 +110,15 @@ public class OptionsFrameController {
         passwordFieldPassword.setVisible(isPriceContextVisible);
         buttonPriceChangePerform.setVisible(isPriceContextVisible);
         isPriceContextVisible = !isPriceContextVisible;
+    }
+
+    private void setContextDiscountsTableModel(){
+        DBConnect connect = DBConnect.getInstance();
+        connect.openConnect();
+        TableDiscountsModel tableDiscountsModel = new TableDiscountsModel(connect.getDiscountList());
+        connect.closeConnect();
+
+        tableDiscounts.setModel(tableDiscountsModel);
     }
 
     private class buttonChangeUserActionListener implements ActionListener {
@@ -149,6 +170,14 @@ public class OptionsFrameController {
             textFieldNewPrice.setText("");
             passwordFieldPassword.setText("");
 
+        }
+    }
+
+    private class buttonMenuDiscountsActionListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            setContextDiscountsTableModel();
+            showContextPanel("CardDiscounts");
         }
     }
 }
