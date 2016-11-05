@@ -9,9 +9,13 @@ import com.arcon.ui.model.UserType;
 import com.arcon.ui.view.OptionsFrame;
 
 import javax.swing.*;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 public class OptionsFrameController {
     OptionsFrame optionsFrame;
@@ -40,6 +44,7 @@ public class OptionsFrameController {
     private JButton buttonDeleteDiscount;
 
     private boolean isPriceContextVisible = false;
+    private Discount currentDiscount;
 
 
     public OptionsFrameController() {
@@ -82,6 +87,8 @@ public class OptionsFrameController {
         buttonMenuDiscounts.addActionListener(new buttonMenuDiscountsActionListener());
         buttonAddDiscount.addActionListener(new buttonAddDiscountActionListener());
         buttonDeleteDiscount.addActionListener(new buttonDeleteDiscountActionListener());
+
+        tableDiscounts.addMouseListener(new tableDiscountsMouseListener());
     }
 
     public void showOptionsFrameWindow() {
@@ -122,6 +129,7 @@ public class OptionsFrameController {
         connect.closeConnect();
 
         tableDiscounts.setModel(tableDiscountsModel);
+        currentDiscount = null;
     }
 
     private void addDiscount(){
@@ -165,14 +173,20 @@ public class OptionsFrameController {
     }
 
     private void deleteDiscount(){
+        if (currentDiscount != null){
 
-        DBConnect connect = DBConnect.getInstance();
-        connect.openConnect();
+            int output = JOptionPane.showConfirmDialog(null, "Discount: " + currentDiscount.getDiscount() +
+                    "  User type: " + currentDiscount.getUserType(),
+                    "Delete this discount?", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+            if (output == JOptionPane.YES_OPTION) {
+                DBConnect connect = DBConnect.getInstance();
+                connect.openConnect();
+                connect.deleteDiscount(currentDiscount);
+                connect.closeConnect();
+                currentDiscount = null;
+            }
+        }
 
-        //Discount discount = connect.getDiscountList().get(7);
-
-        //connect.deleteDiscount(discount);
-        connect.closeConnect();
 
     }
 
@@ -252,11 +266,55 @@ public class OptionsFrameController {
         @Override
         public void actionPerformed(ActionEvent e) {
             if(Constants.getUserType().equals(UserType.ADMIN.toString())) {
-                deleteDiscount();
-                setContextDiscountsTableModel();
+                if (currentDiscount != null) {
+                    deleteDiscount();
+                    setContextDiscountsTableModel();
+                }else{
+                    JOptionPane.showMessageDialog(null, "Select item in the table!", "Select error", JOptionPane.INFORMATION_MESSAGE);
+                }
             }else {
                 JOptionPane.showMessageDialog(null, "Only Administrator can delete discounts.", "Access error", JOptionPane.INFORMATION_MESSAGE);
             }
+
+        }
+    }
+
+    private class tableDiscountsMouseListener implements MouseListener {
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            int row = tableDiscounts.getSelectedRow();
+            double discountValue = (double) tableDiscounts.getValueAt(row, 0);
+            String commentValue = (String) tableDiscounts.getValueAt(row, 1);
+            String userTypeValue = (String) tableDiscounts.getValueAt(row, 2);
+            int isActiveValue;
+            if (tableDiscounts.getValueAt(row, 3).equals("+")){
+                isActiveValue = 1;
+            }else{
+                isActiveValue = 0;
+            }
+
+            currentDiscount = new Discount(discountValue, commentValue, userTypeValue, isActiveValue);
+
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+
         }
     }
 }
