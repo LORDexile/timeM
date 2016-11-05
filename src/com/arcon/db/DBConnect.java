@@ -397,7 +397,7 @@ public class DBConnect{
         try {
             resSet = statement.executeQuery("SELECT * FROM Discount");
             while (resSet.next()) {
-                if (resSet.getString("UserType").equals(Constants.getUserType()) || Constants.getUserType().equals(UserType.ADMIN.toString())) {
+                if ((resSet.getString("UserType").equals(Constants.getUserType()) || Constants.getUserType().equals(UserType.ADMIN.toString())) && resSet.getInt("Active")==1) {
                     list.add(new Discount(resSet.getDouble("Discount"), resSet.getString("Comment"), resSet.getString("UserType"), resSet.getInt("Active")));
                 }
             }
