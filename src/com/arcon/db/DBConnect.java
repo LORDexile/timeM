@@ -267,6 +267,23 @@ public class DBConnect{
         }
     }
 
+    public void setDiscount(double discount, String comment, UserType userType){
+        try{
+            String sql = "INSERT INTO Discount (Discount, Comment, UserType, Active) " +
+                    "VALUES ('" + discount +
+                    "', '" + comment +
+                    "', '" + userType +
+                    "', '" + 1 +
+                    "');";
+
+            System.out.println(sql);
+            statement.executeUpdate(sql);
+
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public double getGlobalPrice() {
         try {
             resSet = statement.executeQuery("SELECT * FROM constants WHERE `key` = 'price_per_hour';");
