@@ -11,10 +11,10 @@ public class Discount {
         this.comment = comment;
     }
 
-    public Discount(double discount, String comment, String userName, int isActive) {
+    public Discount(double discount, String comment, String userType, int isActive) {
         this.discount = discount;
         this.comment = comment;
-        this.userType = userName;
+        this.userType = userType;
         this.isActive = isActive;
     }
 
