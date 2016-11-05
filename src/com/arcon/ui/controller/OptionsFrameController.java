@@ -3,6 +3,7 @@ package com.arcon.ui.controller;
 import com.arcon.Main;
 import com.arcon.db.DBConnect;
 import com.arcon.lib.Constants;
+import com.arcon.ui.model.Discount;
 import com.arcon.ui.model.TableDiscountsModel;
 import com.arcon.ui.model.UserType;
 import com.arcon.ui.view.OptionsFrame;
@@ -163,6 +164,18 @@ public class OptionsFrameController {
 
     }
 
+    private void deleteDiscount(){
+
+        DBConnect connect = DBConnect.getInstance();
+        connect.openConnect();
+
+        //Discount discount = connect.getDiscountList().get(7);
+
+        //connect.deleteDiscount(discount);
+        connect.closeConnect();
+
+    }
+
     private class buttonChangeUserActionListener implements ActionListener {
 
         @Override
@@ -238,7 +251,12 @@ public class OptionsFrameController {
     private class buttonDeleteDiscountActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            System.out.println("dell");
+            if(Constants.getUserType().equals(UserType.ADMIN.toString())) {
+                deleteDiscount();
+                setContextDiscountsTableModel();
+            }else {
+                JOptionPane.showMessageDialog(null, "Only Administrator can delete discounts.", "Access error", JOptionPane.INFORMATION_MESSAGE);
+            }
         }
     }
 }
