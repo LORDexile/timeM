@@ -164,15 +164,6 @@ public class DBConnect{
         setCardCount(1);
     }
 
-    public void deleteCardInUse(String id) {
-        try {
-            String sql = "DELETE FROM CardInUse WHERE id=" + id + ";";
-            statement.executeUpdate(sql);
-        }catch (SQLException e){
-            e.printStackTrace();
-        }
-    }
-
     public void writeCard(Card card) {
         try{
             String sql = "INSERT INTO Cards (Card_id, User, Price, Discount, DATA_in, DATA_out) " +
@@ -186,6 +177,28 @@ public class DBConnect{
             System.out.println(sql);
             statement.executeUpdate(sql);
         }catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteCardInUse(String id) {
+        try {
+            String sql = "DELETE FROM CardInUse WHERE id=" + id + ";";
+            statement.executeUpdate(sql);
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteDiscount(Discount discount){
+        try {
+            String sql = "DELETE FROM Discount WHERE Discount=" + discount.getDiscount() +
+                    " AND UserType='" + discount.getUserType() +
+                    "';";
+
+            statement.executeUpdate(sql);
+
+        }catch (SQLException e){
             e.printStackTrace();
         }
     }
@@ -209,7 +222,6 @@ public class DBConnect{
                     "', '" + comment +
                     "');";
 
-            System.out.println(sql);
             statement.executeUpdate(sql);
 
         }catch (SQLException e) {
