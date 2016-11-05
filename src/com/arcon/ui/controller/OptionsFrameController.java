@@ -43,7 +43,6 @@ public class OptionsFrameController {
     private JButton buttonAddDiscount;
     private JButton buttonDeleteDiscount;
 
-    private boolean isPriceContextVisible = false;
     private Discount currentDiscount;
 
 
@@ -103,23 +102,11 @@ public class OptionsFrameController {
 
     private void setContextPricePanel(){
         labelPrice.setText((String.valueOf(Constants.PRICE)));
-        if (!Constants.getUserType().equals(UserType.ADMIN.toString())){
-            setUserTypeContextPrice();
-        }
     }
 
     private void showContextPanel(String panel){
         CardLayout cl = (CardLayout)(panelContextMain.getLayout());
         cl.show(panelContextMain, panel);
-    }
-
-    private void setUserTypeContextPrice(){
-        jLabelNewPrice.setVisible(isPriceContextVisible);
-        textFieldNewPrice.setVisible(isPriceContextVisible);
-        jLabelPassword.setVisible(isPriceContextVisible);
-        passwordFieldPassword.setVisible(isPriceContextVisible);
-        buttonPriceChangePerform.setVisible(isPriceContextVisible);
-        isPriceContextVisible = !isPriceContextVisible;
     }
 
     private void setContextDiscountsTableModel(){
@@ -130,6 +117,23 @@ public class OptionsFrameController {
 
         tableDiscounts.setModel(tableDiscountsModel);
         currentDiscount = null;
+    }
+
+    private void changeGlobalPrice(){
+        double newPrice;
+        try {
+            newPrice = Double.parseDouble(textFieldNewPrice.getText());
+
+            DBConnect connect = DBConnect.getInstance();
+            connect.openConnect();
+            connect.setGlobalPrice(newPrice, passwordFieldPassword.getText());
+
+            JOptionPane.showMessageDialog(null, "Please reboot program!", "", JOptionPane.INFORMATION_MESSAGE);
+        }catch (Exception exp){
+            JOptionPane.showMessageDialog(null, "input error", "error", JOptionPane.ERROR_MESSAGE);
+            textFieldNewPrice.setText("");
+            textFieldNewPrice.requestFocus();
+        }
     }
 
     private void addDiscount(){
@@ -222,19 +226,10 @@ public class OptionsFrameController {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            double newPrice;
-            try {
-                newPrice = Double.parseDouble(textFieldNewPrice.getText());
-
-                DBConnect connect = DBConnect.getInstance();
-                connect.openConnect();
-                connect.setGlobalPrice(newPrice, passwordFieldPassword.getText());
-
-                JOptionPane.showMessageDialog(null, "Please reboot program!", "", JOptionPane.INFORMATION_MESSAGE);
-            }catch (Exception exp){
-                JOptionPane.showMessageDialog(null, "input error", "error", JOptionPane.ERROR_MESSAGE);
-                textFieldNewPrice.setText("");
-                textFieldNewPrice.requestFocus();
+            if(Constants.getUserType().equals(UserType.ADMIN.toString())){
+                changeGlobalPrice();
+            }else {
+                JOptionPane.showMessageDialog(null, "Only Administrator can change Global Price.", "Access error", JOptionPane.INFORMATION_MESSAGE);
             }
             textFieldNewPrice.setText("");
             passwordFieldPassword.setText("");
