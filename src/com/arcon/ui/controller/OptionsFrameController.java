@@ -123,6 +123,46 @@ public class OptionsFrameController {
         tableDiscounts.setModel(tableDiscountsModel);
     }
 
+    private void addDiscount(){
+        JComponent[] components = new JComponent[6];
+
+        JLabel labelDiscount = new JLabel("Discount %:");
+        JTextField textFieldDiscount = new JTextField();
+        textFieldDiscount.setToolTipText("Enter discount % value.  Example:  5  or  4.2");
+
+        JLabel labelComment = new JLabel("Comment:");
+        JTextField textFieldComment = new JTextField();
+        textFieldComment.setToolTipText("Enter comment.");
+
+        JLabel labelUserType = new JLabel("User type:");
+        JComboBox comboBoxUserType = new JComboBox(UserType.values());
+        comboBoxUserType.setToolTipText("Select the type of user, which will be available discount.");
+
+        components[0] = labelDiscount;
+        components[1] = textFieldDiscount;
+        components[2] = labelComment;
+        components[3] = textFieldComment;
+        components[4] = labelUserType;
+        components[5] = comboBoxUserType;
+
+        int output = JOptionPane.showConfirmDialog(null, components, "New discount:", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+        if (output == JOptionPane.YES_OPTION) {
+            try {
+                double discount = Double.parseDouble(textFieldDiscount.getText());
+
+                DBConnect connect = DBConnect.getInstance();
+                connect.openConnect();
+                connect.setDiscount(discount, textFieldComment.getText(), (UserType) comboBoxUserType.getSelectedItem());
+                connect.closeConnect();
+
+            }catch (Exception e){
+                JOptionPane.showMessageDialog(null, "Please input correct discount!" + "\n" + "Example:  5  or  4.2", "Discount enter error", JOptionPane.ERROR_MESSAGE);
+                addDiscount();
+            }
+        }
+
+    }
+
     private class buttonChangeUserActionListener implements ActionListener {
 
         @Override
@@ -186,7 +226,12 @@ public class OptionsFrameController {
     private class buttonAddDiscountActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            System.out.println("Add");
+            if(Constants.getUserType().equals(UserType.ADMIN.toString())) {
+                addDiscount();
+                setContextDiscountsTableModel();
+            }else {
+                JOptionPane.showMessageDialog(null, "Only Administrator can add new discounts.", "Access error", JOptionPane.INFORMATION_MESSAGE);
+            }
         }
     }
 
