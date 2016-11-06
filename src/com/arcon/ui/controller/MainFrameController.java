@@ -44,7 +44,6 @@ public class MainFrameController {
 
     private boolean setText = true;
     private boolean isDiscountSet = false;
-    private List<Discount> discountList;
     private Card card;
     private boolean cardReady = false;
 
@@ -172,6 +171,11 @@ public class MainFrameController {
     private void cancelAction() {
         card = null;
         cardReady = false;
+
+        checkBoxDiscount.setSelected(false);
+        isDiscountSet = false;
+
+        textFieldCash.setText("");
         textFieldCard.setText("");
         textFieldCard.requestFocus();
         setText();
@@ -256,7 +260,7 @@ public class MainFrameController {
                 if (!isDiscountSet) {
                     DBConnect connect = new DBConnect();
                     connect.openConnect();
-                    discountList = connect.getUserDiscountList();
+                    List<Discount> discountList = connect.getUserDiscountList();
                     connect.closeConnect();
 
                     for (Discount elem :
@@ -268,8 +272,13 @@ public class MainFrameController {
                 }
 
             }else {
+                if(card != null) {
+                    card.setDiscount(0.0);
+                    jLabelPrice.setText(String.valueOf(card.getPrice()));
+                }
                 comboBoxDiscount.setEnabled(false);
-                comboBoxDiscount.setSelectedIndex(0);
+                isDiscountSet = false;
+                comboBoxDiscount.removeAllItems();
             }
 
         }
@@ -332,7 +341,7 @@ public class MainFrameController {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            if (card != null) {
+            if (card != null && isDiscountSet) {
                 Discount disc = (Discount) comboBoxDiscount.getSelectedItem();
                 card.setDiscount(disc.getDiscount());
                 jLabelPrice.setText(String.valueOf(card.getPrice()));
