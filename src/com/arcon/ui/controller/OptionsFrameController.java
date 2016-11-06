@@ -3,9 +3,7 @@ package com.arcon.ui.controller;
 import com.arcon.Main;
 import com.arcon.db.DBConnect;
 import com.arcon.lib.Constants;
-import com.arcon.ui.model.Discount;
-import com.arcon.ui.model.TableDiscountsModel;
-import com.arcon.ui.model.UserType;
+import com.arcon.ui.model.*;
 import com.arcon.ui.view.OptionsFrame;
 
 import javax.swing.*;
@@ -43,7 +41,7 @@ public class OptionsFrameController {
     private JButton buttonSwitchDiscount;
 
     private Discount currentDiscount;
-
+    private User currentUser;
 
     public OptionsFrameController() {
         initComponents();
@@ -82,6 +80,7 @@ public class OptionsFrameController {
         buttonMenuPrice.addActionListener(new buttonMenuPriceActionListener());
 
         buttonChangeUser.addActionListener(new buttonChangeUserActionListener());
+
         buttonPriceChangePerform.addActionListener(new buttonPriceChangePerformActionListener());
 
         buttonMenuDiscounts.addActionListener(new buttonMenuDiscountsActionListener());
@@ -97,6 +96,11 @@ public class OptionsFrameController {
         setContextChangeUserPanel();
     }
 
+    private void showContextPanel(String panel){
+        CardLayout cl = (CardLayout)(panelContextMain.getLayout());
+        cl.show(panelContextMain, panel);
+    }
+
     private void setContextChangeUserPanel(){
         labelUserName.setText("<html><font color='red'>" + Constants.getUserName() + "</font></html>");
         labelUserType.setText("<html><font color='red'>" + Constants.getUserType() + "</font></html>");
@@ -105,6 +109,8 @@ public class OptionsFrameController {
             buttonChangeExistUser.setVisible(true);
             buttonAddNewUser.setVisible(true);
             buttonDeleteExistUser.setVisible(true);
+
+            setUsersTableModel();
         }else{
             if(scrollPaneUsers.isVisible()){
                 scrollPaneUsers.setVisible(false);
@@ -119,12 +125,11 @@ public class OptionsFrameController {
         labelPrice.setText((String.valueOf(Constants.PRICE)));
     }
 
-    private void showContextPanel(String panel){
-        CardLayout cl = (CardLayout)(panelContextMain.getLayout());
-        cl.show(panelContextMain, panel);
+    private void setContextDiscountsPanel(){
+        setDiscountsTableModel();
     }
 
-    private void setContextDiscountsTableModel(){
+    private void setDiscountsTableModel(){
         DBConnect connect = DBConnect.getInstance();
         connect.openConnect();
         TableDiscountsModel tableDiscountsModel = new TableDiscountsModel(connect.getDiscountList());
@@ -132,6 +137,17 @@ public class OptionsFrameController {
 
         tableDiscounts.setModel(tableDiscountsModel);
         currentDiscount = null;
+    }
+
+    private void setUsersTableModel(){
+
+        DBConnect connect = DBConnect.getInstance();
+        connect.openConnect();
+        TableUsersModel tableUsersModel = new TableUsersModel(connect.getUsersList());
+        connect.closeConnect();
+
+        tableUsers.setModel(tableUsersModel);
+        currentUser = null;
     }
 
     private void changeGlobalPrice(){
@@ -292,7 +308,7 @@ public class OptionsFrameController {
     private class buttonMenuDiscountsActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            setContextDiscountsTableModel();
+            setContextDiscountsPanel();
             showContextPanel("CardDiscounts");
         }
     }
@@ -302,7 +318,7 @@ public class OptionsFrameController {
         public void actionPerformed(ActionEvent e) {
             if(Constants.getUserType().equals(UserType.ADMIN.toString())) {
                 addDiscount();
-                setContextDiscountsTableModel();
+                setDiscountsTableModel();
             }else {
                 JOptionPane.showMessageDialog(null, "Only Administrator can add new discounts.", "Access error", JOptionPane.INFORMATION_MESSAGE);
             }
@@ -315,7 +331,7 @@ public class OptionsFrameController {
             if(Constants.getUserType().equals(UserType.ADMIN.toString())) {
                 if (currentDiscount != null) {
                     deleteDiscount();
-                    setContextDiscountsTableModel();
+                    setDiscountsTableModel();
                 }else{
                     JOptionPane.showMessageDialog(null, "Select item in the table!", "Select error", JOptionPane.INFORMATION_MESSAGE);
                 }
@@ -371,7 +387,7 @@ public class OptionsFrameController {
             if(Constants.getUserType().equals(UserType.ADMIN.toString())) {
                 if (currentDiscount != null) {
                     switchDiscount();
-                    setContextDiscountsTableModel();
+                    setDiscountsTableModel();
                 }else{
                     JOptionPane.showMessageDialog(null, "Select item in the table!", "Select error", JOptionPane.INFORMATION_MESSAGE);
                 }
