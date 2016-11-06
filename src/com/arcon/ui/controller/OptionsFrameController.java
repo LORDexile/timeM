@@ -33,11 +33,7 @@ public class OptionsFrameController {
     private JButton buttonChangeUser;
 
     private JLabel labelPrice;
-    private JTextField textFieldNewPrice;
-    private JPasswordField passwordFieldPassword;
     private JButton buttonPriceChangePerform;
-    private JLabel jLabelNewPrice;
-    private JLabel jLabelPassword;
 
     private JTable tableDiscounts;
     private JButton buttonAddDiscount;
@@ -64,11 +60,7 @@ public class OptionsFrameController {
 
         buttonMenuPrice = optionsFrame.getButtonMenuPrice();
         labelPrice = optionsFrame.getLabelPrice();
-        textFieldNewPrice = optionsFrame.getTextFieldNewPrice();
-        passwordFieldPassword = optionsFrame.getPasswordFieldPassword();
         buttonPriceChangePerform = optionsFrame.getButtonPriceChangePerform();
-        jLabelNewPrice = optionsFrame.getjLabelNewPrice();
-        jLabelPassword = optionsFrame.getjLabelPassword();
 
         buttonMenuDiscounts = optionsFrame.getButtonMenuDiscounts();
         tableDiscounts = optionsFrame.getTableDiscounts();
@@ -122,19 +114,42 @@ public class OptionsFrameController {
     }
 
     private void changeGlobalPrice(){
-        double newPrice;
-        try {
-            newPrice = Double.parseDouble(textFieldNewPrice.getText());
 
-            DBConnect connect = DBConnect.getInstance();
-            connect.openConnect();
-            connect.setGlobalPrice(newPrice, passwordFieldPassword.getText());
+        JComponent[] components = new JComponent[6];
 
-            JOptionPane.showMessageDialog(null, "Please reboot program!", "", JOptionPane.INFORMATION_MESSAGE);
-        }catch (Exception exp){
-            JOptionPane.showMessageDialog(null, "input error", "error", JOptionPane.ERROR_MESSAGE);
-            textFieldNewPrice.setText("");
-            textFieldNewPrice.requestFocus();
+        JLabel labelOldPrice = new JLabel("<html>Old price: <font color='red'>" + Constants.PRICE + "</font></html>");
+
+        JLabel labelNewPrice = new JLabel("New price:");
+        JTextField textFieldNewPrice = new JTextField();
+        textFieldNewPrice.setToolTipText("Enter new price per hour. Example:  50  or  45.0");
+
+        JLabel labelPassword = new JLabel("Password:");
+        JPasswordField passwordFieldPassword = new JPasswordField();
+        passwordFieldPassword.setToolTipText("Enter password to confirm operation.");
+
+        components[0] = labelOldPrice;
+        components[1] = labelNewPrice;
+        components[2] = textFieldNewPrice;
+        components[3] = labelPassword;
+        components[4] = passwordFieldPassword;
+
+        int input = JOptionPane.showConfirmDialog(null, components, "Change price?", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+
+        if (input == JOptionPane.YES_OPTION) {
+            double newPrice;
+            try {
+                newPrice = Double.parseDouble(textFieldNewPrice.getText());
+
+                DBConnect connect = DBConnect.getInstance();
+                connect.openConnect();
+                connect.setGlobalPrice(newPrice, passwordFieldPassword.getText());
+                connect.closeConnect();
+
+                JOptionPane.showMessageDialog(null, "Please reboot program!", "", JOptionPane.INFORMATION_MESSAGE);
+            } catch (Exception exp) {
+                JOptionPane.showMessageDialog(null, "input error", "error", JOptionPane.ERROR_MESSAGE);
+                changeGlobalPrice();
+            }
         }
     }
 
@@ -160,8 +175,8 @@ public class OptionsFrameController {
         components[4] = labelUserType;
         components[5] = comboBoxUserType;
 
-        int output = JOptionPane.showConfirmDialog(null, components, "New discount:", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
-        if (output == JOptionPane.YES_OPTION) {
+        int input = JOptionPane.showConfirmDialog(null, components, "New discount:", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+        if (input == JOptionPane.YES_OPTION) {
             try {
                 double discount = Double.parseDouble(textFieldDiscount.getText());
 
@@ -249,8 +264,6 @@ public class OptionsFrameController {
             }else {
                 JOptionPane.showMessageDialog(null, "Only Administrator can change Global Price.", "Access error", JOptionPane.INFORMATION_MESSAGE);
             }
-            textFieldNewPrice.setText("");
-            passwordFieldPassword.setText("");
 
         }
     }
