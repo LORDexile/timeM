@@ -12,6 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.sql.SQLException;
 
 public class OptionsFrameController {
     OptionsFrame optionsFrame;
@@ -80,6 +81,7 @@ public class OptionsFrameController {
         buttonMenuPrice.addActionListener(new buttonMenuPriceActionListener());
 
         buttonChangeUser.addActionListener(new buttonChangeUserActionListener());
+        buttonAddNewUser.addActionListener(new buttonAddNewUserActionListener());
 
         buttonPriceChangePerform.addActionListener(new buttonPriceChangePerformActionListener());
 
@@ -129,16 +131,6 @@ public class OptionsFrameController {
         setDiscountsTableModel();
     }
 
-    private void setDiscountsTableModel(){
-        DBConnect connect = DBConnect.getInstance();
-        connect.openConnect();
-        TableDiscountsModel tableDiscountsModel = new TableDiscountsModel(connect.getDiscountList());
-        connect.closeConnect();
-
-        tableDiscounts.setModel(tableDiscountsModel);
-        currentDiscount = null;
-    }
-
     private void setUsersTableModel(){
 
         DBConnect connect = DBConnect.getInstance();
@@ -150,9 +142,106 @@ public class OptionsFrameController {
         currentUser = null;
     }
 
+    private void setDiscountsTableModel(){
+        DBConnect connect = DBConnect.getInstance();
+        connect.openConnect();
+        TableDiscountsModel tableDiscountsModel = new TableDiscountsModel(connect.getDiscountList());
+        connect.closeConnect();
+
+        tableDiscounts.setModel(tableDiscountsModel);
+        currentDiscount = null;
+    }
+
+    private void addNewUser() {
+        JComponent[] components = new JComponent[10];
+
+        JLabel labelNewUserLogin = new JLabel("User login:");
+        JTextField textFieldNewUserLogin = new JTextField();
+        textFieldNewUserLogin.setToolTipText("Enter new user login.");
+
+        JLabel labelNewUserType = new JLabel("User type:");
+        JComboBox comboBoxNewUserType = new JComboBox(UserType.values());
+        comboBoxNewUserType.setToolTipText("Select the type of new user.");
+        comboBoxNewUserType.setSelectedIndex(UserType.values().length - 2);
+
+        JLabel labelNewUserPassword = new JLabel("Password:");
+        JTextField textFieldNewUserPassword = new JTextField();
+        textFieldNewUserPassword.setToolTipText("Enter new user password. Minimum 6 symbols.");
+
+        JLabel labelNewUserComment = new JLabel("Comment:");
+        JTextField textFieldNewUserComment = new JTextField();
+        textFieldNewUserComment.setToolTipText("Enter comment.");
+
+        JLabel labelCurrentUserPassword = new JLabel("<html><font color='red'>Administrator</font> password:</html>");
+        JPasswordField passwordFieldCurrentUserPassword = new JPasswordField();
+        passwordFieldCurrentUserPassword.setToolTipText("<html>Enter <font color='red'>yours</font>(administrator) password.</html>");
+
+        JButton buttonCheck = new JButton("Create");
+        buttonCheck.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                DBConnect connect = DBConnect.getInstance();
+                connect.openConnect();
+
+                if(connect.verifyUser(textFieldNewUserLogin.getText(), "") != 0 || textFieldNewUserLogin.getText().equals("")){
+                    JOptionPane.showMessageDialog(null, "Login exist!", "Login Error", JOptionPane.ERROR_MESSAGE);
+                    textFieldNewUserLogin.grabFocus();
+                    connect.closeConnect();
+                    return;
+                }
+
+                if(textFieldNewUserPassword.getText().length() < 6){
+                    JOptionPane.showMessageDialog(null, "Incorrect password! minimum 6 symbols!", "Password Error", JOptionPane.ERROR_MESSAGE);
+                    textFieldNewUserPassword.grabFocus();
+                    return;
+                }
+
+                if(connect.verifyUser(Constants.getUserName(), passwordFieldCurrentUserPassword.getText()) != 2){
+                    JOptionPane.showMessageDialog(null, "Incorrect current(administrator) password!", "Password Error", JOptionPane.ERROR_MESSAGE);
+                    passwordFieldCurrentUserPassword.grabFocus();
+                    connect.closeConnect();
+                    return;
+                }
+
+                connect.createNewUser(new User(textFieldNewUserLogin.getText(),
+                        (UserType)comboBoxNewUserType.getSelectedItem(),
+                        passwordFieldCurrentUserPassword.getText(),
+                        textFieldNewUserComment.getText())
+                );
+
+                connect.closeConnect();
+
+                JOptionPane.showMessageDialog(null, "New user created!", "OK", JOptionPane.INFORMATION_MESSAGE);
+
+                textFieldNewUserLogin.setText("");
+                textFieldNewUserLogin.grabFocus();
+                comboBoxNewUserType.setSelectedIndex(UserType.values().length - 2);
+                textFieldNewUserPassword.setText("");
+                textFieldNewUserComment.setText("");
+                passwordFieldCurrentUserPassword.setText("");
+
+                setUsersTableModel();
+            }
+        });
+
+        components[0] = labelNewUserLogin;
+        components[1] = textFieldNewUserLogin;
+        components[2] = labelNewUserType;
+        components[3] = comboBoxNewUserType;
+        components[4] = labelNewUserPassword;
+        components[5] = textFieldNewUserPassword;
+        components[6] = labelNewUserComment;
+        components[7] = textFieldNewUserComment;
+        components[8] = labelCurrentUserPassword;
+        components[9] = passwordFieldCurrentUserPassword;
+
+        JOptionPane.showOptionDialog(null, components, "Add new user?", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, new Object[]{buttonCheck}, null);
+
+    }
+
     private void changeGlobalPrice(){
 
-        JComponent[] components = new JComponent[6];
+        JComponent[] components = new JComponent[5];
 
         JLabel labelOldPrice = new JLabel("<html>Old price: <font color='red'>" + Constants.PRICE + "</font></html>");
 
@@ -394,6 +483,13 @@ public class OptionsFrameController {
             }else {
                 JOptionPane.showMessageDialog(null, "Only Administrator can switch activity of discounts.", "Access error", JOptionPane.INFORMATION_MESSAGE);
             }
+        }
+    }
+
+    private class buttonAddNewUserActionListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            addNewUser();
         }
     }
 }
