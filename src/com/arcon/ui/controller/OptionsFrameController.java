@@ -9,8 +9,6 @@ import com.arcon.ui.model.UserType;
 import com.arcon.ui.view.OptionsFrame;
 
 import javax.swing.*;
-import javax.swing.event.TableModelEvent;
-import javax.swing.event.TableModelListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -23,7 +21,6 @@ public class OptionsFrameController {
     private JButton buttonMenuChangeUser;
     private JButton buttonMenuPrice;
     private JButton buttonMenuDiscounts;
-    private JButton buttonMenuUsers;
     private JButton buttonMenuProgram;
 
     private JPanel panelContextMain;
@@ -31,6 +28,11 @@ public class OptionsFrameController {
     private JLabel labelUserName;
     private JLabel labelUserType;
     private JButton buttonChangeUser;
+    private JScrollPane scrollPaneUsers;
+    private JTable tableUsers;
+    private JButton buttonAddNewUser;
+    private JButton buttonChangeExistUser;
+    private JButton buttonDeleteExistUser;
 
     private JLabel labelPrice;
     private JButton buttonPriceChangePerform;
@@ -57,6 +59,11 @@ public class OptionsFrameController {
         labelUserName = optionsFrame.getLabelUserName();
         labelUserType = optionsFrame.getLabelUserType();
         buttonChangeUser = optionsFrame.getButtonChangeUser();
+        scrollPaneUsers = optionsFrame.getScrollPaneUsers();
+        tableUsers = optionsFrame.getTableUsers();
+        buttonAddNewUser = optionsFrame.getButtonAddNewUser();
+        buttonChangeExistUser = optionsFrame.getButtonChangeExistUser();
+        buttonDeleteExistUser = optionsFrame.getButtonDeleteExistUser();
 
         buttonMenuPrice = optionsFrame.getButtonMenuPrice();
         labelPrice = optionsFrame.getLabelPrice();
@@ -86,12 +93,26 @@ public class OptionsFrameController {
 
     public void showOptionsFrameWindow() {
         optionsFrame.setVisible(true);
-        setContextChangeUserPanelUserInfo();
+        showContextPanel("CardChangeUser");
+        setContextChangeUserPanel();
     }
 
-    private void setContextChangeUserPanelUserInfo(){
+    private void setContextChangeUserPanel(){
         labelUserName.setText("<html><font color='red'>" + Constants.getUserName() + "</font></html>");
         labelUserType.setText("<html><font color='red'>" + Constants.getUserType() + "</font></html>");
+        if(Constants.getUserType().equals(UserType.ADMIN.toString())){
+            scrollPaneUsers.setVisible(true);
+            buttonChangeExistUser.setVisible(true);
+            buttonAddNewUser.setVisible(true);
+            buttonDeleteExistUser.setVisible(true);
+        }else{
+            if(scrollPaneUsers.isVisible()){
+                scrollPaneUsers.setVisible(false);
+                buttonChangeExistUser.setVisible(false);
+                buttonAddNewUser.setVisible(false);
+                buttonDeleteExistUser.setVisible(false);
+            }
+        }
     }
 
     private void setContextPricePanel(){
@@ -240,7 +261,7 @@ public class OptionsFrameController {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            setContextChangeUserPanelUserInfo();
+            setContextChangeUserPanel();
             showContextPanel("CardChangeUser");
         }
     }
