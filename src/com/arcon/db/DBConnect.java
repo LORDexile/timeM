@@ -203,6 +203,26 @@ public class DBConnect{
         }
     }
 
+    public void switchDiscount(Discount discount) {
+        int isActive;
+        if(discount.isActive()){
+            isActive = 0;
+        }else {
+            isActive = 1;
+        }
+
+        try {
+            String sql = "UPDATE Discount set Active =" + isActive + " WHERE Discount=" + discount.getDiscount() +
+                    " AND UserType='" + discount.getUserType() +
+                    "';";
+
+            statement.executeUpdate(sql);
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+
     public void setTransaction(int money, ActionType actionType) {
         setTransaction(money, actionType, null);
     }
