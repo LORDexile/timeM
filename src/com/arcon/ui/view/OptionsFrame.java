@@ -13,12 +13,16 @@ public class OptionsFrame extends JFrame{
     private JButton buttonMenuChangeUser;
     private JButton buttonMenuPrice;
     private JButton buttonMenuDiscounts;
-    private JButton buttonMenuUsers;
     private JButton buttonMenuProgram;
 
     private JLabel labelUserName;
     private JLabel labelUserType;
     private JButton buttonChangeUser;
+    private JScrollPane scrollPaneUsers;
+    private JTable tableUsers;
+    private JButton buttonAddNewUser;
+    private JButton buttonChangeExistUser;
+    private JButton buttonDeleteExistUser;
 
     private JLabel labelPrice;
     private JButton buttonPriceChangePerform;
@@ -56,10 +60,6 @@ public class OptionsFrame extends JFrame{
 
     public JButton getButtonMenuDiscounts() {
         return buttonMenuDiscounts;
-    }
-
-    public JButton getButtonMenuUsers() {
-        return buttonMenuUsers;
     }
 
     public JButton getButtonMenuProgram() {
@@ -100,5 +100,25 @@ public class OptionsFrame extends JFrame{
 
     public JButton getButtonSwitchDiscount() {
         return buttonSwitchDiscount;
+    }
+
+    public JScrollPane getScrollPaneUsers() {
+        return scrollPaneUsers;
+    }
+
+    public JTable getTableUsers() {
+        return tableUsers;
+    }
+
+    public JButton getButtonAddNewUser() {
+        return buttonAddNewUser;
+    }
+
+    public JButton getButtonChangeExistUser() {
+        return buttonChangeExistUser;
+    }
+
+    public JButton getButtonDeleteExistUser() {
+        return buttonDeleteExistUser;
     }
 }
