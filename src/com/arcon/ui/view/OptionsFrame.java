@@ -21,11 +21,7 @@ public class OptionsFrame extends JFrame{
     private JButton buttonChangeUser;
 
     private JLabel labelPrice;
-    private JTextField textFieldNewPrice;
-    private JPasswordField passwordFieldPassword;
     private JButton buttonPriceChangePerform;
-    private JLabel jLabelNewPrice;
-    private JLabel jLabelPassword;
 
     private JTable tableDiscounts;
     private JButton buttonAddDiscount;
@@ -86,24 +82,8 @@ public class OptionsFrame extends JFrame{
         return labelPrice;
     }
 
-    public JTextField getTextFieldNewPrice() {
-        return textFieldNewPrice;
-    }
-
-    public JPasswordField getPasswordFieldPassword() {
-        return passwordFieldPassword;
-    }
-
     public JButton getButtonPriceChangePerform() {
         return buttonPriceChangePerform;
-    }
-
-    public JLabel getjLabelPassword() {
-        return jLabelPassword;
-    }
-
-    public JLabel getjLabelNewPrice() {
-        return jLabelNewPrice;
     }
 
     public JTable getTableDiscounts() {
