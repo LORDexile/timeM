@@ -42,6 +42,7 @@ public class OptionsFrameController {
     private JTable tableDiscounts;
     private JButton buttonAddDiscount;
     private JButton buttonDeleteDiscount;
+    private JButton buttonSwitchDiscount;
 
     private Discount currentDiscount;
 
@@ -73,6 +74,7 @@ public class OptionsFrameController {
         tableDiscounts = optionsFrame.getTableDiscounts();
         buttonAddDiscount = optionsFrame.getButtonAddDiscount();
         buttonDeleteDiscount = optionsFrame.getButtonDeleteDiscount();
+        buttonSwitchDiscount = optionsFrame.getButtonSwitchDiscount();
     }
 
     private void initListeners() {
@@ -84,10 +86,10 @@ public class OptionsFrameController {
         buttonPriceChangePerform.addActionListener(new buttonPriceChangePerformActionListener());
 
         buttonMenuDiscounts.addActionListener(new buttonMenuDiscountsActionListener());
+        tableDiscounts.addMouseListener(new tableDiscountsMouseListener());
         buttonAddDiscount.addActionListener(new buttonAddDiscountActionListener());
         buttonDeleteDiscount.addActionListener(new buttonDeleteDiscountActionListener());
-
-        tableDiscounts.addMouseListener(new tableDiscountsMouseListener());
+        buttonSwitchDiscount.addActionListener(new buttonSwitchDiscountActionListener());
     }
 
     public void showOptionsFrameWindow() {
@@ -112,7 +114,7 @@ public class OptionsFrameController {
     private void setContextDiscountsTableModel(){
         DBConnect connect = DBConnect.getInstance();
         connect.openConnect();
-        TableDiscountsModel tableDiscountsModel = new TableDiscountsModel(connect.getUserDiscountList());
+        TableDiscountsModel tableDiscountsModel = new TableDiscountsModel(connect.getDiscountList());
         connect.closeConnect();
 
         tableDiscounts.setModel(tableDiscountsModel);
@@ -192,6 +194,22 @@ public class OptionsFrameController {
         }
 
 
+    }
+
+    private void switchDiscount(){
+        if (currentDiscount != null){
+
+            int output = JOptionPane.showConfirmDialog(null, "Discount: " + currentDiscount.getDiscount() +
+                            "  User type: " + currentDiscount.getUserType(),
+                    "Switch this discount?", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+            if (output == JOptionPane.YES_OPTION) {
+                DBConnect connect = DBConnect.getInstance();
+                connect.openConnect();
+                connect.switchDiscount(currentDiscount);
+                connect.closeConnect();
+                currentDiscount = null;
+            }
+        }
     }
 
     private class buttonChangeUserActionListener implements ActionListener {
@@ -310,6 +328,22 @@ public class OptionsFrameController {
         @Override
         public void mouseExited(MouseEvent e) {
 
+        }
+    }
+
+    private class buttonSwitchDiscountActionListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if(Constants.getUserType().equals(UserType.ADMIN.toString())) {
+                if (currentDiscount != null) {
+                    switchDiscount();
+                    setContextDiscountsTableModel();
+                }else{
+                    JOptionPane.showMessageDialog(null, "Select item in the table!", "Select error", JOptionPane.INFORMATION_MESSAGE);
+                }
+            }else {
+                JOptionPane.showMessageDialog(null, "Only Administrator can switch activity of discounts.", "Access error", JOptionPane.INFORMATION_MESSAGE);
+            }
         }
     }
 }
