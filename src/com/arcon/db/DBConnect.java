@@ -190,6 +190,17 @@ public class DBConnect{
         }
     }
 
+    public void deleteUser(User user) {
+        try {
+            String sql = "DELETE FROM Users WHERE UserName='" + user.getUserName() + "';";
+
+            statement.executeUpdate(sql);
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+
     public void deleteDiscount(Discount discount){
         try {
             String sql = "DELETE FROM Discount WHERE Discount=" + discount.getDiscount() +
