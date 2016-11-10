@@ -30,7 +30,6 @@ public class OptionsFrameController {
     private JScrollPane scrollPaneUsers;
     private JTable tableUsers;
     private JButton buttonAddNewUser;
-    private JButton buttonChangeExistUser;
     private JButton buttonDeleteExistUser;
 
     private JLabel labelPrice;
@@ -61,7 +60,6 @@ public class OptionsFrameController {
         scrollPaneUsers = optionsFrame.getScrollPaneUsers();
         tableUsers = optionsFrame.getTableUsers();
         buttonAddNewUser = optionsFrame.getButtonAddNewUser();
-        buttonChangeExistUser = optionsFrame.getButtonChangeExistUser();
         buttonDeleteExistUser = optionsFrame.getButtonDeleteExistUser();
 
         buttonMenuPrice = optionsFrame.getButtonMenuPrice();
@@ -82,6 +80,8 @@ public class OptionsFrameController {
 
         buttonChangeUser.addActionListener(new buttonChangeUserActionListener());
         buttonAddNewUser.addActionListener(new buttonAddNewUserActionListener());
+        buttonDeleteExistUser.addActionListener(new buttonDeleteExistUserActionListener());
+        tableUsers.addMouseListener(new tableUsersMouseListener());
 
         buttonPriceChangePerform.addActionListener(new buttonPriceChangePerformActionListener());
 
@@ -108,7 +108,6 @@ public class OptionsFrameController {
         labelUserType.setText("<html><font color='red'>" + Constants.getUserType() + "</font></html>");
         if(Constants.getUserType().equals(UserType.ADMIN.toString())){
             scrollPaneUsers.setVisible(true);
-            buttonChangeExistUser.setVisible(true);
             buttonAddNewUser.setVisible(true);
             buttonDeleteExistUser.setVisible(true);
 
@@ -116,7 +115,6 @@ public class OptionsFrameController {
         }else{
             if(scrollPaneUsers.isVisible()){
                 scrollPaneUsers.setVisible(false);
-                buttonChangeExistUser.setVisible(false);
                 buttonAddNewUser.setVisible(false);
                 buttonDeleteExistUser.setVisible(false);
             }
@@ -237,6 +235,21 @@ public class OptionsFrameController {
 
         JOptionPane.showOptionDialog(null, components, "Add new user?", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, new Object[]{buttonCheck}, null);
 
+    }
+
+    private void deleteUser() {
+        if (currentUser != null){
+
+            int output = JOptionPane.showConfirmDialog(null, "User: " + currentUser.getUserName(),
+                    "Delete this User?", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+            if (output == JOptionPane.YES_OPTION) {
+                DBConnect connect = DBConnect.getInstance();
+                connect.openConnect();
+                connect.deleteUser(currentUser);
+                connect.closeConnect();
+                currentUser = null;
+            }
+        }
     }
 
     private void changeGlobalPrice(){
@@ -490,6 +503,54 @@ public class OptionsFrameController {
         @Override
         public void actionPerformed(ActionEvent e) {
             addNewUser();
+        }
+    }
+
+    private class buttonDeleteExistUserActionListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if(Constants.getUserType().equals(UserType.ADMIN.toString())) {
+                if (currentUser != null) {
+                    deleteUser();
+                    setUsersTableModel();
+                }else{
+                    JOptionPane.showMessageDialog(null, "Select item in the table!", "Select error", JOptionPane.INFORMATION_MESSAGE);
+                }
+            }else {
+                JOptionPane.showMessageDialog(null, "Only Administrator can delete users.", "Access error", JOptionPane.INFORMATION_MESSAGE);
+            }
+        }
+    }
+
+    private class tableUsersMouseListener implements MouseListener {
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            int row = tableUsers.getSelectedRow();
+            String userName = (String) tableUsers.getValueAt(row, 0);
+            UserType userType = (UserType) tableUsers.getValueAt(row, 1);
+            String commentValue = (String) tableUsers.getValueAt(row, 2);
+
+            currentUser = new User(userName, userType, "", commentValue);
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+
         }
     }
 }

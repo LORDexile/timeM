@@ -21,7 +21,6 @@ public class OptionsFrame extends JFrame{
     private JScrollPane scrollPaneUsers;
     private JTable tableUsers;
     private JButton buttonAddNewUser;
-    private JButton buttonChangeExistUser;
     private JButton buttonDeleteExistUser;
 
     private JLabel labelPrice;
@@ -112,10 +111,6 @@ public class OptionsFrame extends JFrame{
 
     public JButton getButtonAddNewUser() {
         return buttonAddNewUser;
-    }
-
-    public JButton getButtonChangeExistUser() {
-        return buttonChangeExistUser;
     }
 
     public JButton getButtonDeleteExistUser() {
