@@ -158,35 +158,6 @@
                   </component>
                 </children>
               </scrollpane>
-              <component id="c92a6" class="javax.swing.JButton" binding="buttonChangeExistUser">
-                <constraints>
-                  <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <label value="Change user"/>
-                  <text value="Change user"/>
-                  <visible value="false"/>
-                </properties>
-              </component>
-              <component id="89320" class="javax.swing.JButton" binding="buttonAddNewUser">
-                <constraints>
-                  <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <label value="New user"/>
-                  <text value="New user"/>
-                  <visible value="false"/>
-                </properties>
-              </component>
-              <component id="44a44" class="javax.swing.JButton" binding="buttonDeleteExistUser">
-                <constraints>
-                  <grid row="5" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <text value="Delete user"/>
-                  <visible value="false"/>
-                </properties>
-              </component>
               <vspacer id="7488c">
                 <constraints>
                   <grid row="3" column="4" row-span="3" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
@@ -213,6 +184,25 @@
                   <grid row="2" column="1" row-span="1" col-span="3" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
               </hspacer>
+              <component id="89320" class="javax.swing.JButton" binding="buttonAddNewUser">
+                <constraints>
+                  <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <label value="New user"/>
+                  <text value="New user"/>
+                  <visible value="false"/>
+                </properties>
+              </component>
+              <component id="44a44" class="javax.swing.JButton" binding="buttonDeleteExistUser">
+                <constraints>
+                  <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="Delete user"/>
+                  <visible value="false"/>
+                </properties>
+              </component>
             </children>
           </grid>
           <grid id="459eb" binding="panelContextPrice" layout-manager="GridLayoutManager" row-count="4" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
